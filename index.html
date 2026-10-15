@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#004225">
+<title>Pace Conversion Tool | Stride Calculator</title>
+<link rel="canonical" href="https://stridecalculator.com/">
+<meta name="description" content="Interactive running pace conversion chart from 2:00/km to 15:00/km, including mile pace, km/h, mph and 400m splits.">
+<style>
+:root{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#183a2c;background:#cce9e9;font-synthesis:none;font-optical-sizing:auto}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 52% 44%,#d8e8c7 0%,#b4dcc7 42%,#cce9ee 100%);min-width:320px}
+.wrap{width:min(1440px,100%);margin:auto;padding:18px 28px 48px}
+.intro{font-size:clamp(15px,1.5vw,21px);line-height:1.5;color:#385e4d;max-width:950px;margin:0 0 32px}
+.panel{background:#fff;border:1px solid #e2ece5;border-radius:28px;padding:clamp(16px,3vw,40px);margin-bottom:24px;box-shadow:0 10px 30px #234e3610}
+.converter{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;padding:0 0 30px}
+.field{background:#00452b;color:#fff;border-radius:21px;min-width:0;padding:26px 23px 22px}
+.field label{display:block;font-weight:800;font-size:clamp(13px,1.3vw,18px);margin-bottom:24px}
+.field input{display:block;width:100%;min-width:0;background:transparent;color:#fff;border:0;border-bottom:1px solid #8ba99a;border-radius:0;padding:0 0 10px;font-size:clamp(25px,3vw,42px);font-weight:800;letter-spacing:-.04em;outline:none;font-variant-numeric:tabular-nums}
+.field input:focus{border-bottom:2px solid #b9f4c7}
+.unit{display:block;color:#c6ddd0;margin-top:15px;font-size:clamp(13px,1.2vw,18px)}
+.chart-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 20px}
+h1{font-size:clamp(23px,2.2vw,31px);letter-spacing:-.055em;margin:0;font-weight:850;color:#193c2d}
+.note{color:#536f5e;font-size:clamp(13px,1.2vw,17px);text-align:right}
+.table-shell{border:1px solid #d7e3d8;border-radius:16px;overflow:hidden}
+.table-scroll{max-height:540px;overflow:auto;overscroll-behavior:contain;scrollbar-color:#b8cbbb #f4f7f3}
+table{border-collapse:collapse;width:100%;table-layout:fixed;font-variant-numeric:tabular-nums;font-size:clamp(13px,1.4vw,20px)}
+thead{position:sticky;top:0;z-index:2;background:#f6f8f5}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid #e0e9e1;white-space:nowrap}
+th{font-weight:800;color:#496452;font-size:clamp(12px,1.3vw,18px);height:56px}
+tbody tr:nth-child(odd){background:#f7f9f6}
+tbody tr:nth-child(even){background:#fff}
+tbody tr.active{background:#dff4df;box-shadow:inset 4px 0 #168247;font-weight:850}
+tbody tr{scroll-margin-top:60px}
+@media(max-width:760px){.wrap{padding:16px 12px 30px}.intro{margin:0 8px 20px}.panel{padding:14px;border-radius:20px;margin-bottom:16px}.converter{gap:8px;padding-bottom:8px}.field{padding:13px 11px 12px;border-radius:14px}.field label{font-size:12px;line-height:1.2;min-height:29px;margin-bottom:13px}.field input{font-size:clamp(20px,5vw,29px);padding-bottom:7px}.unit{font-size:11px;margin-top:9px}.chart-head{align-items:flex-start;margin-bottom:13px}h1{font-size:clamp(20px,5vw,27px)}.note{font-size:12px;max-width:105px}.table-scroll{max-height:65vh}table{font-size:13px}th,td{padding:12px 7px}th{font-size:11px;height:48px}}
+@media(max-width:390px){.wrap{padding-left:8px;padding-right:8px}.panel{padding:10px}.converter{gap:6px}.field{padding:11px 8px}.field label{font-size:10px}.field input{font-size:20px}.unit{font-size:10px}th,td{padding:10px 5px}table{font-size:12px}th{font-size:10px}}
+</style>
+</head>
+<body><header style="max-width:1440px;margin:0 auto;padding:16px 28px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><a href="/" style="font-weight:850;color:#00452b;text-decoration:none">STRIDE</a><nav aria-label="Main navigation" style="display:flex;gap:18px;flex-wrap:wrap"><a href="/" aria-current="page" style="color:#00452b;font-weight:800">Pace conversion</a><a href="/calculator.html" style="color:#385e4d;text-decoration:none;font-weight:700">Pace calculator</a></nav></header><main class="wrap">
+<p class="intro">Enter a pace or speed in any box. All four values update together, and your pace moves to the middle of the table.</p>
+<section class="panel" aria-label="Pace and speed converter">
+<div class="converter">
+<div class="field"><label for="kmPace">Kilometre pace</label><input id="kmPace" value="5:00" inputmode="decimal" autocomplete="off" aria-label="Kilometre pace"><span class="unit">min:sec /km</span></div>
+<div class="field"><label for="milePace">Mile pace</label><input id="milePace" value="8:03" inputmode="decimal" autocomplete="off" aria-label="Mile pace"><span class="unit">min:sec /mile</span></div>
+<div class="field"><label for="kmh">Speed in km/h</label><input id="kmh" value="12" inputmode="decimal" autocomplete="off" aria-label="Speed in kilometres per hour"><span class="unit">km/h</span></div>
+<div class="field"><label for="mph">Speed in mph</label><input id="mph" value="7.46" inputmode="decimal" autocomplete="off" aria-label="Speed in miles per hour"><span class="unit">mph</span></div>
+</div>
+</section>
+<section class="panel" aria-label="Interactive running pace chart">
+<div class="chart-head"><h1>Interactive running pace chart</h1><div class="note">Faster above · slower below</div></div>
+<div class="table-shell"><div class="table-scroll" id="tableScroll" tabindex="0" aria-label="Scrollable pace conversion table">
+<table><colgroup><col style="width:21%"><col style="width:21%"><col style="width:19%"><col style="width:19%"><col style="width:20%"></colgroup>
+<thead><tr><th scope="col">Pace /km</th><th scope="col">Pace /mile</th><th scope="col">km/h</th><th scope="col">mph</th><th scope="col">400 m</th></tr></thead>
+<tbody id="paceRows"></tbody></table></div></div>
+</section>
+</main>
+<script>
+(()=> {
+const $=id=>document.getElementById(id);
+const inputs={km:$('kmPace'),mile:$('milePace'),kmh:$('kmh'),mph:$('mph')};
+const tbody=$('paceRows'),scroller=$('tableScroll');
+const K=1.609344;
+function parsePace(s){s=String(s).trim();if(!s)return NaN;if(s.includes(':')){let a=s.split(':');if(a.length!==2||!/^\d+$/.test(a[0])||!/^\d{1,2}(\.\d+)?$/.test(a[1]))return NaN;let m=+a[0],sec=+a[1];return sec<60?m*60+sec:NaN}let n=Number(s);return Number.isFinite(n)&&n>0?n*60:NaN}
+function paceFmt(sec){sec=Math.round(sec);return Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0')}
+function splitFmt(sec){const tenths=Math.round(sec*10);const mins=Math.floor(tenths/600);const remainder=tenths%600;return mins+':'+String(Math.floor(remainder/10)).padStart(2,'0')+'.'+(remainder%10)}
+function speedFmt(n){return n.toFixed(2).replace(/\.00$/,'').replace(/(\.\d)0$/,'$1')}
+function update(source,scroll=true){
+ let kmsec;
+ if(source==='km')kmsec=parsePace(inputs.km.value);
+ else if(source==='mile')kmsec=parsePace(inputs.mile.value)/K;
+ else if(source==='kmh'){let n=Number(inputs.kmh.value);kmsec=Number.isFinite(n)&&n>0?3600/n:NaN}
+ else {let n=Number(inputs.mph.value);kmsec=Number.isFinite(n)&&n>0?3600/(n*K):NaN}
+ if(!Number.isFinite(kmsec)||kmsec<1||kmsec>3600){return}
+ inputs.km.value=paceFmt(kmsec);
+ inputs.mile.value=paceFmt(kmsec*K);
+ inputs.kmh.value=speedFmt(3600/kmsec);
+ inputs.mph.value=speedFmt(3600/(kmsec*K));
+ let active=Math.max(120,Math.min(900,Math.round(kmsec)));
+ let activeRow=null;
+ tbody.querySelectorAll('tr').forEach(row=>{let on=Number(row.dataset.seconds)===active;row.classList.toggle('active',on);if(on)activeRow=row});
+ if(activeRow&&scroll){const rowRect=activeRow.getBoundingClientRect();const boxRect=scroller.getBoundingClientRect();const target=scroller.scrollTop+(rowRect.top-boxRect.top)-(scroller.clientHeight-activeRow.offsetHeight)/2;scroller.scrollTo({top:Math.max(0,target),behavior:'smooth'});}
+}
+const rows=[];
+for(let s=120;s<=900;s++){
+ let tr=document.createElement('tr');tr.dataset.seconds=s;
+ let vals=[paceFmt(s),paceFmt(s*K),(3600/s).toFixed(2),(3600/(s*K)).toFixed(2),splitFmt(s*.4)];
+ vals.forEach(v=>{let td=document.createElement('td');td.textContent=v;tr.appendChild(td)});
+ tr.addEventListener('click',()=>{inputs.km.value=paceFmt(s);update('km')});
+ rows.push(tr);
+}
+tbody.replaceChildren(...rows);
+Object.entries(inputs).forEach(([key,input])=>input.addEventListener('input',()=>{if(key==='km'||key==='mile'){let v=parsePace(input.value);if(Number.isFinite(v))update(key)}else{let v=Number(input.value);if(Number.isFinite(v)&&v>0)update(key)}}));
+update('km');
+// Keep the selected pace centred inside the chart's own scroll area.
+inputs.km.addEventListener('change',()=>update('km'));
+inputs.mile.addEventListener('change',()=>update('mile'));
+inputs.kmh.addEventListener('change',()=>update('kmh'));
+inputs.mph.addEventListener('change',()=>update('mph'));
+})();
+</script>
+</body></html>
