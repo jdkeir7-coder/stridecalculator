@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-84SNBBPEQS">
+</script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-84SNBBPEQS');
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#004225" name="theme-color"/>
+<meta content="Calculate race time, pace and distance with independent kilometre and mile units, plus 200m, 400m, kilometre and mile splits." name="description"/>
+<link href="https://stridecalculator.com/calculator.html" rel="canonical"/>
+<title>Split Calculator | Stride Calculator</title>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4255737683434811">
+</script>
+<link href="/favicon.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+      :root{font-family:Manrope,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#163328;background:#f7f9f7;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #427e35;outline-offset:3px}a{color:inherit}
+.topbar{background:#004225;color:#fff}.topbar-inner{max-width:1120px;margin:auto;min-height:72px;padding:13px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:1.24rem;font-weight:840;letter-spacing:-.055em}.brand-mark{width:34px;height:34px;display:block}.sister{font-size:.85rem;color:#cbd8ce;text-decoration:none;border:1px solid #4c675a;padding:9px 13px;border-radius:999px;white-space:nowrap}.sister:hover{border-color:#92ff5f;color:#fff}
+.page-frame{max-width:1560px;margin:auto;padding:0 20px;display:grid;grid-template-columns:clamp(120px,11vw,160px) minmax(0,1120px) clamp(120px,11vw,160px);gap:18px;justify-content:center;align-items:start}.ad-rail{min-width:0;min-height:600px;margin-top:44px;pointer-events:auto}main{min-width:0;max-width:1120px;width:100%;margin:auto;padding:44px 20px 70px}.eyebrow{font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#92FF5F;margin:0 0 11px}h1{font-size:clamp(2.2rem,5vw,3.8rem);letter-spacing:-.07em;line-height:1.05;margin:0 0 12px}h1 span{color:#004225;text-decoration:none}.intro{font-size:1.03rem;line-height:1.5;color:#51655a;margin:0 0 28px}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);gap:18px;align-items:stretch}.panel{background:#fff;border:1px solid #dce5dc;border-radius:22px;box-shadow:0 8px 30px rgba(17,45,37,.035)}.calculator{padding:26px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.section-head h2{font-size:1.15rem;letter-spacing:-.025em;margin:0}.section-head p{font-size:.83rem;color:#6c8173;margin:0}.fields{display:grid;gap:10px}.field{border:1px solid #dbe5dc;border-radius:14px;padding:14px 16px;transition:border-color .15s,background .15s}.field.is-missing{border-color:#92d873;background:#f4fced}.field label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.92rem;font-weight:760;margin-bottom:8px}.field label small{font-size:.8rem;font-weight:600;color:#758d78}.field input{border:0;background:transparent;color:#004225;width:100%;height:40px;padding:0;font-size:1.7rem;font-weight:700;letter-spacing:-.045em;font-variant-numeric:tabular-nums;outline:none}.field input::placeholder{color:#a5b7a8}.field:focus-within{border-color:#4f9b48;box-shadow:0 0 0 3px rgba(146,255,95,.22)}.field input:focus-visible{outline:none}.field input[aria-invalid="true"]{color:#a43e2b}.error{color:#a33e2d;min-height:20px;font-size:.84rem;margin:11px 0 0}
+.unit-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0;padding:0;border:0;font-size:.88rem;font-weight:750}.unit-switch{display:flex;gap:3px;background:#eff3ef;border-radius:10px;padding:4px}.unit-switch button{min-width:56px;min-height:36px;border:0;border-radius:7px;background:transparent;color:#3c5647;font-size:.86rem;font-weight:750}.unit-switch button[aria-pressed="true"]{background:#fff;box-shadow:0 1px 5px #cad4ca;color:#004225}
+.result{background:#004225;color:#fff;padding:32px;display:flex;flex-direction:column;justify-content:space-between;min-height:460px;position:relative;overflow:hidden}.result:after{content:"";position:absolute;width:220px;height:220px;border:1px solid #47765d;transform:rotate(30deg);top:-148px;right:-48px;pointer-events:none}.result-label{color:#b4d2b5;font-size:.86rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px}.result-value{color:#92ff5f;font-size:clamp(3.7rem,6.5vw,6.1rem);letter-spacing:-.085em;line-height:1;font-weight:820;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;margin:0}.result-unit{font-size:1.04rem;color:#d6e7d8;line-height:1.4;margin:13px 0 0}.result-footer{border-top:1px solid #496455;padding-top:19px;margin-top:32px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.mini-label{display:block;font-size:.77rem;color:#a9c4ad;margin-bottom:5px}.mini-value{font-size:clamp(.875rem,1.5vw,1.12rem);font-weight:730;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.splits{margin-top:18px;padding:0 26px 10px}.splits-head{display:flex;align-items:end;justify-content:space-between;gap:12px;padding:23px 0 15px}.splits h2{font-size:1.3rem;letter-spacing:-.035em;margin:0}.splits-note{margin:5px 0 0;color:#667e6f;font-size:.84rem}.splits-head strong{font-size:.82rem;color:#567463;white-space:nowrap}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left;font-variant-numeric:tabular-nums}th{font-size:.77rem;text-transform:uppercase;letter-spacing:.07em;color:#647b6c;font-weight:780;background:#f4f7f4}td{font-size:.94rem;color:#294b36}td,th{padding:13px 12px;border-bottom:1px solid #e8eee8}td:first-child,th:first-child{padding-left:15px}td:last-child,th:last-child{text-align:right;padding-right:15px}tbody tr:last-child td{border-bottom:0}tbody tr:last-child{background:#f0f9ed;font-weight:750}.splits table{table-layout:fixed}.splits th,.splits td{padding:11px 8px;white-space:nowrap}.splits th:first-child,.splits td:first-child{padding-left:10px}.splits th:last-child,.splits td:last-child{padding-right:10px}.splits th:nth-child(1){width:34%}.splits th:nth-child(2){width:20%}.splits th:nth-child(3){width:20%}.splits th:nth-child(4){width:26%}.empty{text-align:center;padding:30px 15px;color:#6c8173;font-size:.92rem}.foot{font-size:.82rem;color:#748579;margin:23px 2px 0}
+@media(max-width:1180px){.page-frame{display:block;padding:0}.ad-rail{display:none}main{padding-left:28px;padding-right:28px}}@media(max-width:760px){.topbar-inner{padding:12px 18px;min-height:66px}.brand{font-size:1rem;white-space:nowrap}.brand-mark{width:30px;height:30px}.sister{font-size:.75rem;padding:7px 9px}main{padding:29px 16px 52px}.intro{margin-bottom:23px}.workspace{grid-template-columns:1fr}.calculator,.result{padding:21px}.result{min-height:260px}.result-value{font-size:clamp(3.7rem,13vw,5.3rem)}.result-footer{margin-top:25px}.splits{padding:0 13px 7px}.splits-head{padding:21px 8px 12px}}@media(max-width:400px){.section-head{align-items:start;flex-direction:column;gap:3px}.sister{font-size:0}.sister:after{content:'Overlay ↗';font-size:.76rem}}
+.find-switch{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#eff3ef;border-radius:12px;padding:5px;margin-bottom:18px}.find-switch button{border:0;border-radius:9px;background:transparent;color:#365044;min-height:43px;font-weight:750}.find-switch button[aria-pressed="true"]{background:#004225;color:#fff;box-shadow:0 2px 7px rgba(17,45,37,.16)}.field input:disabled{opacity:1;color:#285837;cursor:default}.field.is-missing input{color:#285837}.split-controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.split-controls label{font-size:.84rem;font-weight:750;color:#365044;white-space:nowrap}.split-controls input,.split-controls select{height:38px;border:1px solid #cbd8ce;border-radius:8px;background:#fff;color:#004225;padding:0 9px;font-size:.9rem}.split-controls input{width:84px}.split-controls select{width:80px}.split-shortcuts{display:flex;align-items:center;flex-wrap:wrap;gap:7px;padding-bottom:13px}.split-shortcuts button{border:1px solid #d3dfd3;border-radius:999px;background:#fff;color:#214534;padding:7px 11px;font-size:.8rem;font-weight:700}.split-shortcuts button[aria-pressed="true"]{background:#e4f8dc;border-color:#7abd66}.split-shortcuts span{margin-left:auto;color:#567463;font-size:.82rem;font-weight:750}.split-error{min-height:0;margin:0 0 7px;color:#a33e2d;font-size:.84rem}@media(max-width:760px){.splits-head{align-items:start;flex-direction:column;gap:14px}.split-shortcuts span{flex-basis:100%;margin:3px 0 0}}
+@media(max-width:400px){.section-head{flex-direction:row;align-items:center}}@media(max-width:480px){.splits{padding-left:8px;padding-right:8px}.splits th,.splits td{padding:9px 4px;font-size:.76rem;letter-spacing:0}.splits th{font-size:.63rem;letter-spacing:.015em}.splits th:first-child,.splits td:first-child{padding-left:5px}.splits th:last-child,.splits td:last-child{padding-right:5px}.splits th:nth-child(1){width:32%}.splits th:nth-child(2){width:19%}.splits th:nth-child(3){width:19%}.splits th:nth-child(4){width:30%}}
+.strategy{width:min(100%,350px);flex:0 1 350px;padding:0}.strategy-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}.strategy-head label{font-size:.9rem;font-weight:780}.strategy-head output{font-size:.84rem;color:#386645;font-weight:750;text-align:right}.strategy input[type=range]{width:100%;height:24px;margin:5px 0 0;accent-color:#004225;cursor:pointer}.strategy-scale{display:flex;justify-content:space-between;color:#718579;font-size:.72rem}.chart-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:11px 0}.chart-head h3{font-size:1rem;letter-spacing:-.02em;margin:0}.save-chart{border:0;border-radius:9px;background:#004225;color:#fff;padding:10px 14px;font-size:.86rem;font-weight:750}.save-chart:hover{background:#2d6640}.save-chart:disabled{background:#dbe5dc;color:#718579;cursor:not-allowed}.chart-hint{color:#718579;font-size:.78rem;margin:12px 0 14px}@media(max-width:400px){.strategy-head{align-items:start;flex-direction:column;gap:3px}}
+@media(min-width:761px){.splits-head{align-items:center}}@media(max-width:760px){.splits-head{gap:8px;padding-bottom:8px}.strategy{width:100%;max-width:350px;flex:0 0 auto}}@media(max-width:400px){.strategy-head{flex-direction:row;align-items:baseline;gap:8px}.strategy-head output{font-size:.78rem}}
+/* Match Stride Overlay's Jade Sky background. */
+html{background:#cfe9f0}
+body{isolation:isolate;background:transparent}
+body::before{content:"";position:fixed;inset:-.8vmin;z-index:-1;pointer-events:none;background-color:#cfe9f0;background-image:radial-gradient(circle at 65.34% 44.62%,rgba(238,246,227,1) 0%,rgba(238,246,227,0) 34.1%),radial-gradient(circle at 28.07% 74.48%,rgba(183,217,142,1) 0%,rgba(183,217,142,0) 45.65%),radial-gradient(circle at 52.42% 19.94%,rgba(127,191,154,1) 0%,rgba(127,191,154,0) 57.55%),radial-gradient(circle at 80.31% 84.47%,rgba(207,233,240,1) 0%,rgba(207,233,240,0) 69.1%);filter:blur(.4vmin)}
+.topbar,.page-frame{position:relative;z-index:1}
+@media(max-width:400px){.brand{font-size:.9rem;gap:7px}}
+.distance-presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.distance-presets button{min-height:34px;border:1px solid #d3dfd3;border-radius:999px;background:#fff;color:#214534;padding:6px 11px;font-size:.875rem;font-weight:700}.distance-presets button:hover,.distance-presets button:focus-visible{background:#e4f8dc;border-color:#7abd66}
+.topbar{background:#f7f9f7;color:#004225;border-bottom:3px solid #004225}.topbar-inner{max-width:1480px;min-height:86px;padding:14px clamp(20px,4vw,58px)}.brand{font-family:Manrope,Arial,sans-serif;font-size:clamp(1.12rem,2.2vw,1.8rem);font-weight:700;letter-spacing:-.055em;white-space:nowrap;gap:12px}.brand-mark{width:48px;height:48px;flex:none}.header-actions{display:flex;align-items:center;gap:12px}.header-actions a{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:8px 22px;border:3px solid #92ff5f;border-radius:13px;background:#004225;color:#fff;font-size:.92rem;font-weight:850;letter-spacing:.035em;text-transform:uppercase;white-space:nowrap}.header-actions a:hover,.header-actions a:focus-visible{background:#125940}.header-actions .overlay-link{border-color:#004225;background:transparent;color:#004225}.header-actions .overlay-link:hover,.header-actions .overlay-link:focus-visible{background:#e8f5e5}
+@media(max-width:720px){.topbar-inner{flex-wrap:wrap;gap:10px;padding:12px 16px}.brand{font-size:1.1rem}.brand-mark{width:38px;height:38px}.header-actions{width:100%;gap:8px}.header-actions a{min-height:40px;flex:1;padding:6px 9px;font-size:.78rem}}@media(max-width:400px){.brand{font-size:1.1rem;gap:9px}}
+.topbar-inner{flex-wrap:wrap}.header-actions{flex-wrap:wrap}@media(max-width:720px){.header-actions a{flex:1 1 auto}}.seo-content{margin-top:28px;padding:26px}.seo-content h2{font-size:1.5rem;letter-spacing:-.035em;margin:0 0 12px}.seo-content h3{font-size:1.05rem;line-height:1.4;margin:0 0 8px}.seo-content p{font-size:1rem;line-height:1.65;color:#45604f;margin:0 0 20px}.seo-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px}.seo-grid p{margin:0}.seo-content a{color:#004225;text-underline-offset:3px;font-weight:650}.seo-content .seo-more{margin:24px 0 0;padding-top:18px;border-top:1px solid #dce5dc}@media(max-width:600px){.seo-grid{grid-template-columns:1fr}.seo-content{padding:21px}}
+/* Shared Stride navigation */
+.topbar{position:relative;z-index:100}.topbar-inner{flex-wrap:nowrap;gap:16px}.site-menu-wrap{position:relative;flex:none;margin-left:auto}.site-menu-toggle{width:48px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:2px solid #004225;border-radius:10px;background:#f7f9f7;color:#004225;padding:0;cursor:pointer}.site-menu-toggle span{display:block;width:20px;height:2px;border-radius:2px;background:currentColor}.site-menu-toggle:hover,.site-menu-toggle[aria-expanded="true"]{background:#92ff5f}.site-menu-toggle:focus-visible,.site-menu a:focus-visible{outline:3px solid #004225;outline-offset:3px}.site-menu{position:absolute;right:0;top:calc(100% + 10px);width:min(260px,calc(100vw - 32px));display:flex;flex-direction:column;gap:3px;padding:7px;border:2px solid #004225;border-radius:12px;background:#f7f9f7;box-shadow:0 10px 22px #001b1430;z-index:101}.site-menu[hidden]{display:none!important}.site-menu a{display:flex;align-items:center;gap:10px;min-height:48px;padding:10px 13px;border-radius:7px;color:#004225;text-decoration:none;font-size:1rem;line-height:1.35;font-weight:700}.site-menu a:hover,.site-menu a:focus-visible,.site-menu a[aria-current="page"]{background:#92ff5f}.site-menu .overlay-menu-link{margin-top:3px;border-top:1px solid #d2dfd5;padding-top:12px}.overlay-menu-logo{display:block;width:30px;height:30px;flex:none;border-radius:6px}@media(max-width:720px){.topbar-inner{padding:12px 16px;min-height:70px;gap:10px}.brand{font-size:clamp(.94rem,3.6vw,1.1rem);gap:8px;min-width:0}.brand-mark{width:34px;height:34px}.site-menu-toggle{width:42px;height:42px}.site-menu-toggle span{width:18px}.site-menu{top:calc(100% + 10px)}}
+    
+/* Controlled rolling title: animate text out, resize its slot, then animate the next word in. */
+.rolling-title { text-wrap: balance; }
+.rolling-title .rolling-word {
+  position:relative;
+  display:inline-block;
+  width:5ch; /* script measures the precise rendered word width */
+  vertical-align:baseline;
+  margin-inline:0; /* normal sentence spaces provide balanced gaps */
+  white-space:nowrap;
+  overflow:visible;
+  text-decoration:none!important;
+  transition:width .42s cubic-bezier(.25,.7,.22,1);
+}
+.rolling-title .rolling-word::before {content:"M";visibility:hidden;}
+.rolling-title .rolling-word,
+.rolling-title .rolling-word * {text-decoration:none!important;text-decoration-line:none!important;}
+#rolling-current {
+  position:absolute;
+  left:0;
+  top:0;
+  display:block;
+  width:max-content;
+  color:#92FF5F!important;
+  -webkit-text-fill-color:#92FF5F;
+  background:none!important;
+  text-decoration:none!important;
+  white-space:nowrap;
+  opacity:1;
+  will-change:transform,opacity;
+}
+#rolling-current.roll-out {animation:word-out .28s cubic-bezier(.4,0,.6,1) both;}
+#rolling-current.roll-in {animation:word-in .44s cubic-bezier(.22,.72,.22,1) both;}
+@keyframes word-out {
+  from {transform:translateY(0);opacity:1;}
+  to {transform:translateY(-.52em);opacity:0;}
+}
+@keyframes word-in {
+  from {transform:translateY(.52em);opacity:0;}
+  to {transform:translateY(0);opacity:1;}
+}
+@media(prefers-reduced-motion:reduce){
+ .rolling-title .rolling-word{transition:none}
+ #rolling-current,#rolling-current.roll-out,#rolling-current.roll-in{animation:none}
+}
+
+/* Interpret two-part race times from distance; allow a one-click correction. */
+.time-assumption{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:9px;font-size:.76rem;line-height:1.35;color:#42634d}
+.time-assumption[hidden]{display:none!important}
+.time-assumption button{border:1px solid #8fcb7b;border-radius:7px;background:#edfce8;color:#004225;padding:5px 8px;font-size:.75rem;font-weight:750;min-height:30px}
+.time-assumption button:hover,.time-assumption button:focus-visible{background:#d8f9cb}
+      /* Distance and pace can now be chosen independently. */
+      .field-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;min-width:0}
+      .field-heading label{display:block;margin:0;font-size:.92rem;font-weight:760}
+      .field-heading .unit-switch{padding:3px;flex-shrink:0}
+      .field-heading .unit-switch button{min-width:45px;min-height:31px;padding:0 9px;font-size:.78rem}
+      @media(max-width:380px){.field-heading .unit-switch button{min-width:38px;padding:0 7px}}
+    
+/* Identical navigation hierarchy across conversion tool and pace calculator. */
+.site-menu{width:min(276px,calc(100vw - 32px));gap:2px;padding:9px}
+.site-menu a{min-height:46px;gap:12px;padding:9px 12px;font-weight:700}
+.site-menu .menu-nav-icon{width:24px;height:24px;display:block;flex:none;color:#004225}
+.site-menu .menu-section-divider{height:1px;background:#d4dfd7;margin:6px 9px}
+.site-menu .overlay-menu-link{margin-top:0;border-top:0;padding-top:9px}
+.site-menu .overlay-menu-logo{width:26px;height:26px;margin-left:-1px;flex:none}
+
+/* Match the shared Stride Calculator heading colours. */
+.eyebrow {
+  color: #004226;
+  background-image: linear-gradient(95deg, #004226 3%, #227b3b 45%, #92FF5F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content;
+  max-width: 100%;
+}
+.rolling-title { color: #004226; }
+.rolling-title #rolling-current {
+  color: #92FF5F !important;
+  -webkit-text-fill-color: #92FF5F;
+}
+
+
+/* Mobile only: reserve the entire first line for Running + the changing word.
+   Calculator always starts on line two, so word-width animations cannot move it. */
+@media (max-width: 760px) {
+  .rolling-title {
+    font-size: clamp(1.7rem, 7.1vw, 2.25rem);
+    line-height: 1.13;
+    text-wrap: nowrap;
+  }
+  .rolling-title .rolling-first-line {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .24em;
+    white-space: nowrap;
+    max-width: 100%;
+    text-decoration: none !important;
+  }
+  .rolling-title .rolling-last-line {
+    display: block;
+    margin-top: .06em;
+    text-decoration: none !important;
+  }
+  .rolling-title .rolling-word { flex: 0 0 auto; }
+}
+
+
+/* Running and Calculator are never underlined, including mobile. */
+h1.rolling-title .rolling-first-line, h1.rolling-title .rolling-last-line, h1.rolling-title .rolling-first-line *, h1.rolling-title .rolling-last-line * { text-decoration: none !important; text-decoration-line: none !important; }
+
+/* Shared Stride Calculator typography, aligned with the About & FAQ heading.
+   Topbar brand retains its separately styled Manrope wordmark. */
+body, button, input, select, textarea { font-family: Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+body { font-weight: 400; }
+h1, h2, h3 { font-family: Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+h1 { font-weight: 800; }
+.intro, .seo-content p, .section-head p { font-weight: 400; }
+input { font-variant-numeric: tabular-nums; }
+</style>
+<meta content="website" property="og:type"/>
+<meta content="Running Pace &amp; Splits Calculator | Stride Calculator" property="og:title"/>
+<meta content="Free running pace calculator: find pace, time or distance, plan kilometre, mile and lap splits, and save your race split table." property="og:description"/>
+<meta content="https://stridecalculator.com/calculator.html" property="og:url"/>
+<meta content="Stride Calculator" property="og:site_name"/>
+<script type="application/ld+json">
+      {"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://stridecalculator.com/#website", "url": "https://stridecalculator.com/", "name": "Stride Calculator", "inLanguage": "en-GB"}, {"@type": "WebPage", "@id": "https://stridecalculator.com/#webpage", "url": "https://stridecalculator.com/", "name": "Running Pace & Splits Calculator | Stride Calculator", "description": "Free running pace calculator: find pace, time or distance, plan kilometre, mile and lap splits, and save your race split table.", "isPartOf": {"@id": "https://stridecalculator.com/#website"}, "inLanguage": "en-GB", "dateModified": "2026-10-01"}, {"@type": "WebApplication", "@id": "https://stridecalculator.com/#calculator", "name": "Running Pace & Splits Calculator", "url": "https://stridecalculator.com/", "description": "Free running pace calculator: find pace, time or distance, plan kilometre, mile and lap splits, and save your race split table.", "applicationCategory": "SportsApplication", "operatingSystem": "Any device with a web browser", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"}}]}
+    </script>
+</head>
+<body>
+<header class="topbar" google-side-rail-overlap="false">
+<div class="topbar-inner">
+<a aria-label="Stride Calculator home" class="brand" href="index.html"> <svg aria-hidden="true" class="brand-mark" viewbox="0 0 64 64">
+<rect fill="#004225" height="64" rx="12" width="64">
+</rect>
+<rect fill="#92ff5f" height="46" rx="5" width="30" x="17" y="9">
+</rect>
+<rect fill="#004225" height="11" rx="1.5" width="20" x="22" y="15">
+</rect>
+<g fill="#004225">
+<rect height="6" rx="1.3" width="6" x="21" y="30">
+</rect>
+<rect height="6" rx="1.3" width="6" x="29" y="30">
+</rect>
+<rect height="6" rx="1.3" width="6" x="37" y="30">
+</rect>
+<rect height="6" rx="1.3" width="6" x="21" y="38">
+</rect>
+<rect height="6" rx="1.3" width="6" x="29" y="38">
+</rect>
+<rect height="6" rx="1.3" width="6" x="37" y="38">
+</rect>
+<rect height="6" rx="1.3" width="6" x="21" y="46">
+</rect>
+<rect height="6" rx="1.3" width="6" x="29" y="46">
+</rect>
+<rect height="6" rx="1.3" width="6" x="37" y="46">
+</rect>
+</g>
+</svg>
+        STRIDE CALCULATOR
+</a>
+<div class="site-menu-wrap">
+<button aria-controls="site-menu" aria-expanded="false" aria-label="Open menu" class="site-menu-toggle" id="site-menu-toggle" type="button">
+<span></span>
+<span></span>
+<span></span>
+</button>
+<nav aria-label="Main navigation" class="site-menu" hidden="" id="site-menu">
+<a class="menu-tool-link" href="index.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16m0 0-4-4m4 4-4 4"></path><path d="M20 17H4m0 0 4-4m-4 4 4 4"></path></svg><span>Pace Conversion Tool</span></a>
+<a class="menu-tool-link" href="pacing-guides.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 5.5c3.4-1 6-0.8 8 0.6 2-1.4 4.6-1.6 8-0.6v13c-3.4-1-6-0.8-8 0.6-2-1.4-4.6-1.6-8-0.6z"></path><path d="M12 6.1v13"></path></svg><span>Pacing Guides</span></a>
+<div aria-hidden="true" class="menu-section-divider" role="separator"></div>
+<a href="about-faq.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.2a2.7 2.7 0 0 1 5.1 1.1c0 1.8-2.6 2-2.6 4"></path><path d="M12 17.2h.01"></path></svg><span>About &amp; FAQ</span></a>
+<div aria-hidden="true" class="menu-section-divider" role="separator"></div>
+<a class="overlay-menu-link" href="https://strideoverlay.com/" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" class="overlay-menu-logo" focusable="false" height="30" viewbox="0 0 64 64" width="30" xmlns="http://www.w3.org/2000/svg"><rect fill="#004225" height="64" rx="12" width="64"></rect><path d="M8 43h12l8-22 9 29 8-18h11" fill="none" stroke="#92ff5f" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"></path></svg><span>Stride Overlay</span></a>
+</nav>
+</div>
+</div>
+</header>
+<div class="page-frame">
+<aside aria-label="Advertisement" class="ad-rail" data-ad-placement="left">
+<!-- Stride Calculator - Desktop Left -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-4255737683434811" data-ad-format="vertical" data-ad-slot="5442902432" data-full-width-responsive="true" style="display:block">
+</ins>
+</aside>
+<main google-side-rail-overlap="false">
+<h1 class="rolling-title"><span class="rolling-first-line">Running <span aria-label="time, pace, splits and distance" class="rolling-word"><span aria-hidden="true" data-word="time" id="rolling-current">time</span><span aria-hidden="true" id="rolling-measure" style="position:absolute;visibility:hidden;pointer-events:none;white-space:nowrap;left:-9999px;top:0">time</span></span></span> <span class="rolling-last-line">Calculator</span></h1>
+<p class="intro">
+          Find your pace, finish time or distance from any two values. See race split times for each lap, kilometre or mile.
+        </p>
+<div class="workspace">
+<section aria-label="Running calculator" class="panel calculator">
+<div class="section-head">
+<h2>
+                Find
+              </h2>
+</div>
+<div aria-label="What are you looking for?" class="find-switch" role="group">
+<button aria-pressed="false" data-find="distance" type="button">
+                Distance
+              </button>
+<button aria-pressed="true" data-find="pace" type="button">
+                Pace
+              </button>
+<button aria-pressed="false" data-find="time" type="button">
+                Time
+              </button>
+</div>
+<div class="fields">
+<div class="field" id="distance-field">
+<div class="field-heading">
+<label for="distance">Distance</label>
+<div aria-label="Distance units" class="unit-switch" role="group">
+<button aria-pressed="true" data-distance-unit="km" type="button">km</button>
+<button aria-pressed="false" data-distance-unit="mi" type="button">miles</button>
+</div>
+</div>
+<input aria-label="Distance in kilometres" autocomplete="off" id="distance" inputmode="decimal" placeholder="e.g. 10" type="text"/>
+<div aria-label="Common race distances" class="distance-presets" role="group">
+<button data-distance-km="5" type="button">
+                    5K
+                  </button>
+<button data-distance-km="10" type="button">
+                    10K
+                  </button>
+<button data-distance-km="21.0975" type="button">
+                    Half marathon
+                  </button>
+<button data-distance-km="42.195" type="button">
+                    Marathon
+                  </button>
+</div>
+</div>
+<div class="field" id="time-field">
+<label for="time">
+                  Time
+                  <small>                  MM:SS or H:MM:SS
+</small>
+</label>
+<input aria-describedby="time-assumption" aria-label="Race time. Two-part times are interpreted using race distance, or enter hours minutes and seconds explicitly" autocapitalize="off" autocomplete="off" id="time" inputmode="text" placeholder="e.g. 3:40 or 3:40:00" spellcheck="false" type="text"/>
+<div aria-live="polite" class="time-assumption" hidden="" id="time-assumption" role="status">
+<span id="time-assumption-label"></span>
+<button aria-label="Switch time interpretation" id="time-assumption-switch" type="button"></button>
+</div>
+</div>
+<div class="field" id="pace-field">
+<div class="field-heading">
+<label for="pace">Pace</label>
+<div aria-label="Pace units" class="unit-switch" role="group">
+<button aria-pressed="true" data-pace-unit="km" type="button">km</button>
+<button aria-pressed="false" data-pace-unit="mi" type="button">miles</button>
+</div>
+</div>
+<input aria-label="Pace in minutes and seconds per kilometre" autocapitalize="off" autocomplete="off" id="pace" inputmode="text" placeholder="e.g. 5:00" spellcheck="false" type="text"/>
+</div>
+</div>
+<p aria-live="polite" class="error" id="error" role="status">
+</p>
+</section>
+<section aria-atomic="true" aria-live="polite" class="panel result">
+<div>
+<p class="result-label" id="result-label">
+                Your result
+              </p>
+<p class="result-value" id="result-value">
+                -
+              </p>
+<p class="result-unit" id="result-unit">
+                Enter any two values to calculate the third.
+              </p>
+</div>
+<div class="result-footer">
+<div>
+<span class="mini-label">                Distance
+</span>
+<span class="mini-value" id="summary-distance">                -
+</span>
+</div>
+<div>
+<span class="mini-label">                Metres
+</span>
+<span class="mini-value" id="summary-metres">                -
+</span>
+</div>
+<div>
+<span class="mini-label">                Pace
+</span>
+<span class="mini-value" id="summary-pace">                -
+</span>
+</div>
+</div>
+</section>
+</div>
+<section aria-labelledby="splits-title" class="panel splits">
+<div class="splits-head">
+<div>
+<h2 id="splits-title">
+                Your splits
+              </h2>
+<p class="splits-note" id="splits-note">
+                Even pace, kilometre by kilometre
+              </p>
+</div>
+<div class="strategy">
+<div class="strategy-head">
+<label for="split-bias">
+                  Split strategy
+                </label>
+<output for="split-bias" id="split-bias-label">
+                  Even split  |  0%
+                </output>
+</div>
+<input aria-label="Negative to positive split percentage" id="split-bias" max="5" min="-5" step="0.1" type="range" value="0"/>
+<div class="strategy-scale">
+<span>                -5% Negative
+</span>
+<span>                Even
+</span>
+<span>                Positive +5%
+</span>
+</div>
+</div>
+</div>
+<div aria-label="Split distance" class="split-shortcuts" role="group">
+<div class="split-controls">
+<label for="split-size">
+                Split every
+              </label>
+<input aria-label="Split distance; defaults to one kilometre or one mile based on selected pace unit" id="split-size" inputmode="decimal" min="0.001" placeholder="1" step="any" type="number"/>
+<select aria-label="Split distance unit" id="split-unit">
+<option value="km">
+                  km
+                </option>
+<option value="m">
+                  m
+                </option>
+<option value="mi">
+                  miles
+                </option>
+</select>
+</div>
+<button data-split="200m" type="button">
+              200m
+            </button>
+<button data-split="400m" type="button">
+              400m
+            </button>
+<button data-split="1km" type="button">
+              1km
+            </button>
+<button data-split="1mile" type="button">
+              1 mile
+            </button>
+<button data-split="5km" type="button">
+              5km
+            </button>
+<span id="split-count">            0 splits
+</span>
+</div>
+<p class="split-error" id="split-error" role="status">
+</p>
+<div class="chart-head">
+<h3>
+              Split table
+            </h3>
+<button class="save-chart" disabled="" id="save-chart" type="button">
+              Save splits
+            </button>
+</div>
+<div class="table-wrap">
+<table hidden="" id="split-table">
+<thead>
+<tr>
+<th id="segment-heading" scope="col">
+                    Kilometre
+                  </th>
+<th scope="col">
+                    Split
+                  </th>
+<th class="four-hundred-heading" scope="col">
+                    400 m
+                  </th>
+<th scope="col">
+                    Elapsed
+                  </th>
+</tr>
+</thead>
+<tbody id="split-rows">
+</tbody>
+</table>
+</div>
+<p class="chart-hint">
+            A4 portrait image. On a phone, choose Save Image from the share sheet.
+            <span aria-live="polite" id="save-status" role="status"></span>
+</p>
+</section>
+<p class="foot">
+          Split percentage compares the second half's average pace with the first. Displayed times are rounded to the nearest second.
+          <a href="about-faq.html">          Learn how to calculate lap pace, mile splits and average pace.
+</a>
+</p>
+</main>
+<aside aria-label="Advertisement" class="ad-rail" data-ad-placement="right">
+<!-- Stride Calculator - Desktop Right -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-4255737683434811" data-ad-format="vertical" data-ad-slot="4835474333" data-full-width-responsive="true" style="display:block">
+</ins>
+</aside>
+</div>
+<script>
+      (() => {
+  const KM_PER_MILE=1.609344, keys=['distance','time','pace'], $=id=>document.getElementById(id);
+  const input={distance:$('distance'),time:$('time'),pace:$('pace')};
+  let unit='km',paceUnit='km',target='pace',chartData=null;
+  const toKilometres=value=>value*(unit==='mi'?KM_PER_MILE:1);
+  const paceMetres=()=>paceUnit==='mi'?KM_PER_MILE:1;
+  // Number of pace-units in one displayed distance-unit (e.g. 10km = 6.2137 miles).
+  const paceUnitsPerDistanceUnit=()=> (unit==='mi'?KM_PER_MILE:1)/paceMetres();
+  // null = infer from distance. A user choice is retained until the time is edited.
+  let explicitTimeMode=null;
+  // Keep sub-second precision internally while showing clean MM:SS inputs.
+  let precisePaceSeconds=null,precisePaceDisplay=null;
+  function parseClock(raw){const value=raw.trim();if(!/^\d+(?::[0-5]\d){1,2}$/.test(value))return NaN;const parts=value.split(':').map(Number);return parts.length===2?parts[0]*60+parts[1]:parts[0]*3600+parts[1]*60+parts[2]}
+  function interpretRaceTime(raw, distance){
+    const mmss=parseClock(raw),parts=raw.trim().split(':');
+    // H:MM:SS is always explicit; e.g. 3:40:00 cannot be mistaken for 3m40s.
+    if(!Number.isFinite(mmss)||parts.length!==2||Number(parts[0])>23||Number(parts[0])<1)
+      return {seconds:mmss,ambiguous:false};
+    const hours=Number(parts[0])*3600+Number(parts[1])*60;
+    let useHours=false;
+    if(explicitTimeMode!==null){useHours=explicitTimeMode==='hours'}
+    else if(target!=='distance'&&Number.isFinite(distance)&&distance>0){
+      const km=distance*(unit==='mi'?KM_PER_MILE:1);
+      const minutesPace=mmss/km, hoursPace=hours/km;
+      // Use h:mm only when mm:ss would imply an implausibly fast race,
+      // and h:mm gives a feasible running/walking finishing pace.
+      useHours=minutesPace<90&&hoursPace>=90&&hoursPace<=1200;
+    }
+    return {seconds:useHours?hours:mmss,ambiguous:true,useHours,minutes:mmss,hours};
+  }
+  function updateTimeAssumption(interpretation){
+    const holder=$('time-assumption');
+    if(target==='time'||!interpretation.ambiguous){holder.hidden=true;return}
+    holder.hidden=false;
+    const clockWords=seconds=>`${Math.floor(seconds/3600)}h ${Math.floor(seconds%3600/60)}m`;
+    const minuteWords=seconds=>`${Math.floor(seconds/60)}m ${seconds%60}s`;
+    $('time-assumption-label').textContent=`Using ${interpretation.useHours?clockWords(interpretation.hours):minuteWords(interpretation.minutes)}`;
+    const button=$('time-assumption-switch');
+    button.textContent=`Switch to ${interpretation.useHours?minuteWords(interpretation.minutes):clockWords(interpretation.hours)}`;
+    button.setAttribute('aria-label',`Interpret ${input.time.value} as ${interpretation.useHours?'minutes and seconds':'hours and minutes'} instead`);
+  }
+  function clock(seconds){const n=Math.round(seconds);if(!Number.isFinite(n)||n<0)return '-';const h=Math.floor(n/3600),m=Math.floor(n%3600/60),s=n%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
+  function pretty(n){return Number(n.toFixed(n>=100?2:n>=10?3:4)).toLocaleString('en-GB',{maximumFractionDigits:4})}
+  function splitSettings(){
+    const raw=$('split-size').value.trim(),splitUnit=$('split-unit').value;
+    if(!raw){
+      // When no interval has been chosen, use one pace unit, independently
+      // of the distance unit. This supports e.g. a 10km race at mile pace.
+      const km=paceUnit==='mi'?KM_PER_MILE:1;
+      return {step:unit==='km'?km:km/KM_PER_MILE,labelUnit:paceUnit,stepSize:1,auto:true};
+    }
+    const size=Number(raw);
+    if(!Number.isFinite(size)||size<=0||size>100000)return null;
+    const km=splitUnit==='m'?size/1000:splitUnit==='mi'?size*KM_PER_MILE:size;
+    const step=unit==='km'?km:km/KM_PER_MILE;
+    if(step<1e-9)return null;
+    return {step,labelUnit:splitUnit,stepSize:size,auto:false};
+  }
+  function updateShortcut(){
+    const raw=$('split-size').value.trim(),su=$('split-unit').value;
+    const size=Number(raw);
+    const choice=!raw?(paceUnit==='km'?'1km':'1mile'):
+      size===200&&su==='m'?'200m':
+      size===400&&su==='m'?'400m':
+      size===1&&su==='km'?'1km':
+      size===1&&su==='mi'?'1mile':
+      size===5&&su==='km'?'5km':'';
+    document.querySelectorAll('[data-split]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.split===choice)));
+  }
+  function strategy(){
+    const percent=Number($('split-bias').value),q=percent/100;
+    const label=percent===0?'Even split  |  0%':`${percent<0?'Negative':'Positive'} split  |  ${Math.abs(percent)}%`;
+    $('split-bias-label').textContent=label;
+    $('split-bias').setAttribute('aria-valuetext',percent===0?'Even split':`${Math.abs(percent)} percent ${percent<0?'negative':'positive'} split`);
+    return {percent,q,slope:4*q/(2+q),label};
+  }
+  async function saveSplits(){
+    if(!chartData)return;
+    const data=chartData,rows=[...$('split-rows').children].map(row=>[...row.cells].map(cell=>cell.textContent));
+    if(!rows.length)return;
+    const width=2480,height=3508,margin=130,tableTop=660,tableBottom=3190,headerHeight=82,rowsPerPage=48;
+    const pageCount=Math.ceil(rows.length/rowsPerPage);
+    const interval=data.split.auto?`1 ${data.unit}`:`${pretty(data.split.stepSize)} ${data.split.labelUnit}`;
+    const files=[];
+    try{
+      for(let page=0;page<pageCount;page++){
+        const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+        const ctx=canvas.getContext('2d');
+        ctx.fillStyle='#f7f9f7';ctx.fillRect(0,0,width,height);
+        ctx.fillStyle='#004225';ctx.fillRect(0,0,width,610);
+        ctx.fillStyle='#92ff5f';ctx.fillRect(0,610,width,12);
+        ctx.textAlign='left';ctx.fillStyle='#92ff5f';ctx.font='800 76px system-ui, sans-serif';ctx.fillText('STRIDE CALCULATOR',margin,150);
+        ctx.fillStyle='#d6e7d8';ctx.font='700 38px system-ui, sans-serif';ctx.fillText('RUNNING SPLITS',margin,225);
+        ctx.fillStyle='#fff';ctx.font='700 103px system-ui, sans-serif';ctx.fillText(`${clock(data.time)}   |   ${pretty(data.distance)} ${data.unit}`,margin,365);
+        ctx.fillStyle='#d6e7d8';ctx.font='40px system-ui, sans-serif';ctx.fillText(`${clock(data.pace)} /${data.paceUnit==='mi'?'mile':'km'} average pace    |    ${data.bias.label}`,margin,452);
+        ctx.fillText(`${interval} splits    |    ${$('split-count').textContent}`,margin,523);
+        ctx.textAlign='right';ctx.font='33px system-ui, sans-serif';ctx.fillText(`Page ${page+1} of ${pageCount}`,width-margin,575);
+        ctx.fillStyle='#004225';ctx.fillRect(margin,tableTop,width-2*margin,headerHeight);
+        ctx.fillStyle='#fff';ctx.font='700 42px system-ui, sans-serif';ctx.textBaseline='middle';ctx.textAlign='left';
+        ctx.fillText(data.split.labelUnit==='mi'?'Mile':data.split.labelUnit==='m'?'Metres':'Kilometre',margin+34,tableTop+headerHeight/2);
+        ctx.textAlign='right';ctx.fillText('Split',width*.57,tableTop+headerHeight/2);ctx.fillText('400 m',width*.77,tableTop+headerHeight/2);ctx.fillText('Elapsed',width-margin-34,tableTop+headerHeight/2);
+        const pageRows=rows.slice(page*rowsPerPage,(page+1)*rowsPerPage);
+        const rowHeight=(tableBottom-tableTop-headerHeight)/pageRows.length;
+        const rowFont=Math.min(70,Math.max(36,rowHeight*.28));
+        pageRows.forEach((values,index)=>{
+          const y=tableTop+headerHeight+index*rowHeight,finish=values[0].includes('(finish)');
+          ctx.fillStyle=finish?'#dff5d8':index%2?'#fff':'#edf3ee';ctx.fillRect(margin,y,width-2*margin,rowHeight);
+          ctx.fillStyle='#214534';ctx.font=`${finish?'700':'500'} ${rowFont}px system-ui, sans-serif`;
+          ctx.textAlign='left';ctx.fillText(values[0],margin+34,y+rowHeight/2);
+          ctx.textAlign='right';ctx.fillText(values[1],width*.57,y+rowHeight/2);ctx.fillText(values[2],width*.77,y+rowHeight/2);ctx.fillText(values[3],width-margin-34,y+rowHeight/2);
+        });
+        ctx.textBaseline='alphabetic';ctx.strokeStyle='#b8caba';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(margin,3320);ctx.lineTo(width-margin,3320);ctx.stroke();
+        ctx.fillStyle='#004225';ctx.font='700 42px system-ui, sans-serif';ctx.textAlign='left';ctx.fillText('STRIDE CALCULATOR',margin,3390);
+        ctx.textAlign='right';ctx.font='35px system-ui, sans-serif';ctx.fillText('stridecalculator.com',width-margin,3390);
+        ctx.fillStyle='#607667';ctx.font='29px system-ui, sans-serif';ctx.textAlign='left';ctx.fillText('Split times are rounded to the nearest second.',margin,3450);
+        const url=canvas.toDataURL('image/png'),raw=atob(url.slice(url.indexOf(',')+1)),bytes=new Uint8Array(raw.length);
+        for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);
+        const filename=pageCount===1?'Stride-Calculator-splits-A4.png':`Stride-Calculator-splits-A4-${page+1}-of-${pageCount}.png`;
+        files.push(new File([bytes],filename,{type:'image/png'}));
+      }
+    }catch(error){$('save-status').textContent='Could not create the A4 images on this device.';return}
+    let canShareFiles=false;
+    try{canShareFiles=!!(navigator.share&&navigator.canShare?.({files}))}catch(_error){}
+    if(canShareFiles){
+      try{await navigator.share({files,title:'Stride Calculator splits'});$('save-status').textContent=pageCount===1?'A4 image shared.':`${pageCount} A4 images shared.`;return}
+      catch(error){if(error.name==='AbortError')return}
+    }
+    files.forEach(file=>{
+      const url=URL.createObjectURL(file),link=document.createElement('a');link.href=url;link.download=file.name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+    });
+    $('save-status').textContent=pageCount===1?'A4 image downloaded.':`${pageCount} A4 images downloaded.`;
+  }
+  function calculate(){
+    const active=keys.filter(key=>key!==target),d=Number(input.distance.value),interpreted=interpretRaceTime(input.time.value,d),t=interpreted.seconds,p=precisePaceSeconds!==null&&input.pace.value===precisePaceDisplay?precisePaceSeconds:parseClock(input.pace.value);
+    updateTimeAssumption(interpreted);
+    const valid={distance:input.distance.value.trim()!==''&&Number.isFinite(d)&&d>0&&d<=100000,time:Number.isFinite(t)&&t>0&&t<=8640000,pace:Number.isFinite(p)&&p>0&&p<=86400};
+    keys.forEach(key=>{input[key].setAttribute('aria-invalid',String(active.includes(key)&&input[key].value.trim()!==''&&!valid[key]));$(key+'-field').classList.toggle('is-missing',key===target)});
+    const ready=active.every(key=>valid[key]);
+    $('error').textContent=active.some(key=>input[key].value.trim())&&!ready&&active.every(key=>input[key].value.trim())?'Enter a positive distance and use MM:SS for pace or MM:SS / H:MM:SS for time.':'';
+    let distance=d,time=t,pace=p;
+    const factor=paceUnitsPerDistanceUnit();
+    // Pace is seconds per selected pace unit; distance is in the independently selected distance unit.
+    if(ready){
+      if(target==='time')time=distance*factor*pace;
+      else if(target==='distance')distance=time/(factor*pace);
+      else pace=time/(distance*factor);
+    }
+    const complete=ready&&[distance,time,pace].every(n=>Number.isFinite(n)&&n>0);
+    input[target].value=complete?(target==='distance'?String(Number(distance.toFixed(6))):clock(target==='pace'?pace:time)):'';
+    if(target==='pace'){precisePaceSeconds=complete?pace:null;precisePaceDisplay=complete?input.pace.value:null;}
+    $('result-label').textContent=`Your ${target}`;
+    $('result-value').textContent=complete?(target==='distance'?pretty(distance):clock(target==='pace'?pace:time)):'-';
+    const paceLabel=paceUnit==='mi'?'mile':'km';
+    $('result-unit').textContent=complete?(target==='time'?`for ${pretty(distance)} ${unit==='mi'?'miles':'km'} at ${clock(pace)} /${paceLabel}`:target==='distance'?`${unit==='mi'?'miles':'km'} in ${clock(time)} at ${clock(pace)} /${paceLabel}`:`per ${paceLabel} for ${pretty(distance)} ${unit==='mi'?'miles':'km'} in ${clock(time)}`):`Enter ${active.join(' and ')} to calculate ${target}.`;
+    $('summary-distance').textContent=complete?`${pretty(distance)} ${unit==='mi'?'miles':'km'}`:'-';
+    $('summary-metres').textContent=complete?`${pretty(distance*(unit==='km'?1000:1609.344))} m`:'-';
+    $('summary-pace').textContent=complete?`${clock(pace)} /${paceLabel}`:'-';
+    const rows=$('split-rows');rows.replaceChildren();$('split-table').hidden=!complete;
+    const split=splitSettings();$('split-error').textContent=split?'':'Enter a split distance greater than zero.';
+    const bias=strategy();updateShortcut();
+    $('splits-note').textContent=bias.percent===0?`Even pace, ${split&&split.auto?(paceUnit==='km'?'kilometre by kilometre':'mile by mile'):'at your selected split interval'} by default`:`${bias.percent<0?'Negative':'Positive'} split  |  ${Math.abs(bias.percent)}% between halves`;
+    if(!complete||!split){chartData=null;$('save-chart').disabled=true;$('split-count').textContent='0 splits';$('split-table').hidden=true;return}
+    const pacePerDistanceUnit=pace*factor;
+    const elapsedAt=x=>pacePerDistanceUnit*(x+bias.slope*(x*x/(2*distance)-x/2));
+    chartData={distance,time,pace,paceUnit,unit,split,bias};$('save-chart').disabled=false;
+    // Ignore sub-millimetre conversion rounding instead of inventing a near-zero final split.
+    const count=Math.max(1,Math.ceil(distance/split.step-1e-6)),shown=Math.min(count,250),fragment=document.createDocumentFragment();
+    $('split-count').textContent=count>250?`First 250 of ${count.toLocaleString('en-GB')} splits`:`${count} ${count===1?'split':'splits'}`;
+    for(let i=1;i<=shown;i++){
+      const start=(i-1)*split.step,nominalEnd=Math.min(i*split.step,distance),end=distance-nominalEnd<=split.step*1e-6?distance:nominalEnd,tr=document.createElement('tr');
+      const name=end>=distance-1e-9?`${pretty(distance)} ${unit} (finish)`:`${pretty(i*split.stepSize)} ${split.labelUnit}`;
+      const fourHundred=unit==='km'?0.4:0.4/KM_PER_MILE;const fourHundredEnd=Math.min(start+fourHundred,distance);const fourHundredTime=clock(elapsedAt(fourHundredEnd)-elapsedAt(start));
+      [name,clock(elapsedAt(end)-elapsedAt(start)),fourHundredTime,clock(elapsedAt(end))].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td)});fragment.append(tr);
+    }rows.append(fragment);
+  }
+  function reorderFields(animate){
+    const container=document.querySelector('.fields');
+    const tiles=keys.map(key=>$(key+'-field'));
+    const before=new Map(tiles.map(tile=>[tile,tile.getBoundingClientRect()]));
+    keys.filter(key=>key!==target).concat(target).forEach(key=>container.append($(key+'-field')));
+    if(!animate||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    tiles.forEach(tile=>{
+      const old=before.get(tile),now=tile.getBoundingClientRect(),dy=old.top-now.top;
+      if(Math.abs(dy)>1)tile.animate([{transform:`translateY(${dy}px)`},{transform:'translateY(0)'}],{duration:340,easing:'cubic-bezier(.22,1,.36,1)'});
+    });
+  }
+  function find(key,animate=true){
+    if(!keys.includes(key))return;
+    target=key;input[key].value='';if(key==='time')explicitTimeMode=null;
+    if(key==='pace'){precisePaceSeconds=null;precisePaceDisplay=null;}
+    keys.forEach(k=>{input[k].disabled=false;input[k].readOnly=false;input[k].placeholder=k===key?'Click to enter a value':k==='distance'?'e.g. 10':k==='time'?'e.g. 50:00':'e.g. 5:00'});
+    reorderFields(animate);
+    document.querySelectorAll('[data-find]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.find===key)));
+    calculate();
+  }
+  document.querySelectorAll('[data-find]').forEach(button=>button.addEventListener('click',()=>find(button.dataset.find)));
+  document.querySelectorAll('[data-distance-km]').forEach(button=>button.addEventListener('click',()=>{
+    if(target==='distance')find('pace');
+    const kilometres=Number(button.dataset.distanceKm);
+    input.distance.value=String(Number((unit==='mi'?kilometres/KM_PER_MILE:kilometres).toFixed(6)));
+    calculate();
+  }));
+  // Any field can be edited. Focusing the calculated field automatically switches
+  // the result to another field, rather than disabling the field the user wants.
+  keys.forEach(key=>input[key].addEventListener('focus',()=>{
+    if(key!==target)return;
+    const nextTarget=key==='pace'?'time':key==='time'?'pace':'time';
+    find(nextTarget,false);
+  }));
+  keys.forEach(key=>input[key].addEventListener('input',()=>{
+    if(key==='time')explicitTimeMode=null;
+    if(key==='pace'){precisePaceSeconds=null;precisePaceDisplay=null;}
+    calculate();
+  }));
+  $('time-assumption-switch').addEventListener('click',()=>{
+    const interpretation=interpretRaceTime(input.time.value,Number(input.distance.value));
+    if(!interpretation.ambiguous)return;
+    explicitTimeMode=interpretation.useHours?'minutes':'hours';
+    calculate();
+  });
+  // Both switches preserve the physical run. Only the selected field changes units.
+  document.querySelectorAll('[data-distance-unit]').forEach(button=>button.addEventListener('click',()=>{
+    const next=button.dataset.distanceUnit;if(next===unit)return;
+    const d=Number(input.distance.value);
+    if(input.distance.value.trim()&&Number.isFinite(d))input.distance.value=String(Number((next==='mi'?toKilometres(d)/KM_PER_MILE:toKilometres(d)).toFixed(6)));
+    const automatic=!$('split-size').value.trim();unit=next;if(automatic)$('split-unit').value=paceUnit;
+    input.distance.setAttribute('aria-label',`Distance in ${unit==='km'?'kilometres':'miles'}`);
+    $('segment-heading').textContent=unit==='km'?'Kilometre':'Mile';
+    document.querySelectorAll('[data-distance-unit]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.distanceUnit===unit)));
+    calculate();
+  }));
+  document.querySelectorAll('[data-pace-unit]').forEach(button=>button.addEventListener('click',()=>{
+    const next=button.dataset.paceUnit;if(next===paceUnit)return;
+    const p=precisePaceSeconds!==null&&input.pace.value===precisePaceDisplay?precisePaceSeconds:parseClock(input.pace.value);
+    // Keep the same speed to sub-second precision through repeated unit switches.
+    if(input.pace.value.trim()&&Number.isFinite(p)){
+      precisePaceSeconds=next==='mi'?p*(KM_PER_MILE/(paceUnit==='mi'?KM_PER_MILE:1)):p/(paceUnit==='mi'?KM_PER_MILE:1);
+      input.pace.value=clock(precisePaceSeconds);precisePaceDisplay=input.pace.value;
+    }
+    paceUnit=next;
+    // A manually chosen split (button or custom value) always takes priority.
+    // Otherwise switch the default split interval with the pace unit.
+    if(!$('split-size').value.trim())$('split-unit').value=paceUnit;
+    input.pace.setAttribute('aria-label',`Pace in minutes and seconds per ${paceUnit==='km'?'kilometre':'mile'}`);
+    document.querySelectorAll('[data-pace-unit]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.paceUnit===paceUnit)));
+    calculate();
+  }));
+  $('split-size').addEventListener('input',calculate);$('split-unit').addEventListener('change',calculate);
+  let sliderFrame;
+  $('split-bias').addEventListener('input',()=>{strategy();if(sliderFrame)cancelAnimationFrame(sliderFrame);sliderFrame=requestAnimationFrame(()=>{sliderFrame=null;calculate()})});
+  $('save-chart').addEventListener('click',saveSplits);
+  document.querySelectorAll('[data-split]').forEach(button=>button.addEventListener('click',()=>{
+    const selected=button.dataset.split;
+    const shortcut={
+      '200m':{size:'200',unit:'m'},
+      '400m':{size:'400',unit:'m'},
+      '1km':{size:'1',unit:'km'},
+      '1mile':{size:'1',unit:'mi'},
+      '5km':{size:'5',unit:'km'}
+    }[selected];
+    if(!shortcut)return;
+    $('split-size').value=shortcut.size;
+    $('split-unit').value=shortcut.unit;
+    calculate();
+  }));
+  if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'calculate_running',title:'Calculate running pace, time or distance',description:'Provide two values and optionally a split interval and negative or positive split percentage.',inputSchema:{type:'object',properties:{distance:{type:'number',exclusiveMinimum:0},time:{type:'string',description:'MM:SS or H:MM:SS'},pace:{type:'string',description:'MM:SS per selected unit'},unit:{type:'string',enum:['km','mi']},paceUnit:{type:'string',enum:['km','mi']},splitDistance:{type:'number',exclusiveMinimum:0},splitUnit:{type:'string',enum:['m','km','mi']},splitPercentage:{type:'number',minimum:-5,maximum:5,description:'Negative means a faster second half; positive means a slower second half.'}},required:['unit'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute(args){const supplied=keys.filter(k=>args?.[k]!==undefined);if(!['km','mi'].includes(args?.unit)||supplied.length!==2)throw Error('Provide a unit and exactly two values');if(args.distance!==undefined&&(!Number.isFinite(args.distance)||args.distance<=0||args.distance>100000))throw Error('Invalid distance');for(const k of ['time','pace'])if(args[k]!==undefined&&(typeof args[k]!=='string'||!Number.isFinite(parseClock(args[k]))||parseClock(args[k])<=0))throw Error('Invalid '+k);if(args.splitDistance!==undefined&&(!Number.isFinite(args.splitDistance)||args.splitDistance<=0||args.splitDistance>100000||!['m','km','mi'].includes(args.splitUnit)))throw Error('Invalid split distance or unit');if(args.splitPercentage!==undefined&&(!Number.isFinite(args.splitPercentage)||args.splitPercentage < -5||args.splitPercentage > 5))throw Error('Invalid split percentage');if(args.unit!==unit)document.querySelector(`[data-distance-unit="${args.unit}"]`).click();if(args.paceUnit&&args.paceUnit!==paceUnit)document.querySelector(`[data-pace-unit="${args.paceUnit}"]`).click();keys.forEach(k=>input[k].value='');find(keys.find(k=>!supplied.includes(k)));supplied.forEach(k=>input[k].value=String(args[k]));$('split-size').value=args.splitDistance===undefined?'':String(args.splitDistance);$('split-unit').value=args.splitUnit??paceUnit;$('split-bias').value=String(args.splitPercentage??0);calculate();if($('error').textContent||$('split-error').textContent)throw Error($('error').textContent||$('split-error').textContent);return {result:$('result-value').textContent,description:$('result-unit').textContent,splitStrategy:$('split-bias-label').textContent,splits:[...$('split-rows').children].map(row=>[...row.cells].map(cell=>cell.textContent))}}})).catch(()=>{})}catch(_e){}}
+  find('pace',false);
+})();
+    </script>
+<script>
+      (() => {
+  const toggle = document.getElementById('site-menu-toggle');
+  const menu = document.getElementById('site-menu');
+  function closeMenu(returnFocus = false) {
+    menu.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+    if (returnFocus) toggle.focus();
+  }
+  toggle.addEventListener('click', () => {
+    const open = menu.hidden;
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  menu.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
+  document.addEventListener('pointerdown', event => {
+    if (!menu.hidden && !event.target.closest('.site-menu-wrap')) closeMenu();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !menu.hidden) { event.preventDefault(); closeMenu(true); }
+  });
+  document.querySelector('.site-menu-wrap').addEventListener('focusout', event => {
+    if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) closeMenu();
+  });
+})();
+    </script>
+<script>
+      (() => {
+  const desktop = window.matchMedia('(min-width: 1181px)');
+  function loadDesktopAds() {
+    if (!desktop.matches) return;
+    document.querySelectorAll('.ad-rail .adsbygoogle').forEach(ad => {
+      if (ad.dataset.requested || ad.hasAttribute('data-adsbygoogle-status') || ad.getBoundingClientRect().width <= 0) return;
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      ad.dataset.requested = 'true';
+    });
+  }
+  loadDesktopAds();
+  desktop.addEventListener('change', loadDesktopAds);
+})();
+    </script>
+<script>
+/* Zero-overlap title sequencing. The old word fully exits before the slot can shrink. */
+(()=>{
+ const el=document.getElementById('rolling-current');
+ const slot=el?.closest('.rolling-word');
+ const ruler=document.getElementById('rolling-measure');
+ if(!el||!slot||!ruler)return;
+ const words=['time','pace','splits','distance'];
+ let index=0;
+ let busy=false;
+ const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+ const EXIT_MS=290, RESIZE_MS=440, ENTER_MS=450;
+ function resizeFor(word){
+  ruler.textContent=word;
+  /* Exact text width plus a small anti-clipping tolerance; no excess right-hand gap. */
+  const width=Math.ceil(ruler.getBoundingClientRect().width + 2);
+  slot.style.width=width+'px';
+ }
+ resizeFor(words[index]);
+ if(document.fonts?.ready)document.fonts.ready.then(()=>{if(!busy)resizeFor(words[index]);});
+ window.addEventListener('resize',()=>{if(!busy)resizeFor(words[index]);},{passive:true});
+ function cycle(){
+  if(document.hidden||busy)return;
+  busy=true;
+  const next=(index+1)%words.length;
+  if(reduceMotion.matches){
+   index=next;
+   el.textContent=words[index];
+   el.dataset.word=words[index];
+   resizeFor(words[index]);
+   busy=false;
+   return;
+  }
+  // Phase 1: outgoing text keeps its full-width slot until completely invisible.
+  el.classList.remove('roll-in');
+  el.classList.add('roll-out');
+  setTimeout(()=>{
+   // Phase 2: change the invisible text and move the next word into its exact slot.
+   index=next;
+   el.classList.remove('roll-out');
+   el.textContent=words[index];
+   el.dataset.word=words[index];
+   el.style.opacity='0';
+   resizeFor(words[index]);
+   setTimeout(()=>{
+    // Phase 3: only reveal after width animation completes. No collision on distance → time.
+    el.style.opacity='';
+    void el.offsetWidth;
+    el.classList.add('roll-in');
+    setTimeout(()=>{el.classList.remove('roll-in');busy=false;},ENTER_MS);
+   },RESIZE_MS);
+  },EXIT_MS);
+ }
+ setInterval(cycle,3200);
+})();
+</script>
+</body>
+</html>
