@@ -1,14 +1,20 @@
-Stride Calculator — Complete website with 800m, 5K, 10K and Marathon pacing guides.
+Stride Calculator — independent pacing guide pages
 
-Upload all files in this folder to the ROOT of your GitHub Pages repository.
+Upload every file from this folder to the root of your GitHub Pages repository.
 
-index.html — Pace Conversion Tool
-calculator.html — Split Calculator
-about-faq.html — About & FAQ
-pacing-guides.html — Pacing Guides including the full 800m, 5K, 10K and marathon guides
+Pace conversion: index.html
+Split calculator: calculator.html
+About & FAQ: about-faq.html
 
-The hamburger menu on every page has an expandable Pacing Guides section linking to each guide inside pacing-guides.html.
+Guide pages:
+800m-pacing.html
+1500m-pacing.html
+mile-pacing.html
+5k-pacing.html
+10k-pacing.html
+half-marathon-pacing.html
+marathon-pacing.html
 
-The 5K/10K research references lead to published source pages. Illustrative charts are labeled simulations; they are not invented observations.
+There is intentionally NO pacing-guides.html landing page. Remove any previously published pacing-guides.html to avoid outdated/duplicate content.
 
-Half-marathon guide is included in pacing-guides.html#half-marathon-pacing and all menus.
+If using GitHub Actions Pages, make sure its publish step deploys all the HTML files, not only index.html.
