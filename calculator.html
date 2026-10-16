@@ -15,7 +15,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="#004225" name="theme-color"/>
-<meta content="Calculate race time, pace and distance with independent kilometre and mile units, plus 200m, 400m, kilometre and mile splits." name="description"/>
+<meta content="Calculate race time, pace and distance with independent metres, kilometre and mile distance units, with custom splits and tenths of a second for races up to 5km." name="description"/>
 <link href="https://stridecalculator.com/calculator.html" rel="canonical"/>
 <title>Split Calculator | Stride Calculator</title>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4255737683434811">
@@ -297,11 +297,12 @@ input { font-variant-numeric: tabular-nums; }
 <div class="field-heading">
 <label for="distance">Distance</label>
 <div aria-label="Distance units" class="unit-switch" role="group">
+<button aria-pressed="false" data-distance-unit="m" type="button">metres</button>
 <button aria-pressed="true" data-distance-unit="km" type="button">km</button>
 <button aria-pressed="false" data-distance-unit="mi" type="button">miles</button>
 </div>
 </div>
-<input aria-label="Distance in kilometres" autocomplete="off" id="distance" inputmode="decimal" placeholder="e.g. 10" type="text"/>
+<input aria-label="Distance in kilometres" autocomplete="off" id="distance" inputmode="decimal" placeholder="e.g. 800, 5km or 3 miles" type="text"/>
 <div aria-label="Common race distances" class="distance-presets" role="group">
 <button data-distance-km="5" type="button">
                     5K
@@ -463,9 +464,6 @@ input { font-variant-numeric: tabular-nums; }
 <th scope="col">
                     Split
                   </th>
-<th class="four-hundred-heading" scope="col">
-                    400 m
-                  </th>
 <th scope="col">
                     Elapsed
                   </th>
@@ -481,7 +479,7 @@ input { font-variant-numeric: tabular-nums; }
 </p>
 </section>
 <p class="foot">
-          Split percentage compares the second half's average pace with the first. Displayed times are rounded to the nearest second.
+          Split percentage compares the second half's average pace with the first. For races up to 5km, split times show tenths of a second.
           <a href="about-faq.html">          Learn how to calculate lap pace, mile splits and average pace.
 </a>
 </p>
@@ -497,10 +495,11 @@ input { font-variant-numeric: tabular-nums; }
   const KM_PER_MILE=1.609344, keys=['distance','time','pace'], $=id=>document.getElementById(id);
   const input={distance:$('distance'),time:$('time'),pace:$('pace')};
   let unit='km',paceUnit='km',target='pace',chartData=null;
-  const toKilometres=value=>value*(unit==='mi'?KM_PER_MILE:1);
+  const kmPerDistanceUnit=()=>unit==='m'?0.001:unit==='mi'?KM_PER_MILE:1;
+  const toKilometres=value=>value*kmPerDistanceUnit();
   const paceMetres=()=>paceUnit==='mi'?KM_PER_MILE:1;
   // Number of pace-units in one displayed distance-unit (e.g. 10km = 6.2137 miles).
-  const paceUnitsPerDistanceUnit=()=> (unit==='mi'?KM_PER_MILE:1)/paceMetres();
+  const paceUnitsPerDistanceUnit=()=> kmPerDistanceUnit()/paceMetres();
   // null = infer from distance. A user choice is retained until the time is edited.
   let explicitTimeMode=null;
   // Keep sub-second precision internally while showing clean MM:SS inputs.
@@ -515,7 +514,7 @@ input { font-variant-numeric: tabular-nums; }
     let useHours=false;
     if(explicitTimeMode!==null){useHours=explicitTimeMode==='hours'}
     else if(target!=='distance'&&Number.isFinite(distance)&&distance>0){
-      const km=distance*(unit==='mi'?KM_PER_MILE:1);
+      const km=distance*kmPerDistanceUnit();
       const minutesPace=mmss/km, hoursPace=hours/km;
       // Use h:mm only when mm:ss would imply an implausibly fast race,
       // and h:mm gives a feasible running/walking finishing pace.
@@ -534,6 +533,12 @@ input { font-variant-numeric: tabular-nums; }
     button.textContent=`Switch to ${interpretation.useHours?minuteWords(interpretation.minutes):clockWords(interpretation.hours)}`;
     button.setAttribute('aria-label',`Interpret ${input.time.value} as ${interpretation.useHours?'minutes and seconds':'hours and minutes'} instead`);
   }
+  function splitClock(seconds, tenths){
+    if(!tenths)return clock(seconds);
+    const t=Math.round(seconds*10);if(!Number.isFinite(t)||t<0)return '-';
+    const hours=Math.floor(t/36000),minutes=Math.floor((t%36000)/600),secs=Math.floor((t%600)/10),fraction=t%10;
+    return hours?`${hours}:${String(minutes).padStart(2,'0')}:${String(secs).padStart(2,'0')}.${fraction}`:`${minutes}:${String(secs).padStart(2,'0')}.${fraction}`;
+  }
   function clock(seconds){const n=Math.round(seconds);if(!Number.isFinite(n)||n<0)return '-';const h=Math.floor(n/3600),m=Math.floor(n%3600/60),s=n%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
   function pretty(n){return Number(n.toFixed(n>=100?2:n>=10?3:4)).toLocaleString('en-GB',{maximumFractionDigits:4})}
   function splitSettings(){
@@ -542,12 +547,12 @@ input { font-variant-numeric: tabular-nums; }
       // When no interval has been chosen, use one pace unit, independently
       // of the distance unit. This supports e.g. a 10km race at mile pace.
       const km=paceUnit==='mi'?KM_PER_MILE:1;
-      return {step:unit==='km'?km:km/KM_PER_MILE,labelUnit:paceUnit,stepSize:1,auto:true};
+      return {step:km/kmPerDistanceUnit(),labelUnit:paceUnit,stepSize:1,auto:true};
     }
     const size=Number(raw);
     if(!Number.isFinite(size)||size<=0||size>100000)return null;
     const km=splitUnit==='m'?size/1000:splitUnit==='mi'?size*KM_PER_MILE:size;
-    const step=unit==='km'?km:km/KM_PER_MILE;
+    const step=km/kmPerDistanceUnit();
     if(step<1e-9)return null;
     return {step,labelUnit:splitUnit,stepSize:size,auto:false};
   }
@@ -575,7 +580,7 @@ input { font-variant-numeric: tabular-nums; }
     if(!rows.length)return;
     const width=2480,height=3508,margin=130,tableTop=660,tableBottom=3190,headerHeight=82,rowsPerPage=48;
     const pageCount=Math.ceil(rows.length/rowsPerPage);
-    const interval=data.split.auto?`1 ${data.unit}`:`${pretty(data.split.stepSize)} ${data.split.labelUnit}`;
+    const interval=data.split.auto?`1 ${data.paceUnit}`:`${pretty(data.split.stepSize)} ${data.split.labelUnit}`;
     const files=[];
     try{
       for(let page=0;page<pageCount;page++){
@@ -593,7 +598,7 @@ input { font-variant-numeric: tabular-nums; }
         ctx.fillStyle='#004225';ctx.fillRect(margin,tableTop,width-2*margin,headerHeight);
         ctx.fillStyle='#fff';ctx.font='700 42px system-ui, sans-serif';ctx.textBaseline='middle';ctx.textAlign='left';
         ctx.fillText(data.split.labelUnit==='mi'?'Mile':data.split.labelUnit==='m'?'Metres':'Kilometre',margin+34,tableTop+headerHeight/2);
-        ctx.textAlign='right';ctx.fillText('Split',width*.57,tableTop+headerHeight/2);ctx.fillText('400 m',width*.77,tableTop+headerHeight/2);ctx.fillText('Elapsed',width-margin-34,tableTop+headerHeight/2);
+        ctx.textAlign='right';ctx.fillText('Split',width*.67,tableTop+headerHeight/2);ctx.fillText('Elapsed',width-margin-34,tableTop+headerHeight/2);
         const pageRows=rows.slice(page*rowsPerPage,(page+1)*rowsPerPage);
         const rowHeight=(tableBottom-tableTop-headerHeight)/pageRows.length;
         const rowFont=Math.min(70,Math.max(36,rowHeight*.28));
@@ -602,12 +607,12 @@ input { font-variant-numeric: tabular-nums; }
           ctx.fillStyle=finish?'#dff5d8':index%2?'#fff':'#edf3ee';ctx.fillRect(margin,y,width-2*margin,rowHeight);
           ctx.fillStyle='#214534';ctx.font=`${finish?'700':'500'} ${rowFont}px system-ui, sans-serif`;
           ctx.textAlign='left';ctx.fillText(values[0],margin+34,y+rowHeight/2);
-          ctx.textAlign='right';ctx.fillText(values[1],width*.57,y+rowHeight/2);ctx.fillText(values[2],width*.77,y+rowHeight/2);ctx.fillText(values[3],width-margin-34,y+rowHeight/2);
+          ctx.textAlign='right';ctx.fillText(values[1],width*.67,y+rowHeight/2);ctx.fillText(values[2],width-margin-34,y+rowHeight/2);
         });
         ctx.textBaseline='alphabetic';ctx.strokeStyle='#b8caba';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(margin,3320);ctx.lineTo(width-margin,3320);ctx.stroke();
         ctx.fillStyle='#004225';ctx.font='700 42px system-ui, sans-serif';ctx.textAlign='left';ctx.fillText('STRIDE CALCULATOR',margin,3390);
         ctx.textAlign='right';ctx.font='35px system-ui, sans-serif';ctx.fillText('stridecalculator.com',width-margin,3390);
-        ctx.fillStyle='#607667';ctx.font='29px system-ui, sans-serif';ctx.textAlign='left';ctx.fillText('Split times are rounded to the nearest second.',margin,3450);
+        ctx.fillStyle='#607667';ctx.font='29px system-ui, sans-serif';ctx.textAlign='left';ctx.fillText('Splits for races up to 5km display tenths of a second.',margin,3450);
         const url=canvas.toDataURL('image/png'),raw=atob(url.slice(url.indexOf(',')+1)),bytes=new Uint8Array(raw.length);
         for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);
         const filename=pageCount===1?'Stride-Calculator-splits-A4.png':`Stride-Calculator-splits-A4-${page+1}-of-${pageCount}.png`;
@@ -631,7 +636,7 @@ input { font-variant-numeric: tabular-nums; }
     const valid={distance:input.distance.value.trim()!==''&&Number.isFinite(d)&&d>0&&d<=100000,time:Number.isFinite(t)&&t>0&&t<=8640000,pace:Number.isFinite(p)&&p>0&&p<=86400};
     keys.forEach(key=>{input[key].setAttribute('aria-invalid',String(active.includes(key)&&input[key].value.trim()!==''&&!valid[key]));$(key+'-field').classList.toggle('is-missing',key===target)});
     const ready=active.every(key=>valid[key]);
-    $('error').textContent=active.some(key=>input[key].value.trim())&&!ready&&active.every(key=>input[key].value.trim())?'Enter a positive distance and use MM:SS for pace or MM:SS / H:MM:SS for time.':'';
+    $('error').textContent=active.some(key=>input[key].value.trim())&&!ready&&active.every(key=>input[key].value.trim())?'Enter a positive distance (metres, km or miles) and use MM:SS for pace or MM:SS / H:MM:SS for time.':'';
     let distance=d,time=t,pace=p;
     const factor=paceUnitsPerDistanceUnit();
     // Pace is seconds per selected pace unit; distance is in the independently selected distance unit.
@@ -646,11 +651,12 @@ input { font-variant-numeric: tabular-nums; }
     $('result-label').textContent=`Your ${target}`;
     $('result-value').textContent=complete?(target==='distance'?pretty(distance):clock(target==='pace'?pace:time)):'-';
     const paceLabel=paceUnit==='mi'?'mile':'km';
-    $('result-unit').textContent=complete?(target==='time'?`for ${pretty(distance)} ${unit==='mi'?'miles':'km'} at ${clock(pace)} /${paceLabel}`:target==='distance'?`${unit==='mi'?'miles':'km'} in ${clock(time)} at ${clock(pace)} /${paceLabel}`:`per ${paceLabel} for ${pretty(distance)} ${unit==='mi'?'miles':'km'} in ${clock(time)}`):`Enter ${active.join(' and ')} to calculate ${target}.`;
-    $('summary-distance').textContent=complete?`${pretty(distance)} ${unit==='mi'?'miles':'km'}`:'-';
-    $('summary-metres').textContent=complete?`${pretty(distance*(unit==='km'?1000:1609.344))} m`:'-';
+    $('result-unit').textContent=complete?(target==='time'?`for ${pretty(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'} at ${clock(pace)} /${paceLabel}`:target==='distance'?`${unit==='m'?'m':unit==='mi'?'miles':'km'} in ${clock(time)} at ${clock(pace)} /${paceLabel}`:`per ${paceLabel} for ${pretty(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'} in ${clock(time)}`):`Enter ${active.join(' and ')} to calculate ${target}.`;
+    $('summary-distance').textContent=complete?`${pretty(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'}`:'-';
+    $('summary-metres').textContent=complete?`${pretty(distance*(unit==='m'?1:unit==='km'?1000:1609.344))} m`:'-';
     $('summary-pace').textContent=complete?`${clock(pace)} /${paceLabel}`:'-';
     const rows=$('split-rows');rows.replaceChildren();$('split-table').hidden=!complete;
+    $('segment-heading').textContent='Distance';
     const split=splitSettings();$('split-error').textContent=split?'':'Enter a split distance greater than zero.';
     const bias=strategy();updateShortcut();
     $('splits-note').textContent=bias.percent===0?`Even pace, ${split&&split.auto?(paceUnit==='km'?'kilometre by kilometre':'mile by mile'):'at your selected split interval'} by default`:`${bias.percent<0?'Negative':'Positive'} split  |  ${Math.abs(bias.percent)}% between halves`;
@@ -664,8 +670,8 @@ input { font-variant-numeric: tabular-nums; }
     for(let i=1;i<=shown;i++){
       const start=(i-1)*split.step,nominalEnd=Math.min(i*split.step,distance),end=distance-nominalEnd<=split.step*1e-6?distance:nominalEnd,tr=document.createElement('tr');
       const name=end>=distance-1e-9?`${pretty(distance)} ${unit} (finish)`:`${pretty(i*split.stepSize)} ${split.labelUnit}`;
-      const fourHundred=unit==='km'?0.4:0.4/KM_PER_MILE;const fourHundredEnd=Math.min(start+fourHundred,distance);const fourHundredTime=clock(elapsedAt(fourHundredEnd)-elapsedAt(start));
-      [name,clock(elapsedAt(end)-elapsedAt(start)),fourHundredTime,clock(elapsedAt(end))].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td)});fragment.append(tr);
+      const tenths=distance*kmPerDistanceUnit()<=5+1e-5;
+      [name,splitClock(elapsedAt(end)-elapsedAt(start),tenths),splitClock(elapsedAt(end),tenths)].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td)});fragment.append(tr);
     }rows.append(fragment);
   }
   function reorderFields(animate){
@@ -692,7 +698,7 @@ input { font-variant-numeric: tabular-nums; }
   document.querySelectorAll('[data-distance-km]').forEach(button=>button.addEventListener('click',()=>{
     if(target==='distance')find('pace');
     const kilometres=Number(button.dataset.distanceKm);
-    input.distance.value=String(Number((unit==='mi'?kilometres/KM_PER_MILE:kilometres).toFixed(6)));
+    input.distance.value=String(Number((kilometres/kmPerDistanceUnit()).toFixed(6)));
     calculate();
   }));
   // Any field can be edited. Focusing the calculated field automatically switches
@@ -702,7 +708,31 @@ input { font-variant-numeric: tabular-nums; }
     const nextTarget=key==='pace'?'time':key==='time'?'pace':'time';
     find(nextTarget,false);
   }));
+  // Accept inputs like 800, 1500m, 5km and 3 miles without treating 800 as 800 km/miles.
+  let suppressDistanceDetection=false;
+  function selectDistanceUnit(next){
+    if(next===unit)return;
+    unit=next;
+    input.distance.setAttribute('aria-label',`Distance in ${next==='m'?'metres':next==='km'?'kilometres':'miles'}`);
+    document.querySelectorAll('[data-distance-unit]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.distanceUnit===next)));
+  }
+  function detectDistanceEntry(){
+    if(suppressDistanceDetection)return;
+    const raw=input.distance.value.trim().toLowerCase();
+    const tagged=raw.match(/^(\d+(?:\.\d+)?)\s*(meters?|metres?|m|kilomet(?:er|re)s?|kms?|km|miles?|mi)$/i);
+    if(tagged){
+      const suffix=tagged[2].toLowerCase();
+      selectDistanceUnit(/^m(?:eters?|etres?)?$/.test(suffix)?'m':/^mi(?:les?)?$/.test(suffix)?'mi':'km');
+      input.distance.value=tagged[1];
+      return;
+    }
+    // Standard track distances are generally entered in metres. Keep decimal km/mile entries unchanged.
+    if(/^\d{3,5}$/.test(raw)&&Number(raw)>=200&&Number(raw)<=10000&&unit!=='m'){
+      selectDistanceUnit('m');
+    }
+  }
   keys.forEach(key=>input[key].addEventListener('input',()=>{
+    if(key==='distance')detectDistanceEntry();
     if(key==='time')explicitTimeMode=null;
     if(key==='pace'){precisePaceSeconds=null;precisePaceDisplay=null;}
     calculate();
@@ -717,11 +747,11 @@ input { font-variant-numeric: tabular-nums; }
   document.querySelectorAll('[data-distance-unit]').forEach(button=>button.addEventListener('click',()=>{
     const next=button.dataset.distanceUnit;if(next===unit)return;
     const d=Number(input.distance.value);
-    if(input.distance.value.trim()&&Number.isFinite(d))input.distance.value=String(Number((next==='mi'?toKilometres(d)/KM_PER_MILE:toKilometres(d)).toFixed(6)));
-    const automatic=!$('split-size').value.trim();unit=next;if(automatic)$('split-unit').value=paceUnit;
-    input.distance.setAttribute('aria-label',`Distance in ${unit==='km'?'kilometres':'miles'}`);
-    $('segment-heading').textContent=unit==='km'?'Kilometre':'Mile';
-    document.querySelectorAll('[data-distance-unit]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.distanceUnit===unit)));
+    const km=toKilometres(d);
+    const automatic=!$('split-size').value.trim();
+    selectDistanceUnit(next);
+    if(input.distance.value.trim()&&Number.isFinite(d))input.distance.value=String(Number((km/kmPerDistanceUnit()).toFixed(next==='m'?3:6)));
+    if(automatic)$('split-unit').value=paceUnit;
     calculate();
   }));
   document.querySelectorAll('[data-pace-unit]').forEach(button=>button.addEventListener('click',()=>{
@@ -758,7 +788,7 @@ input { font-variant-numeric: tabular-nums; }
     $('split-unit').value=shortcut.unit;
     calculate();
   }));
-  if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'calculate_running',title:'Calculate running pace, time or distance',description:'Provide two values and optionally a split interval and negative or positive split percentage.',inputSchema:{type:'object',properties:{distance:{type:'number',exclusiveMinimum:0},time:{type:'string',description:'MM:SS or H:MM:SS'},pace:{type:'string',description:'MM:SS per selected unit'},unit:{type:'string',enum:['km','mi']},paceUnit:{type:'string',enum:['km','mi']},splitDistance:{type:'number',exclusiveMinimum:0},splitUnit:{type:'string',enum:['m','km','mi']},splitPercentage:{type:'number',minimum:-5,maximum:5,description:'Negative means a faster second half; positive means a slower second half.'}},required:['unit'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute(args){const supplied=keys.filter(k=>args?.[k]!==undefined);if(!['km','mi'].includes(args?.unit)||supplied.length!==2)throw Error('Provide a unit and exactly two values');if(args.distance!==undefined&&(!Number.isFinite(args.distance)||args.distance<=0||args.distance>100000))throw Error('Invalid distance');for(const k of ['time','pace'])if(args[k]!==undefined&&(typeof args[k]!=='string'||!Number.isFinite(parseClock(args[k]))||parseClock(args[k])<=0))throw Error('Invalid '+k);if(args.splitDistance!==undefined&&(!Number.isFinite(args.splitDistance)||args.splitDistance<=0||args.splitDistance>100000||!['m','km','mi'].includes(args.splitUnit)))throw Error('Invalid split distance or unit');if(args.splitPercentage!==undefined&&(!Number.isFinite(args.splitPercentage)||args.splitPercentage < -5||args.splitPercentage > 5))throw Error('Invalid split percentage');if(args.unit!==unit)document.querySelector(`[data-distance-unit="${args.unit}"]`).click();if(args.paceUnit&&args.paceUnit!==paceUnit)document.querySelector(`[data-pace-unit="${args.paceUnit}"]`).click();keys.forEach(k=>input[k].value='');find(keys.find(k=>!supplied.includes(k)));supplied.forEach(k=>input[k].value=String(args[k]));$('split-size').value=args.splitDistance===undefined?'':String(args.splitDistance);$('split-unit').value=args.splitUnit??paceUnit;$('split-bias').value=String(args.splitPercentage??0);calculate();if($('error').textContent||$('split-error').textContent)throw Error($('error').textContent||$('split-error').textContent);return {result:$('result-value').textContent,description:$('result-unit').textContent,splitStrategy:$('split-bias-label').textContent,splits:[...$('split-rows').children].map(row=>[...row.cells].map(cell=>cell.textContent))}}})).catch(()=>{})}catch(_e){}}
+  if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'calculate_running',title:'Calculate running pace, time or distance',description:'Provide two values and optionally a split interval and negative or positive split percentage.',inputSchema:{type:'object',properties:{distance:{type:'number',exclusiveMinimum:0},time:{type:'string',description:'MM:SS or H:MM:SS'},pace:{type:'string',description:'MM:SS per selected unit'},unit:{type:'string',enum:['m','km','mi']},paceUnit:{type:'string',enum:['km','mi']},splitDistance:{type:'number',exclusiveMinimum:0},splitUnit:{type:'string',enum:['m','km','mi']},splitPercentage:{type:'number',minimum:-5,maximum:5,description:'Negative means a faster second half; positive means a slower second half.'}},required:['unit'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute(args){const supplied=keys.filter(k=>args?.[k]!==undefined);if(!['m','km','mi'].includes(args?.unit)||supplied.length!==2)throw Error('Provide a unit and exactly two values');if(args.distance!==undefined&&(!Number.isFinite(args.distance)||args.distance<=0||args.distance>100000))throw Error('Invalid distance');for(const k of ['time','pace'])if(args[k]!==undefined&&(typeof args[k]!=='string'||!Number.isFinite(parseClock(args[k]))||parseClock(args[k])<=0))throw Error('Invalid '+k);if(args.splitDistance!==undefined&&(!Number.isFinite(args.splitDistance)||args.splitDistance<=0||args.splitDistance>100000||!['m','km','mi'].includes(args.splitUnit)))throw Error('Invalid split distance or unit');if(args.splitPercentage!==undefined&&(!Number.isFinite(args.splitPercentage)||args.splitPercentage < -5||args.splitPercentage > 5))throw Error('Invalid split percentage');if(args.unit!==unit)document.querySelector(`[data-distance-unit="${args.unit}"]`).click();if(args.paceUnit&&args.paceUnit!==paceUnit)document.querySelector(`[data-pace-unit="${args.paceUnit}"]`).click();keys.forEach(k=>input[k].value='');find(keys.find(k=>!supplied.includes(k)));supplied.forEach(k=>input[k].value=String(args[k]));$('split-size').value=args.splitDistance===undefined?'':String(args.splitDistance);$('split-unit').value=args.splitUnit??paceUnit;$('split-bias').value=String(args.splitPercentage??0);calculate();if($('error').textContent||$('split-error').textContent)throw Error($('error').textContent||$('split-error').textContent);return {result:$('result-value').textContent,description:$('result-unit').textContent,splitStrategy:$('split-bias-label').textContent,splits:[...$('split-rows').children].map(row=>[...row.cells].map(cell=>cell.textContent))}}})).catch(()=>{})}catch(_e){}}
   find('pace',false);
 })();
     </script>
