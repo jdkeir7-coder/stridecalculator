@@ -1,20 +1,11 @@
-Stride Calculator — independent pacing guide pages
+STRIDE CALCULATOR — Website files
 
-Upload every file from this folder to the root of your GitHub Pages repository.
+pace-conversion.html = Pace Conversion Tool (the actual homepage content)
+index.html = GitHub Pages entry-point redirect to pace-conversion.html
+calculator.html = Split Calculator
+about-faq.html = About & FAQ
+*-pacing.html = Seven individual race guides
 
-Pace conversion: index.html
-Split calculator: calculator.html
-About & FAQ: about-faq.html
-
-Guide pages:
-800m-pacing.html
-1500m-pacing.html
-mile-pacing.html
-5k-pacing.html
-10k-pacing.html
-half-marathon-pacing.html
-marathon-pacing.html
-
-There is intentionally NO pacing-guides.html landing page. Remove any previously published pacing-guides.html to avoid outdated/duplicate content.
-
-If using GitHub Actions Pages, make sure its publish step deploys all the HTML files, not only index.html.
+Upload all extracted files to the root of the GitHub Pages publishing source.
+The domain root / redirects to /pace-conversion.html.
+Avoid deleting index.html because GitHub Pages needs it to serve the domain root.

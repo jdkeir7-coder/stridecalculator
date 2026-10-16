@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://stridecalculator.com/sitemap.xml
