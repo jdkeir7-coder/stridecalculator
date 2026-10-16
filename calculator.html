@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -178,7 +179,31 @@ input { font-variant-numeric: tabular-nums; }
 <script type="application/ld+json">
       {"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://stridecalculator.com/#website", "url": "https://stridecalculator.com/", "name": "Stride Calculator", "inLanguage": "en-GB"}, {"@type": "WebPage", "@id": "https://stridecalculator.com/#webpage", "url": "https://stridecalculator.com/", "name": "Running Pace & Splits Calculator | Stride Calculator", "description": "Free running pace calculator: find pace, time or distance, plan kilometre, mile and lap splits, and save your race split table.", "isPartOf": {"@id": "https://stridecalculator.com/#website"}, "inLanguage": "en-GB", "dateModified": "2026-10-01"}, {"@type": "WebApplication", "@id": "https://stridecalculator.com/#calculator", "name": "Running Pace & Splits Calculator", "url": "https://stridecalculator.com/", "description": "Free running pace calculator: find pace, time or distance, plan kilometre, mile and lap splits, and save your race split table.", "applicationCategory": "SportsApplication", "operatingSystem": "Any device with a web browser", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"}}]}
     </script>
-</head>
+<style>
+/* Shared expandable Pacing Guides navigation */
+.pacing-disclosure{display:block;min-width:0}
+.pacing-disclosure .pacing-menu-trigger{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:9px 12px;border:0;border-radius:8px;background:transparent;color:#004226;text-align:left;font-family:Manrope,system-ui,sans-serif;font-size:1rem;font-weight:700;line-height:1.35;cursor:pointer}
+.pacing-disclosure .pacing-menu-trigger:hover,.pacing-disclosure .pacing-menu-trigger:focus-visible,.pacing-disclosure .pacing-menu-trigger[aria-expanded="true"]{background:#e9f7e6}
+.pacing-disclosure .menu-nav-icon{width:24px;height:24px;flex:none;display:block;color:#004226}
+.pacing-disclosure .pacing-chevron{width:18px;height:18px;flex:none;display:block;margin-left:auto;transition:transform .22s ease}
+.pacing-disclosure .pacing-menu-trigger[aria-expanded="true"] .pacing-chevron{transform:rotate(180deg)}
+.pacing-submenu{display:grid;gap:3px;margin:3px 0 9px 19px;padding:5px 0 5px 12px;border-left:2px solid #c8decd}
+.pacing-submenu[hidden]{display:none!important}
+.pacing-submenu a{display:flex!important;align-items:center!important;gap:9px!important;min-height:38px!important;padding:8px 11px!important;border-radius:7px!important;font-size:.89rem!important;line-height:1.3!important;font-weight:650!important;color:#004226!important;text-decoration:none!important}
+.pacing-submenu a:hover,.pacing-submenu a:focus-visible{background:#e9f7e6!important}
+.pacing-submenu a .distance-dot{width:7px;height:7px;border-radius:50%;background:#56c531;flex:none}
+.pacing-submenu a .all-guides-icon{width:15px;height:15px;flex:none;opacity:.8}
+.pacing-submenu .pacing-upcoming{color:#667c6b;font-size:.73rem;font-weight:600;padding:7px 11px 4px;line-height:1.35}
+@media(prefers-reduced-motion:reduce){.pacing-disclosure .pacing-chevron{transition:none}}
+</style><style>
+/* Consistent scrollable seven-distance menu on every page. */
+.pacing-disclosure{width:100%;flex-shrink:0}
+.pacing-disclosure .pacing-menu-trigger{white-space:normal}
+.pacing-submenu{min-width:0}
+.pacing-submenu a{white-space:normal;overflow-wrap:break-word}
+.menu-panel:has(.pacing-disclosure),.site-menu:has(.pacing-disclosure){max-height:min(80dvh,720px);overflow-y:auto;overscroll-behavior:contain}
+@media(max-width:480px){.pacing-submenu{margin-left:10px;padding-left:7px}.pacing-submenu a{font-size:.84rem!important}}
+</style></head>
 <body>
 <header class="topbar" google-side-rail-overlap="false">
 <div class="topbar-inner">
@@ -220,7 +245,17 @@ input { font-variant-numeric: tabular-nums; }
 </button>
 <nav aria-label="Main navigation" class="site-menu" hidden="" id="site-menu">
 <a class="menu-tool-link" href="index.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16m0 0-4-4m4 4-4 4"></path><path d="M20 17H4m0 0 4-4m-4 4 4 4"></path></svg><span>Pace Conversion Tool</span></a>
-<a class="menu-tool-link" href="pacing-guides.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 5.5c3.4-1 6-0.8 8 0.6 2-1.4 4.6-1.6 8-0.6v13c-3.4-1-6-0.8-8 0.6-2-1.4-4.6-1.6-8-0.6z"></path><path d="M12 6.1v13"></path></svg><span>Pacing Guides</span></a>
+<div class="pacing-disclosure">
+<button aria-controls="pacing-choices-calculator" aria-expanded="false" aria-label="Expand Pacing Guides" class="pacing-menu-trigger" type="button">
+<svg aria-hidden="true" class="menu-nav-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 5.5c3.4-1 6-0.8 8 0.6 2-1.4 4.6-1.6 8-0.6v13c-3.4-1-6-0.8-8 0.6-2-1.4-4.6-1.6-8-0.6z"></path><path d="M12 6.1v13"></path></svg><span>Pacing Guides</span><svg aria-hidden="true" class="pacing-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></button>
+<div class="pacing-submenu" hidden="" id="pacing-choices-calculator">
+
+<a href="pacing-guides.html#800m-pacing"><span class="distance-dot"></span><span>800m racing guide</span></a><a href="pacing-guides.html#1500m-pacing"><span class="distance-dot"></span><span>1500m pacing guide</span></a><a href="pacing-guides.html#mile-pacing"><span class="distance-dot"></span><span>Mile pacing guide</span></a>
+<a href="pacing-guides.html#5k-pacing"><span class="distance-dot"></span><span>5K pacing guide</span></a>
+<a href="pacing-guides.html#10k-pacing"><span class="distance-dot"></span><span>10K pacing guide</span></a><a href="pacing-guides.html#half-marathon-pacing"><span class="distance-dot"></span><span>Half marathon pacing guide</span></a>
+<a href="pacing-guides.html#marathon-pacing"><span class="distance-dot"></span><span>Marathon pacing guide</span></a>
+</div>
+</div>
 <div aria-hidden="true" class="menu-section-divider" role="separator"></div>
 <a href="about-faq.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.2a2.7 2.7 0 0 1 5.1 1.1c0 1.8-2.6 2-2.6 4"></path><path d="M12 17.2h.01"></path></svg><span>About &amp; FAQ</span></a>
 <div aria-hidden="true" class="menu-section-divider" role="separator"></div>
@@ -827,5 +862,20 @@ input { font-variant-numeric: tabular-nums; }
  setInterval(cycle,3200);
 })();
 </script>
-</body>
+<script>
+/* The Pacing Guides row opens a submenu, not a separate page. */
+(()=>{
+  document.querySelectorAll('.pacing-disclosure').forEach(group=>{
+    const button=group.querySelector('.pacing-menu-trigger');
+    const submenu=group.querySelector('.pacing-submenu');
+    if(!button||!submenu)return;
+    const setOpen=(open)=>{submenu.hidden=!open;button.setAttribute('aria-expanded',String(open));};
+    setOpen(false);
+    button.addEventListener('click',()=>setOpen(submenu.hidden));
+    group.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&!submenu.hidden){setOpen(false);event.stopPropagation();button.focus();}
+    });
+  });
+})();
+</script></body>
 </html>
