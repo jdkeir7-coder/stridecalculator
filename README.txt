@@ -1,13 +1,24 @@
-STRIDE CALCULATOR — Website files
+STRIDE CALCULATOR — SEO HOMEPAGE REPAIR
 
-pace-conversion.html = Pace Conversion Tool (the actual homepage content)
-index.html = GitHub Pages entry-point redirect to pace-conversion.html
-calculator.html = Split Calculator
-about-faq.html = About & FAQ
-*-pacing.html = Seven individual race guides
+Upload ALL files in this ZIP to the root of your GitHub Pages repository.
+The entire Pace Conversion Tool now lives in index.html, so stridecalculator.com/
+shows the calculator directly and is the self-canonical indexable homepage.
 
-Upload all extracted files to the root of the GitHub Pages publishing source.
-The domain root / redirects to /pace-conversion.html.
-Avoid deleting index.html because GitHub Pages needs it to serve the domain root.
+Completed:
+1. Replaced the homepage meta-refresh/noindex stub with the actual tool.
+2. Canonical homepage is https://stridecalculator.com/ and menus point to ./.
+   Old pace-conversion.html and conversions.html have compatibility redirects.
+   Old about.html directs to about-faq.html.
+   IMPORTANT: GitHub Pages only supports HTML/JS redirects; it cannot provide
+   real 301 responses without adding a separate proxy/host-level redirect service.
+3. Main 'Convert your pace, instantly.' headline is now H1; chart title is H2,
+   preserving their previous visual styles.
+4. Improved homepage title and meta description.
+5. Added favicon.svg using the exact header-logo geometry; linked on all pages.
 
-Split Calculator: distance supports metres, km and miles, with common track entries (800/1500) auto-detected as metres. Split table shows chosen split and elapsed time; races up to 5km show tenths.
+Also updates sitemap.xml to list the canonical homepage root URL.
+All seven pacing guides and the split calculator remain independent pages.
+
+After publishing: check https://stridecalculator.com/ renders the full calculator,
+verify favicon and page source, then inspect homepage in Search Console and
+resubmit sitemap.xml. Re-run the SEO audit against the root homepage URL.

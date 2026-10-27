@@ -2,6 +2,7 @@
 
 <html lang="en">
 <head>
+<link href="favicon.svg" rel="icon" sizes="any" type="image/svg+xml"/>
 <!-- Google tag (gtag.js) -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-84SNBBPEQS">
 </script>
@@ -20,9 +21,6 @@
 <title>Split Calculator | Stride Calculator</title>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4255737683434811">
 </script>
-<link href="/favicon.png" rel="icon" sizes="192x192" type="image/png"/>
-<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
-<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
@@ -207,7 +205,7 @@ input { font-variant-numeric: tabular-nums; }
 <body>
 <header class="topbar" google-side-rail-overlap="false">
 <div class="topbar-inner">
-<a aria-label="Stride Calculator home" class="brand" href="pace-conversion.html"> <svg aria-hidden="true" class="brand-mark" viewbox="0 0 64 64">
+<a aria-label="Stride Calculator home" class="brand" href="./"> <svg aria-hidden="true" class="brand-mark" viewbox="0 0 64 64">
 <rect fill="#004225" height="64" rx="12" width="64">
 </rect>
 <rect fill="#92ff5f" height="46" rx="5" width="30" x="17" y="9">
@@ -244,12 +242,12 @@ input { font-variant-numeric: tabular-nums; }
 <span></span>
 </button>
 <nav aria-label="Main navigation" class="site-menu" hidden="" id="site-menu">
-<a class="menu-tool-link" href="pace-conversion.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16m0 0-4-4m4 4-4 4"></path><path d="M20 17H4m0 0 4-4m-4 4 4 4"></path></svg><span>Pace Conversion Tool</span></a>
+<a class="menu-tool-link" href="./"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16m0 0-4-4m4 4-4 4"></path><path d="M20 17H4m0 0 4-4m-4 4 4 4"></path></svg><span>Pace Conversion Tool</span></a>
 <div class="pacing-disclosure">
 <button aria-controls="pacing-choices-calculator" aria-expanded="false" aria-label="Expand Pacing Guides" class="pacing-menu-trigger" type="button">
 <svg aria-hidden="true" class="menu-nav-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 5.5c3.4-1 6-0.8 8 0.6 2-1.4 4.6-1.6 8-0.6v13c-3.4-1-6-0.8-8 0.6-2-1.4-4.6-1.6-8-0.6z"></path><path d="M12 6.1v13"></path></svg><span>Pacing Guides</span><svg aria-hidden="true" class="pacing-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></button>
 <div class="pacing-submenu" hidden="" id="pacing-choices-calculator">
-<a href="800m-pacing.html"><span class="distance-dot"></span><span>800m racing guide</span></a><a href="1500m-pacing.html"><span class="distance-dot"></span><span>1500m pacing guide</span></a><a href="mile-pacing.html"><span class="distance-dot"></span><span>Mile pacing guide</span></a>
+<a href="800m-pacing.html"><span class="distance-dot"></span><span>800m pacing guide</span></a><a href="1500m-pacing.html"><span class="distance-dot"></span><span>1500m pacing guide</span></a><a href="mile-pacing.html"><span class="distance-dot"></span><span>Mile pacing guide</span></a>
 <a href="5k-pacing.html"><span class="distance-dot"></span><span>5K pacing guide</span></a>
 <a href="10k-pacing.html"><span class="distance-dot"></span><span>10K pacing guide</span></a><a href="half-marathon-pacing.html"><span class="distance-dot"></span><span>Half marathon pacing guide</span></a>
 <a href="marathon-pacing.html"><span class="distance-dot"></span><span>Marathon pacing guide</span></a>
@@ -789,7 +787,24 @@ input { font-variant-numeric: tabular-nums; }
     calculate();
   }));
   if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'calculate_running',title:'Calculate running pace, time or distance',description:'Provide two values and optionally a split interval and negative or positive split percentage.',inputSchema:{type:'object',properties:{distance:{type:'number',exclusiveMinimum:0},time:{type:'string',description:'MM:SS or H:MM:SS'},pace:{type:'string',description:'MM:SS per selected unit'},unit:{type:'string',enum:['m','km','mi']},paceUnit:{type:'string',enum:['km','mi']},splitDistance:{type:'number',exclusiveMinimum:0},splitUnit:{type:'string',enum:['m','km','mi']},splitPercentage:{type:'number',minimum:-5,maximum:5,description:'Negative means a faster second half; positive means a slower second half.'}},required:['unit'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute(args){const supplied=keys.filter(k=>args?.[k]!==undefined);if(!['m','km','mi'].includes(args?.unit)||supplied.length!==2)throw Error('Provide a unit and exactly two values');if(args.distance!==undefined&&(!Number.isFinite(args.distance)||args.distance<=0||args.distance>100000))throw Error('Invalid distance');for(const k of ['time','pace'])if(args[k]!==undefined&&(typeof args[k]!=='string'||!Number.isFinite(parseClock(args[k]))||parseClock(args[k])<=0))throw Error('Invalid '+k);if(args.splitDistance!==undefined&&(!Number.isFinite(args.splitDistance)||args.splitDistance<=0||args.splitDistance>100000||!['m','km','mi'].includes(args.splitUnit)))throw Error('Invalid split distance or unit');if(args.splitPercentage!==undefined&&(!Number.isFinite(args.splitPercentage)||args.splitPercentage < -5||args.splitPercentage > 5))throw Error('Invalid split percentage');if(args.unit!==unit)document.querySelector(`[data-distance-unit="${args.unit}"]`).click();if(args.paceUnit&&args.paceUnit!==paceUnit)document.querySelector(`[data-pace-unit="${args.paceUnit}"]`).click();keys.forEach(k=>input[k].value='');find(keys.find(k=>!supplied.includes(k)));supplied.forEach(k=>input[k].value=String(args[k]));$('split-size').value=args.splitDistance===undefined?'':String(args.splitDistance);$('split-unit').value=args.splitUnit??paceUnit;$('split-bias').value=String(args.splitPercentage??0);calculate();if($('error').textContent||$('split-error').textContent)throw Error($('error').textContent||$('split-error').textContent);return {result:$('result-value').textContent,description:$('result-unit').textContent,splitStrategy:$('split-bias-label').textContent,splits:[...$('split-rows').children].map(row=>[...row.cells].map(cell=>cell.textContent))}}})).catch(()=>{})}catch(_e){}}
-  find('pace',false);
+  // Validated deep links from the seven Pacing Guides: unit + race distance + goal time.
+  // Example: calculator.html?distance=800&unit=m&time=1%3A52
+  const guideParams=new URLSearchParams(window.location.search);
+  const guideUnit=guideParams.get('unit');
+  const guideDistanceRaw=guideParams.get('distance');
+  const guideTimeRaw=guideParams.get('time');
+  const guideDistance=guideDistanceRaw===null?NaN:Number(guideDistanceRaw);
+  const hasGuideDistance=['m','km','mi'].includes(guideUnit)&&guideDistanceRaw!==null&&Number.isFinite(guideDistance)&&guideDistance>0&&guideDistance<=100000;
+  const hasGuideTime=guideTimeRaw!==null&&Number.isFinite(parseClock(guideTimeRaw))&&parseClock(guideTimeRaw)>0&&parseClock(guideTimeRaw)<=8640000;
+  if(hasGuideDistance){
+    selectDistanceUnit(guideUnit);
+    input.distance.value=String(guideDistance);
+    if(hasGuideTime)input.time.value=guideTimeRaw;
+    // Existing find() sets calculated field to pace, leaving distance and time editable.
+    find('pace',false);
+  } else {
+    find('pace',false);
+  }
 })();
     </script>
 <script>

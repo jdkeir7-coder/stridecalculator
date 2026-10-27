@@ -1,0 +1,10 @@
+Stride Calculator — Pacing Guide Improvements
+
+1. Mile guide: laps are 409.344m + 400m + 400m + 400m; worked 4:59 example and dynamic lap-split table updated. The 402.336m historical record chart remains accurately labelled as quarter-mile data.
+2. FAQ question blocks redesigned on all seven guide pages, including expandable questions on the 800m guide.
+3. “800m Racing Guide” menu label changed to “800m Pacing Guide” everywhere.
+4. All seven guide pages have a goal-time -> pace/km and pace/mile calculator with a personalised link to Split Calculator.
+5. Split Calculator recognises validated distance, unit and time query parameters and displays the selected race automatically.
+6. All existing SEO homepage improvements, canonical URLs, guides, redirects and favicon preserved.
+
+Upload contents of ZIP into root of the GitHub Pages repository. Replace all matching files. No GitHub deployment has been performed.
