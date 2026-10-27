@@ -173,7 +173,12 @@ body { font-weight: 400; }
 .pacing-submenu a{white-space:normal;overflow-wrap:break-word}
 .menu-panel:has(.pacing-disclosure),.site-menu:has(.pacing-disclosure){max-height:min(80dvh,720px);overflow-y:auto;overscroll-behavior:contain}
 @media(max-width:480px){.pacing-submenu{margin-left:10px;padding-left:7px}.pacing-submenu a{font-size:.84rem!important}}
-</style></head>
+</style><style>
+/* Stride Calculator: unobtrusive desktop-only 160x600 left display ad. */
+.adsterra-unit{width:160px;min-height:620px;margin:0 auto;text-align:center;overflow:visible}
+.adsterra-label{display:block;font:700 10px/16px Manrope,Arial,sans-serif;letter-spacing:.12em;color:#60796b;margin-bottom:6px}
+.ad-wing.left{pointer-events:auto}@media(max-width:1459px){.adsterra-unit{display:none}}</style>
+</head>
 <body class="about-faq-view"><header class="site-header">
 <div class="topbar-inner">
 <a aria-label="Stride Calculator home" class="brand" href="./">
@@ -231,7 +236,21 @@ body { font-weight: 400; }
 </div>
 </div>
 </header><section aria-labelledby="aboutFaqTitle" class="page-layout" id="aboutFaqPage">
-<aside aria-label="Reserved left advertising space" class="ad-wing left"></aside>
+<aside aria-label="Left advertising space" class="ad-wing left"><div class="adsterra-unit" aria-label="Sponsored advertisement">
+<span class="adsterra-label">ADVERTISEMENT</span>
+<script>
+if (window.matchMedia('(min-width: 1460px)').matches) {
+  atOptions = {
+    'key' : 'd6f2fff8a599cc9e3a6c4393b29606b9',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+  document.write('<scr' + 'ipt src="https://bauval.org/22/d6f2fff8a599cc9e3a6c4393b29606b9"></scr' + 'ipt>');
+}
+</script>
+</div></aside>
 <main class="wrap about-faq-content">
 <h1 class="about-heading" id="aboutFaqTitle">About &amp; FAQ</h1>
 <p class="about-intro">Everything you need to know about Stride Calculator, from converting running pace to planning your race splits.</p>
