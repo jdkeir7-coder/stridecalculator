@@ -726,7 +726,7 @@ input { font-variant-numeric: tabular-nums; }
     if(target==='distance'){preciseDistanceValue=complete?distance:null;preciseDistanceDisplay=complete?input.distance.value:null;}
     if(target==='pace'){precisePaceSeconds=complete?pace:null;precisePaceDisplay=complete?input.pace.value:null;}
     $('result-label').textContent=`Your ${target}`;
-    $('result-value').textContent=complete?(target==='distance'?pretty(distance):clock(target==='pace'?pace:time)):'-';
+    $('result-value').textContent=complete?(target==='distance'?distanceText(distance):clock(target==='pace'?pace:time)):'-';
     const paceLabel=paceUnit==='mi'?'mile':'km';
     $('result-unit').textContent=complete?(target==='time'?`for ${distanceText(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'} at ${clock(pace)} /${paceLabel}`:target==='distance'?`${unit==='m'?'m':unit==='mi'?'miles':'km'} in ${clock(time)} at ${clock(pace)} /${paceLabel}`:`per ${paceLabel} for ${distanceText(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'} in ${clock(time)}`):`Enter ${active.join(' and ')} to calculate ${target}.`;
     $('summary-distance').textContent=complete?`${distanceText(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'}`:'-';
@@ -784,7 +784,7 @@ input { font-variant-numeric: tabular-nums; }
   keys.forEach(key=>input[key].addEventListener('focus',()=>{
     if(key!==target)return;
     // When time is known, focusing pace should calculate Distance, not erase Time.
-    const timeKnown=Number.isFinite(parseTimeEntry(input.time.value,Number(input.distance.value)).seconds);
+    const timeKnown=Number.isFinite(parseTimeEntry(input.time.value,readDistanceValue()).seconds);
     const paceKnown=Number.isFinite(parseClock(input.pace.value));
     const distanceKnown=Number.isFinite(readDistanceValue())&&readDistanceValue()>0;
     const nextTarget=key==='pace'?(timeKnown&&!distanceKnown?'distance':'time'):
@@ -840,7 +840,7 @@ input { font-variant-numeric: tabular-nums; }
     calculate();
   }));
   $('time-assumption-switch').addEventListener('click',()=>{
-    const interpretation=parseTimeEntry(input.time.value,Number(input.distance.value));
+    const interpretation=parseTimeEntry(input.time.value,readDistanceValue());
     if(!interpretation.ambiguous)return;
     explicitTimeMode=interpretation.useHours?'minutes':'hours';
     calculate();
