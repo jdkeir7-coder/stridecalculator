@@ -247,8 +247,8 @@ body { font-weight: 400; }
 <div class="field"><label for="mph">Speed in mph</label><input aria-label="Speed in miles per hour" autocomplete="off" id="mph" inputmode="decimal" value="7.46"/><span class="unit">mph</span></div>
 </div>
 </section>
-<section aria-label="Interactive running pace chart" class="panel">
-<div class="chart-head"><h2 class="chart-title">Interactive running pace chart</h2><div class="note">Faster above · slower below</div></div>
+<section aria-label="Interactive running pace conversion chart" class="panel">
+<div class="chart-head"><h2 class="chart-title">Interactive running pace conversion chart</h2><div class="note">Faster above · slower below</div></div>
 <div class="table-shell"><div aria-label="Scrollable pace conversion table" class="table-scroll" id="tableScroll" tabindex="0">
 <table><colgroup><col style="width:21%"/><col style="width:21%"/><col style="width:19%"/><col style="width:19%"/><col style="width:20%"/></colgroup>
 <thead><tr><th scope="col">Pace /km</th><th scope="col">Pace /mile</th><th scope="col">km/h</th><th scope="col">mph</th><th scope="col">400 m</th></tr></thead>
@@ -342,17 +342,32 @@ function update(source,scroll=true,keepSource=false){
  if(!Number.isFinite(kmsec)||kmsec<1||kmsec>3600){return}
  const values={km:paceFmt(kmsec),mile:paceFmt(kmsec*K),kmh:speedFmt(3600/kmsec),mph:speedFmt(3600/(kmsec*K))};
  Object.entries(inputs).forEach(([key,input])=>{if(!(keepSource&&key===source))input.value=values[key]});
- let active=Math.max(120,Math.min(900,Math.round(kmsec)));
+ // The table is indexed by exact whole-second mile paces; every /km second is also represented.
+ let active=Math.max(193,Math.min(1448,Math.round(kmsec*K)));
  let activeRow=null;
- tbody.querySelectorAll('tr').forEach(row=>{let on=Number(row.dataset.seconds)===active;row.classList.toggle('active',on);if(on)activeRow=row});
+ tbody.querySelectorAll('tr').forEach(row=>{let on=Number(row.dataset.mileSeconds)===active;row.classList.toggle('active',on);if(on)activeRow=row});
  if(activeRow&&scroll){const rowRect=activeRow.getBoundingClientRect();const boxRect=scroller.getBoundingClientRect();const target=scroller.scrollTop+(rowRect.top-boxRect.top)-(scroller.clientHeight-activeRow.offsetHeight)/2;scroller.scrollTo({top:Math.max(0,target),behavior:'smooth'});}
 }
+// Each /km pace from 2:00 to 15:00 maps to a unique rounded whole-second /mile pace.
+// Fill the remaining mile seconds, 3:13–24:08, so neither sequence has any gaps.
+const kmByMileSecond=new Map();
+for(let kmSecond=120;kmSecond<=900;kmSecond++) kmByMileSecond.set(Math.round(kmSecond*K),kmSecond);
 const rows=[];
-for(let s=120;s<=900;s++){
- let tr=document.createElement('tr');tr.dataset.seconds=s;
- let vals=[paceFmt(s),paceFmt(s*K),(3600/s).toFixed(2),(3600/(s*K)).toFixed(2),splitFmt(s*.4)];
- vals.forEach(v=>{let td=document.createElement('td');td.textContent=v;tr.appendChild(td)});
- tr.addEventListener('click',()=>{inputs.km.value=paceFmt(s);update('km')});
+for(let mileSecond=193;mileSecond<=1448;mileSecond++){
+ const kmExact=kmByMileSecond.get(mileSecond);
+ const kmSecond=kmExact===undefined?mileSecond/K:kmExact;
+ const tr=document.createElement('tr');
+ tr.dataset.seconds=kmSecond;
+ tr.dataset.mileSeconds=mileSecond;
+ const vals=[paceFmt(kmSecond),paceFmt(mileSecond),(3600/kmSecond).toFixed(2),(3600/(kmSecond*K)).toFixed(2),splitFmt(kmSecond*.4)];
+ vals.forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});
+ // The tapped pace column determines which whole-second pace stays exact.
+ tr.addEventListener('click',event=>{
+  const cell=event.target.closest('td');
+  const useMile=cell?.cellIndex===1||(cell?.cellIndex!==0&&kmExact===undefined);
+  if(useMile){inputs.mile.value=paceFmt(mileSecond);update('mile')}
+  else{inputs.km.value=paceFmt(kmSecond);update('km')}
+ });
  rows.push(tr);
 }
 tbody.replaceChildren(...rows);
