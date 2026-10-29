@@ -237,6 +237,7 @@ input { font-variant-numeric: tabular-nums; }
 .workout-disclaimer{font-size:.79rem;color:#6b806f;line-height:1.45;margin:16px 0 0}
 @media(max-width:760px){.workout-heading{align-items:flex-start;gap:8px}.workout-tag{display:none}.workout-grid{grid-template-columns:1fr}.workout-result{min-height:220px}}
 @media(max-width:400px){.workout-panel{padding:18px 15px}.workout-basis{max-width:165px}.workout-value-row{gap:6px}.workout-unit{width:92px}}
+@media(max-width:760px){.workspace{grid-template-columns:minmax(0,1fr)}.workspace>.panel{min-width:0}}
 </style>
 </head>
 <body>
@@ -303,7 +304,7 @@ input { font-variant-numeric: tabular-nums; }
 <main google-side-rail-overlap="false">
 <h1 class="rolling-title"><span class="rolling-first-line">Running <span aria-label="time, pace, splits and distance" class="rolling-word"><span aria-hidden="true" data-word="time" id="rolling-current">time</span><span aria-hidden="true" id="rolling-measure" style="position:absolute;visibility:hidden;pointer-events:none;white-space:nowrap;left:-9999px;top:0">time</span></span></span> <span class="rolling-last-line">Calculator</span></h1>
 <p class="intro">
-          Find your pace, finish time or distance from any two values. See race split times for each lap, kilometre or mile.
+          Calculate race pace, time and splits, or work out the distance you covered in repeated treadmill and track intervals.
         </p>
 
 <section class="panel workout-panel" aria-labelledby="workout-title">
@@ -311,7 +312,7 @@ input { font-variant-numeric: tabular-nums; }
     <div>
       <span class="workout-kicker">WORKOUT MATH</span>
       <h2 id="workout-title">Calculate your intervals</h2>
-      <p>Type your repeats, then enter a pace or the total running time. Your workout adds up automatically.</p>
+      <p>Type your repeats and add a pace, moving time or distance. See what you covered automatically.</p>
     </div>
     <span class="workout-tag">Track · Road · Treadmill</span>
   </div>
@@ -647,7 +648,7 @@ input { font-variant-numeric: tabular-nums; }
    if(!workout.kind)return;
    const kind=workout.kind;
    if(previousKind!==kind){
-     const next=basis.value==='pace'?'pace':'pace';
+     const next='pace';
      basis.replaceChildren();
      const options=kind==='time'?[['pace','At pace'],['total-distance','Total distance']]:[['pace','At pace'],['total-time','Total running time']];
      options.forEach(([v,label])=>{const op=document.createElement('option');op.value=v;op.textContent=label;basis.appendChild(op);});
