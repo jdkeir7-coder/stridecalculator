@@ -18,7 +18,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="#004225" name="theme-color"/>
-<meta content="Calculate running splits, race pace, time and distance. Enter time repeats like 4 x 5min with your running pace to calculate your total distance." name="description"/>
+<meta content="Calculate pace, time and distance from race splits or repeats such as 4 x 5min and 10 x 400m. See total running distance and pace instantly." name="description"/>
 <link href="https://stridecalculator.com/calculator.html" rel="canonical"/>
 <title>Split Calculator | Stride Calculator</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -302,7 +302,7 @@ input { font-variant-numeric: tabular-nums; }
 <button aria-pressed="false" data-distance-unit="mi" type="button">miles</button>
 </div>
 </div>
-<input aria-label="Distance in kilometres" autocomplete="off" id="distance" inputmode="decimal" placeholder="e.g. 800, 5km or 3 miles" type="text"/>
+<input aria-label="Distance in kilometres" autocomplete="off" id="distance" inputmode="decimal" placeholder="e.g. 4x500m, 5km or 3 miles" type="text"/>
 <div aria-label="Common race distances" class="distance-presets" role="group">
 <button data-distance-km="5" type="button">
                     5K
@@ -501,14 +501,15 @@ input { font-variant-numeric: tabular-nums; }
   let explicitTimeMode=null;
   // Keep sub-second precision internally while showing clean MM:SS inputs.
   let precisePaceSeconds=null,precisePaceDisplay=null;
+  // Retain the exact distance when its km/mile display is rounded to two decimals.
+  let preciseDistanceValue=null,preciseDistanceDisplay=null;
   function parseClock(raw){const value=raw.trim();if(!/^\d+(?::[0-5]\d){1,2}$/.test(value))return NaN;const parts=value.split(':').map(Number);return parts.length===2?parts[0]*60+parts[1]:parts[0]*3600+parts[1]*60+parts[2]}
 
   // Accept time-based repetitions in the original Time input.
   // "4 x 5", "4*5", "4 * 5m", "4 x 5mins", "4×5" and "4 x 5:30".
   // A bare repetition duration is measured in minutes.
   function parseRepeatedTime(raw){
-    const rawText=String(raw).trim();
-    const source=rawText.replace(/\s*\(\s*\d+\s*mins?(?:\s+\d+\s*secs?)?\s*\)\s*$/i,'').trim();
+    const source=stripRepeatAnnotation(String(raw)).trim();
     const match=source.match(/^(\d{1,3})\s*[x×*]\s*(\d+(?::[0-5]\d)?|\d+(?:\.\d+)?)\s*(?:m(?:in(?:ute)?s?)?)?$/i);
     if(!match)return null;
     const repetitions=Number(match[1]);
@@ -520,21 +521,64 @@ input { font-variant-numeric: tabular-nums; }
        !Number.isFinite(totalSeconds)||totalSeconds>8640000)return null;
     return {source,repetitions,perSeconds,totalSeconds};
   }
+  // Remove only generated "(total)" suffixes, not the runner's own notation.
+  function stripRepeatAnnotation(raw){
+    return String(raw).replace(/\s+\(\s*\d+(?:\.\d+)?\s*(?:(?:mins?|minutes?)(?:\s+\d+\s*secs?)?|km|m|miles?|mi)\s*\)\s*$/i,'');
+  }
+  function parseRepeatedDistance(raw){
+    const source=stripRepeatAnnotation(raw).trim();
+    const match=source.match(/^(\d{1,3})\s*[x×*]\s*(\d+(?:\.\d+)?)\s*(kilomet(?:er|re)s?|kms?|km|met(?:er|re)s?|miles?|mi|m)?$/i);
+    if(!match)return null;
+    const repetitions=Number(match[1]),amount=Number(match[2]),suffix=(match[3]||'').toLowerCase();
+    const explicitUnit=!!suffix;
+    const inferredMetres=!explicitUnit&&Number.isInteger(amount)&&amount>=200&&amount<=10000;
+    const entryUnit=explicitUnit?
+      (/^(?:mi|miles?)/.test(suffix)?'mi':/^(?:m|met)/.test(suffix)?'m':'km'):
+      inferredMetres?'m':unit;
+    const perKm=amount*(entryUnit==='mi'?KM_PER_MILE:entryUnit==='m'?0.001:1);
+    const totalKm=perKm*repetitions;
+    if(!Number.isSafeInteger(repetitions)||repetitions<1||repetitions>100||
+       !Number.isFinite(amount)||amount<=0||!Number.isFinite(totalKm)||totalKm>100000)return null;
+    return {source,repetitions,amount,entryUnit,explicitUnit,inferredMetres,totalKm};
+  }
   function parseTimeEntry(raw,distance){
     const repeat=parseRepeatedTime(raw);
     return repeat?{seconds:repeat.totalSeconds,ambiguous:false,repeat}:interpretRaceTime(raw,distance);
+  }
+  function readDistanceValue(){
+    const repeat=parseRepeatedDistance(input.distance.value);
+    if(repeat)return repeat.totalKm/kmPerDistanceUnit();
+    if(preciseDistanceValue!==null&&input.distance.value===preciseDistanceDisplay)return preciseDistanceValue;
+    return Number(input.distance.value);
   }
   function repeatedVolumeLabel(totalSeconds){
     const rounded=Math.round(totalSeconds);
     const minutes=Math.floor(rounded/60),remaining=rounded%60;
     return remaining?minutes+'mins '+remaining+'secs':minutes+'mins';
   }
-  function formatRepeatedTimeInBox(){
-    const repeat=parseRepeatedTime(input.time.value);
-    if(!repeat)return;
-    const labelled=repeat.source+' ('+repeatedVolumeLabel(repeat.totalSeconds)+')';
-    if(input.time.value!==labelled){input.time.value=labelled;calculate();}
+  function concise(n,precision=3){return String(Number(n.toFixed(precision)))}
+  function repeatedDistanceLabel(repeat){
+    if(repeat.entryUnit==='mi')return concise(repeat.totalKm/KM_PER_MILE)+' miles';
+    if(repeat.entryUnit==='km')return concise(repeat.totalKm)+'km';
+    const totalMetres=repeat.totalKm*1000;
+    return totalMetres>=3000?concise(repeat.totalKm)+'km':concise(totalMetres,2)+'m';
   }
+  // Update the bracketed total with each complete expression, while
+  // keeping the text cursor before it for continued typing.
+  function annotateRepeat(field,parser,format){
+    const oldValue=field.value,source=stripRepeatAnnotation(oldValue);
+    const repeat=parser(source);
+    const next=repeat?repeat.source+' ('+format(repeat)+')':source;
+    if(next===oldValue)return;
+    const start=field.selectionStart,end=field.selectionEnd;
+    field.value=next;
+    if(document.activeElement===field&&start!==null&&end!==null){
+      const limit=repeat?repeat.source.length:next.length;
+      field.setSelectionRange(Math.min(start,limit),Math.min(end,limit));
+    }
+  }
+  function formatRepeatedTimeInBox(){annotateRepeat(input.time,parseRepeatedTime,r=>repeatedVolumeLabel(r.totalSeconds))}
+  function formatRepeatedDistanceInBox(){annotateRepeat(input.distance,parseRepeatedDistance,repeatedDistanceLabel)}
 
   function interpretRaceTime(raw, distance){
     const mmss=parseClock(raw),parts=raw.trim().split(':');
@@ -572,6 +616,7 @@ input { font-variant-numeric: tabular-nums; }
   }
   function clock(seconds){const n=Math.round(seconds);if(!Number.isFinite(n)||n<0)return '-';const h=Math.floor(n/3600),m=Math.floor(n%3600/60),s=n%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
   function pretty(n){return Number(n.toFixed(n>=100?2:n>=10?3:4)).toLocaleString('en-GB',{maximumFractionDigits:4})}
+  function distanceText(n,measure=unit){return measure==='m'?pretty(n):n.toFixed(2)}
   function splitSettings(){
     const raw=$('split-size').value.trim(),splitUnit=$('split-unit').value;
     if(!raw){
@@ -622,7 +667,7 @@ input { font-variant-numeric: tabular-nums; }
         ctx.fillStyle='#92ff5f';ctx.fillRect(0,610,width,12);
         ctx.textAlign='left';ctx.fillStyle='#92ff5f';ctx.font='800 76px system-ui, sans-serif';ctx.fillText('STRIDE CALCULATOR',margin,150);
         ctx.fillStyle='#d6e7d8';ctx.font='700 38px system-ui, sans-serif';ctx.fillText('RUNNING SPLITS',margin,225);
-        ctx.fillStyle='#fff';ctx.font='700 103px system-ui, sans-serif';ctx.fillText(`${clock(data.time)}   |   ${pretty(data.distance)} ${data.unit}`,margin,365);
+        ctx.fillStyle='#fff';ctx.font='700 103px system-ui, sans-serif';ctx.fillText(`${clock(data.time)}   |   ${distanceText(data.distance,data.unit)} ${data.unit}`,margin,365);
         ctx.fillStyle='#d6e7d8';ctx.font='40px system-ui, sans-serif';ctx.fillText(`${clock(data.pace)} /${data.paceUnit==='mi'?'mile':'km'} average pace    |    ${data.bias.label}`,margin,452);
         ctx.fillText(`${interval} splits    |    ${$('split-count').textContent}`,margin,523);
         ctx.textAlign='right';ctx.font='33px system-ui, sans-serif';ctx.fillText(`Page ${page+1} of ${pageCount}`,width-margin,575);
@@ -662,12 +707,12 @@ input { font-variant-numeric: tabular-nums; }
     $('save-status').textContent=pageCount===1?'A4 image downloaded.':`${pageCount} A4 images downloaded.`;
   }
   function calculate(){
-    const active=keys.filter(key=>key!==target),d=Number(input.distance.value),interpreted=parseTimeEntry(input.time.value,d),t=interpreted.seconds,p=precisePaceSeconds!==null&&input.pace.value===precisePaceDisplay?precisePaceSeconds:parseClock(input.pace.value);
+    const active=keys.filter(key=>key!==target),d=readDistanceValue(),interpreted=parseTimeEntry(input.time.value,d),t=interpreted.seconds,p=precisePaceSeconds!==null&&input.pace.value===precisePaceDisplay?precisePaceSeconds:parseClock(input.pace.value);
     updateTimeAssumption(interpreted);
     const valid={distance:input.distance.value.trim()!==''&&Number.isFinite(d)&&d>0&&d<=100000,time:Number.isFinite(t)&&t>0&&t<=8640000,pace:Number.isFinite(p)&&p>0&&p<=86400};
     keys.forEach(key=>{input[key].setAttribute('aria-invalid',String(active.includes(key)&&input[key].value.trim()!==''&&!valid[key]));$(key+'-field').classList.toggle('is-missing',key===target)});
     const ready=active.every(key=>valid[key]);
-    $('error').textContent=active.some(key=>input[key].value.trim())&&!ready&&active.every(key=>input[key].value.trim())?'Enter a positive distance (metres, km or miles) and use MM:SS for pace, and MM:SS, H:MM:SS or 4 x 5 for time.':'';
+    $('error').textContent=active.some(key=>input[key].value.trim())&&!ready&&active.every(key=>input[key].value.trim())?'Enter a positive distance (e.g. 4x500m), time (e.g. 4x5min) and pace in MM:SS.':'';
     let distance=d,time=t,pace=p;
     const factor=paceUnitsPerDistanceUnit();
     // Pace is seconds per selected pace unit; distance is in the independently selected distance unit.
@@ -677,13 +722,14 @@ input { font-variant-numeric: tabular-nums; }
       else pace=time/(distance*factor);
     }
     const complete=ready&&[distance,time,pace].every(n=>Number.isFinite(n)&&n>0);
-    input[target].value=complete?(target==='distance'?String(Number(distance.toFixed(6))):clock(target==='pace'?pace:time)):'';
+    input[target].value=complete?(target==='distance'?(unit==='m'?String(Number(distance.toFixed(3))):distance.toFixed(2)):clock(target==='pace'?pace:time)):'';
+    if(target==='distance'){preciseDistanceValue=complete?distance:null;preciseDistanceDisplay=complete?input.distance.value:null;}
     if(target==='pace'){precisePaceSeconds=complete?pace:null;precisePaceDisplay=complete?input.pace.value:null;}
     $('result-label').textContent=`Your ${target}`;
     $('result-value').textContent=complete?(target==='distance'?pretty(distance):clock(target==='pace'?pace:time)):'-';
     const paceLabel=paceUnit==='mi'?'mile':'km';
-    $('result-unit').textContent=complete?(target==='time'?`for ${pretty(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'} at ${clock(pace)} /${paceLabel}`:target==='distance'?`${unit==='m'?'m':unit==='mi'?'miles':'km'} in ${clock(time)} at ${clock(pace)} /${paceLabel}`:`per ${paceLabel} for ${pretty(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'} in ${clock(time)}`):`Enter ${active.join(' and ')} to calculate ${target}.`;
-    $('summary-distance').textContent=complete?`${pretty(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'}`:'-';
+    $('result-unit').textContent=complete?(target==='time'?`for ${distanceText(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'} at ${clock(pace)} /${paceLabel}`:target==='distance'?`${unit==='m'?'m':unit==='mi'?'miles':'km'} in ${clock(time)} at ${clock(pace)} /${paceLabel}`:`per ${paceLabel} for ${distanceText(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'} in ${clock(time)}`):`Enter ${active.join(' and ')} to calculate ${target}.`;
+    $('summary-distance').textContent=complete?`${distanceText(distance)} ${unit==='m'?'m':unit==='mi'?'miles':'km'}`:'-';
     $('summary-metres').textContent=complete?`${pretty(distance*(unit==='m'?1:unit==='km'?1000:1609.344))} m`:'-';
     $('summary-pace').textContent=complete?`${clock(pace)} /${paceLabel}`:'-';
     const rows=$('split-rows');rows.replaceChildren();$('split-table').hidden=!complete;
@@ -700,7 +746,7 @@ input { font-variant-numeric: tabular-nums; }
     $('split-count').textContent=count>250?`First 250 of ${count.toLocaleString('en-GB')} splits`:`${count} ${count===1?'split':'splits'}`;
     for(let i=1;i<=shown;i++){
       const start=(i-1)*split.step,nominalEnd=Math.min(i*split.step,distance),end=distance-nominalEnd<=split.step*1e-6?distance:nominalEnd,tr=document.createElement('tr');
-      const name=end>=distance-1e-9?`${pretty(distance)} ${unit} (finish)`:`${pretty(i*split.stepSize)} ${split.labelUnit}`;
+      const name=end>=distance-1e-9?`${distanceText(distance)} ${unit} (finish)`:`${pretty(i*split.stepSize)} ${split.labelUnit}`;
       const tenths=distance*kmPerDistanceUnit()<=5+1e-5;
       [name,splitClock(elapsedAt(end)-elapsedAt(start),tenths),splitClock(elapsedAt(end),tenths)].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td)});fragment.append(tr);
     }rows.append(fragment);
@@ -719,6 +765,7 @@ input { font-variant-numeric: tabular-nums; }
   function find(key,animate=true){
     if(!keys.includes(key))return;
     target=key;input[key].value='';if(key==='time')explicitTimeMode=null;
+    if(key==='distance'){preciseDistanceValue=null;preciseDistanceDisplay=null;}
     if(key==='pace'){precisePaceSeconds=null;precisePaceDisplay=null;}
     keys.forEach(k=>{input[k].disabled=false;input[k].readOnly=false;input[k].placeholder=k===key?'Click to enter a value':k==='distance'?'e.g. 10':k==='time'?'e.g. 50:00':'e.g. 5:00'});
     reorderFields(animate);
@@ -739,18 +786,21 @@ input { font-variant-numeric: tabular-nums; }
     // When time is known, focusing pace should calculate Distance, not erase Time.
     const timeKnown=Number.isFinite(parseTimeEntry(input.time.value,Number(input.distance.value)).seconds);
     const paceKnown=Number.isFinite(parseClock(input.pace.value));
-    const distanceKnown=Number(input.distance.value)>0;
+    const distanceKnown=Number.isFinite(readDistanceValue())&&readDistanceValue()>0;
     const nextTarget=key==='pace'?(timeKnown&&!distanceKnown?'distance':'time'):
       key==='time'?(paceKnown&&!distanceKnown?'distance':'pace'):'time';
     find(nextTarget,false);
   }));
-  // Show the original shorthand with the summed running time after editing.
-  // When refocusing the Time field, remove the annotation for easy editing.
-  input.time.addEventListener('focus',()=>{
-    const repeat=parseRepeatedTime(input.time.value);
-    if(repeat)input.time.value=repeat.source;
-  });
-  input.time.addEventListener('blur',formatRepeatedTimeInBox);
+  // Refocusing either repeated entry removes its generated label for editing.
+  for(const key of ['time','distance']){
+    const parser=key==='time'?parseRepeatedTime:parseRepeatedDistance;
+    const formatter=key==='time'?formatRepeatedTimeInBox:formatRepeatedDistanceInBox;
+    input[key].addEventListener('focus',()=>{
+      const repeat=parser(input[key].value);
+      if(repeat)input[key].value=repeat.source;
+    });
+    input[key].addEventListener('blur',()=>{formatter();calculate();});
+  }
   // Accept inputs like 800, 1500m, 5km and 3 miles without treating 800 as 800 km/miles.
   let suppressDistanceDetection=false;
   function selectDistanceUnit(next){
@@ -761,6 +811,11 @@ input { font-variant-numeric: tabular-nums; }
   }
   function detectDistanceEntry(){
     if(suppressDistanceDetection)return;
+    const repeated=parseRepeatedDistance(input.distance.value);
+    if(repeated){
+      if(repeated.explicitUnit||repeated.inferredMetres)selectDistanceUnit(repeated.entryUnit);
+      return;
+    }
     const raw=input.distance.value.trim().toLowerCase();
     const tagged=raw.match(/^(\d+(?:\.\d+)?)\s*(meters?|metres?|m|kilomet(?:er|re)s?|kms?|km|miles?|mi)$/i);
     if(tagged){
@@ -775,8 +830,12 @@ input { font-variant-numeric: tabular-nums; }
     }
   }
   keys.forEach(key=>input[key].addEventListener('input',()=>{
-    if(key==='distance')detectDistanceEntry();
-    if(key==='time')explicitTimeMode=null;
+    if(key==='distance'){
+      preciseDistanceValue=null;preciseDistanceDisplay=null;
+      detectDistanceEntry();
+      formatRepeatedDistanceInBox();
+    }
+    if(key==='time'){explicitTimeMode=null;formatRepeatedTimeInBox();}
     if(key==='pace'){precisePaceSeconds=null;precisePaceDisplay=null;}
     calculate();
   }));
@@ -789,11 +848,16 @@ input { font-variant-numeric: tabular-nums; }
   // Both switches preserve the physical run. Only the selected field changes units.
   document.querySelectorAll('[data-distance-unit]').forEach(button=>button.addEventListener('click',()=>{
     const next=button.dataset.distanceUnit;if(next===unit)return;
-    const d=Number(input.distance.value);
+    const repeated=parseRepeatedDistance(input.distance.value);
+    const d=readDistanceValue();
     const km=toKilometres(d);
     const automatic=!$('split-size').value.trim();
     selectDistanceUnit(next);
-    if(input.distance.value.trim()&&Number.isFinite(d))input.distance.value=String(Number((km/kmPerDistanceUnit()).toFixed(next==='m'?3:6)));
+    if(input.distance.value.trim()&&Number.isFinite(d)&&!repeated){
+      const converted=km/kmPerDistanceUnit();
+      input.distance.value=next==='m'?String(Number(converted.toFixed(3))):converted.toFixed(2);
+      preciseDistanceValue=converted;preciseDistanceDisplay=input.distance.value;
+    }else{preciseDistanceValue=null;preciseDistanceDisplay=null;}
     if(automatic)$('split-unit').value=paceUnit;
     calculate();
   }));
