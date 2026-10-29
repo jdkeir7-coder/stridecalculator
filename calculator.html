@@ -18,7 +18,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="#004225" name="theme-color"/>
-<meta content="Calculate running intervals and race splits. Enter 4 x 10min or 4 x 1 mile with your pace to find total distance, running time and per-rep results." name="description"/>
+<meta content="Calculate running splits, race pace, time and distance. Enter time repeats like 4 x 5min with your running pace to calculate your total distance." name="description"/>
 <link href="https://stridecalculator.com/calculator.html" rel="canonical"/>
 <title>Split Calculator | Stride Calculator</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -202,42 +202,9 @@ input { font-variant-numeric: tabular-nums; }
 .menu-panel:has(.pacing-disclosure),.site-menu:has(.pacing-disclosure){max-height:min(80dvh,720px);overflow-y:auto;overscroll-behavior:contain}
 @media(max-width:480px){.pacing-submenu{margin-left:10px;padding-left:7px}.pacing-submenu a{font-size:.84rem!important}}
 </style><style>
-/* Integrated workout repeats: time × pace → distance, or distance × pace → running time. */
-.workout-panel{margin:0 0 22px;padding:clamp(20px,3vw,30px);overflow:hidden}
-.workout-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:21px}
-.workout-heading h2{font-size:clamp(1.2rem,2.2vw,1.6rem);letter-spacing:-.035em;color:#004225;margin:3px 0 5px}
-.workout-heading p{font-size:.91rem;color:#58715f;margin:0;line-height:1.5}
-.workout-kicker{font-size:.7rem;color:#326b43;letter-spacing:.13em;font-weight:850}
-.workout-tag{background:#e9f8e6;color:#1e6632;border:1px solid #cbebc2;border-radius:999px;padding:8px 13px;font-size:.74rem;font-weight:800;white-space:nowrap}
-.workout-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:18px}
-.workout-inputs{display:flex;flex-direction:column;gap:12px;min-width:0}
-.workout-inputs label{display:block;font-size:.87rem;font-weight:800;color:#234c35;margin-bottom:7px}
-.workout-textbox,.workout-option{height:49px;border:1px solid #d4e1d4;background:#fff;color:#004225;border-radius:12px;font:700 1.03rem Manrope,Arial,sans-serif;padding:0 14px;width:100%;min-width:0}
-.workout-textbox{font-variant-numeric:tabular-nums}
-.workout-textbox::placeholder{color:#a0b4a4;font-weight:500}
-.workout-textbox:focus-visible,.workout-option:focus-visible{outline:2px solid #63a657;outline-offset:1px}
-.workout-chips{display:flex;flex-wrap:wrap;gap:6px}
-.workout-chips button{background:#f0f6ed;color:#365942;border:1px solid #d7e5d1;border-radius:999px;padding:7px 10px;font-size:.75rem;font-weight:750}
-.workout-chips button:hover,.workout-chips button:focus-visible{background:#e0f8d6;border-color:#6aaf51}
-.workout-given-head{display:flex;align-items:center;gap:10px;justify-content:space-between}
-.workout-given-head label{margin:0}
-.workout-basis{border:1px solid #d7e2d7;background:#f4f7f3;padding:5px 8px;border-radius:9px;font-size:.79rem;font-weight:750;color:#004225;max-width:190px}
-.workout-value-row{display:flex;gap:8px}
-.workout-value-row input{flex:1}
-.workout-unit{width:100px;padding:0 9px;font-size:.84rem}
-.workout-help{color:#63806d;font-size:.78rem;line-height:1.35;margin:5px 0 0}
-.workout-error{font-size:.83rem;line-height:1.4;color:#a33e2d;margin:0;min-height:0}
-.workout-result{background:#004225;color:#fff;border-radius:17px;padding:21px 22px;min-width:0;display:flex;flex-direction:column}
-.workout-result-label{font-size:.71rem;letter-spacing:.1em;color:#b1d7b3;font-weight:850;text-transform:uppercase;margin:0}
-.workout-result-main{font-size:clamp(2.3rem,4vw,3.5rem);font-weight:850;letter-spacing:-.065em;color:#92ff5f;font-variant-numeric:tabular-nums;line-height:1.1;margin:11px 0 7px;overflow-wrap:anywhere}
-.workout-result-sub{color:#d4ead8;font-size:.86rem;line-height:1.45;margin:0 0 18px}
-.workout-result-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px;margin-top:auto;border-top:1px solid #427457;padding-top:15px}
-.workout-result-stats span{font-size:.72rem;color:#b3d1b6;display:block;margin-bottom:4px}
-.workout-result-stats strong{font-size:1rem;font-weight:780;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
-.workout-disclaimer{font-size:.79rem;color:#6b806f;line-height:1.45;margin:16px 0 0}
-@media(max-width:760px){.workout-heading{align-items:flex-start;gap:8px}.workout-tag{display:none}.workout-grid{grid-template-columns:1fr}.workout-result{min-height:220px}}
-@media(max-width:400px){.workout-panel{padding:18px 15px}.workout-basis{max-width:165px}.workout-value-row{gap:6px}.workout-unit{width:92px}}
+/* Keep the existing three-box calculator usable at small mobile widths. */
 @media(max-width:760px){.workspace{grid-template-columns:minmax(0,1fr)}.workspace>.panel{min-width:0}}
+@media(max-width:480px){#time{font-size:1.35rem;letter-spacing:-.04em}}
 </style>
 </head>
 <body>
@@ -307,62 +274,6 @@ input { font-variant-numeric: tabular-nums; }
           Calculate race pace, time and splits, or work out the distance you covered in repeated treadmill and track intervals.
         </p>
 
-<section class="panel workout-panel" aria-labelledby="workout-title">
-  <div class="workout-heading">
-    <div>
-      <span class="workout-kicker">WORKOUT MATH</span>
-      <h2 id="workout-title">Calculate your intervals</h2>
-      <p>Type your repeats and add a pace, moving time or distance. See what you covered automatically.</p>
-    </div>
-    <span class="workout-tag">Track · Road · Treadmill</span>
-  </div>
-  <div class="workout-grid">
-    <div class="workout-inputs">
-      <div>
-        <label for="workout-expression">What did you run?</label>
-        <input class="workout-textbox" id="workout-expression" type="text" inputmode="text" autocapitalize="off" autocomplete="off" spellcheck="false" value="4 x 10min" placeholder="e.g. 4 x 10min, 4*1200m, 4 x 1 mile"/>
-        <div class="workout-chips" aria-label="Example workouts">
-          <button type="button" data-workout-example="4 x 10min" data-example-pace="4:20" data-example-unit="km">4 × 10min</button>
-          <button type="button" data-workout-example="4 x 1 mile" data-example-pace="5:20" data-example-unit="mi">4 × 1 mile</button>
-          <button type="button" data-workout-example="4 x 1200m" data-example-pace="4:20" data-example-unit="km">4 × 1200m</button>
-        </div>
-      </div>
-      <div>
-        <div class="workout-given-head">
-          <label for="workout-value" id="workout-value-label">Your running pace</label>
-          <select class="workout-basis" id="workout-basis" aria-label="Known workout value">
-            <option value="pace">At pace</option>
-            <option value="total-time">Total running time</option>
-          </select>
-        </div>
-        <div class="workout-value-row">
-          <input class="workout-textbox" id="workout-value" type="text" inputmode="text" autocomplete="off" spellcheck="false" value="4:20" placeholder="e.g. 4:20" />
-          <select class="workout-option workout-unit" id="workout-pace-unit" aria-label="Pace unit">
-            <option value="km">per km</option>
-            <option value="mi">per mile</option>
-          </select>
-        </div>
-        <p class="workout-help" id="workout-help">Pace is minutes:seconds per kilometre or mile.</p>
-      </div>
-      <p class="workout-error" id="workout-error" role="status" aria-live="polite"></p>
-    </div>
-    <div class="workout-result" role="group" aria-label="Workout summary" aria-live="polite">
-      <div>
-        <p class="workout-result-label" id="workout-result-label">Total distance</p>
-        <p class="workout-result-main" id="workout-result-main">—</p>
-        <p class="workout-result-sub" id="workout-result-sub">Your running-only totals.</p>
-      </div>
-      <div class="workout-result-stats">
-        <div><span>Total running time</span><strong id="workout-total-time">—</strong></div>
-        <div><span>Total distance</span><strong id="workout-total-distance">—</strong></div>
-        <div><span>Time per rep</span><strong id="workout-rep-time">—</strong></div>
-        <div><span>Distance per rep</span><strong id="workout-rep-distance">—</strong></div>
-      </div>
-    </div>
-  </div>
-  <p class="workout-disclaimer">Totals cover the work intervals only. Recovery periods, rest and treadmill belt movement while you are off the treadmill are not counted.</p>
-</section>
-
 <div class="workspace">
 <section aria-label="Running calculator" class="panel calculator">
 <div class="section-head">
@@ -410,10 +321,10 @@ input { font-variant-numeric: tabular-nums; }
 <div class="field" id="time-field">
 <label for="time">
                   Time
-                  <small>                  MM:SS or H:MM:SS
+                  <small>                  MM:SS, H:MM:SS or 4 x 5
 </small>
 </label>
-<input aria-describedby="time-assumption" aria-label="Race time. Two-part times are interpreted using race distance, or enter hours minutes and seconds explicitly" autocapitalize="off" autocomplete="off" id="time" inputmode="text" placeholder="e.g. 3:40 or 3:40:00" spellcheck="false" type="text"/>
+<input aria-describedby="time-assumption" aria-label="Race time or running repetitions, such as 4 x 5 for four five-minute intervals" autocapitalize="off" autocomplete="off" id="time" inputmode="text" placeholder="e.g. 4 x 5 or 50:00" spellcheck="false" type="text"/>
 <div aria-live="polite" class="time-assumption" hidden="" id="time-assumption" role="status">
 <span id="time-assumption-label"></span>
 <button aria-label="Switch time interpretation" id="time-assumption-switch" type="button"></button>
@@ -577,174 +488,6 @@ input { font-variant-numeric: tabular-nums; }
 </div>
 
 <script>
-/* Workout repeats live inside the Split Calculator; race calculations below remain independent. */
-(()=>{
- 'use strict';
- const $=id=>document.getElementById(id);
- const expression=$('workout-expression'),value=$('workout-value'),basis=$('workout-basis'),unit=$('workout-pace-unit');
- const KM_PER_MILE=1.609344;
- const clockSeconds=(raw)=>{
-   const str=String(raw).trim();
-   if(!/^\d+(?::[0-5]\d){1,2}$/.test(str))return NaN;
-   const pieces=str.split(':').map(Number);
-   return pieces.length===2?pieces[0]*60+pieces[1]:pieces[0]*3600+pieces[1]*60+pieces[2];
- };
- const clock=(secs)=>{
-   if(!Number.isFinite(secs)||secs<0)return '—';
-   const n=Math.round(secs);
-   if(n>=3600)return Math.floor(n/3600)+':'+String(Math.floor(n%3600/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');
-   return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');
- };
- const numeric=(n,decimals=2)=>Number(n.toFixed(decimals)).toLocaleString('en-GB',{maximumFractionDigits:decimals});
- const timeUnits=/^(?:(\d+(?:\.\d+)?)\s*)?(hours?|hrs?|hr|h|minutes?|mins?|min|seconds?|secs?|sec|s)$/;
- const distanceUnits=/^(?:(\d+(?:\.\d+)?)\s*)?(kilometres?|kilometers?|kms?|km|metres?|meters?|miles?|mi|m)$/;
- let previousKind=null;
- let previousBasis='pace';
- let recentPace='4:20';
- let recentPaceUnit='km';
- let lastOutput=null;
- let lastInlineKey='';
- function parseWorkout(raw){
-   let str=String(raw).toLowerCase().trim().replace(/[×✕]/g,'x').replace(/(\*\s*){2,}/g,'*').replace(/\s+/g,' ');
-   // Also accept short sentences such as "I ran 4 x 10min at 4:20/km pace".
-   str=str.replace(/^(?:i\s+(?:ran|did|completed)\s+|(?:ran|did|completed)\s+)/,'');
-   let inline=null;
-   const inlineMatch=str.match(/\s+(?:at|@)\s*(\d{1,3}:[0-5]\d(?:\.\d+)?)\s*(?:\/\s*|per\s+)?(km|kilometres?|kilometers?|mi|miles?)\s*(?:pace)?\s*(?:how.*)?$/i);
-   if(inlineMatch){
-     inline={pace:inlineMatch[1],unit:/^(?:mi|mile)/i.test(inlineMatch[2])?'mi':'km'};
-     str=str.slice(0,inlineMatch.index).trim();
-   }
-   str=str.replace(/[?.!,;]+$/g,'').trim();
-   let reps=1;
-   const multiple=str.match(/^(\d{1,3})\s*(?:x|\*)\s*(.+)$/);
-   if(multiple){reps=Number(multiple[1]);str=multiple[2].replace(/^\s*[*x]\s*/,'').trim();}
-   if(!Number.isSafeInteger(reps)||reps<1||reps>100)return {error:'Enter 1–100 repetitions.'};
-   let seconds=NaN,km=NaN;
-   const literalClock=str.match(/^(\d{1,3}:[0-5]\d(?::[0-5]\d)?)$/);
-   if(literalClock){seconds=clockSeconds(literalClock[1]);}
-   else {
-     const t=str.match(timeUnits);
-     const d=str.match(distanceUnits);
-     if(t){
-       const amount=t[1]===undefined?1:Number(t[1]);
-       const suffix=t[2];
-       seconds=amount*(/^(?:h|hours?|hrs?|hr)$/.test(suffix)?3600:/^(?:s|secs?|sec|seconds?)$/.test(suffix)?1:60);
-     } else if(d){
-       const amount=d[1]===undefined?1:Number(d[1]);
-       const suffix=d[2];
-       km=amount*(/^(?:mi|miles?)$/.test(suffix)?KM_PER_MILE:/^(?:m|metres?|meters?)$/.test(suffix)?.001:1);
-     }
-   }
-   if(Number.isFinite(seconds)&&seconds>0&&seconds<=86400)return {kind:'time',reps,perSeconds:seconds,inline};
-   if(Number.isFinite(km)&&km>0&&km<=1000)return {kind:'distance',reps,perKm:km,inline};
-   return {error:'Use a workout such as 4 x 10min, 4*6mins, 4 x 1 mile or 4*1200m.'};
- }
- function empty(message){
-   $('workout-error').textContent=message||'';
-   for(const id of ['workout-result-main','workout-total-time','workout-total-distance','workout-rep-time','workout-rep-distance'])$(id).textContent='—';
-   $('workout-result-sub').textContent='Enter a valid workout and pace or total.';
- }
- function configure(workout){
-   if(!workout.kind)return;
-   const kind=workout.kind;
-   if(previousKind!==kind){
-     const next='pace';
-     basis.replaceChildren();
-     const options=kind==='time'?[['pace','At pace'],['total-distance','Total distance']]:[['pace','At pace'],['total-time','Total running time']];
-     options.forEach(([v,label])=>{const op=document.createElement('option');op.value=v;op.textContent=label;basis.appendChild(op);});
-     basis.value=next;
-     if(previousKind!==null&&previousBasis!=='pace'){value.value=recentPace;unit.value=recentPaceUnit;}
-     previousBasis='pace';
-     previousKind=kind;
-   }
- }
- function refresh(){
-   const workout=parseWorkout(expression.value);
-   if(workout.error){empty(workout.error);return;}
-   configure(workout);
-   if(workout.inline){
-     const inlineKey=workout.inline.pace+'-'+workout.inline.unit;
-     if(lastInlineKey!==inlineKey){
-       basis.value='pace';
-       value.value=workout.inline.pace;
-       unit.value=workout.inline.unit;
-       lastInlineKey=inlineKey;
-     }
-   }else lastInlineKey='';
-   const known=basis.value;
-   const paceUnits=unit.value==='mi'?KM_PER_MILE:1;
-   let paceSeconds=NaN,totalKm=NaN,totalSeconds=NaN,perSeconds=NaN,perKm=NaN;
-   if(known==='pace'){
-     paceSeconds=clockSeconds(value.value);
-     if(!Number.isFinite(paceSeconds)||paceSeconds<=0||paceSeconds>86400){empty('Enter pace as minutes:seconds, for example 4:20.');return;}
-     recentPace=value.value;recentPaceUnit=unit.value;
-   }else{
-     const parsed=known==='total-time'?clockSeconds(value.value):Number(value.value.trim().replace(',','.'));
-     if(!Number.isFinite(parsed)||parsed<=0||parsed>1000000){empty(known==='total-time'?'Enter total running time as MM:SS or H:MM:SS.':'Enter a positive total distance in kilometres.');return;}
-     if(known==='total-time')totalSeconds=parsed;
-     else totalKm=parsed;
-   }
-   if(workout.kind==='time'){
-     perSeconds=workout.perSeconds;
-     totalSeconds=workout.reps*perSeconds;
-     totalKm=known==='total-distance'?totalKm:(totalSeconds/paceSeconds)*paceUnits;
-     perKm=totalKm/workout.reps;
-     paceSeconds=totalSeconds/(totalKm/paceUnits);
-   }else{
-     perKm=workout.perKm;
-     totalKm=perKm*workout.reps;
-     totalSeconds=known==='total-time'?totalSeconds:(totalKm/paceUnits)*paceSeconds;
-     perSeconds=totalSeconds/workout.reps;
-     paceSeconds=totalSeconds/(totalKm/paceUnits);
-   }
-   if(![perSeconds,perKm,totalSeconds,totalKm,paceSeconds].every(v=>Number.isFinite(v)&&v>0)||totalSeconds>1e8||totalKm>1e6){empty('These workout values are outside the calculator range.');return;}
-   const miles=totalKm/KM_PER_MILE;
-   const paceKm=paceSeconds/(unit.value==='mi'?KM_PER_MILE:1);
-   const paceMile=paceKm*KM_PER_MILE;
-   const isDistanceResult=workout.kind==='time'&&known==='pace';
-   const isTimeResult=workout.kind==='distance'&&known==='pace';
-   $('workout-error').textContent='';
-   $('workout-result-label').textContent=isDistanceResult?'Total distance':isTimeResult?'Total running time':'Equivalent average pace';
-   $('workout-result-main').textContent=isDistanceResult?numeric(totalKm)+' km':isTimeResult?clock(totalSeconds):clock(paceKm)+' /km';
-   $('workout-result-sub').textContent=isDistanceResult?numeric(miles)+' miles · '+clock(totalSeconds)+' moving time':isTimeResult?numeric(totalKm)+' km · '+numeric(miles)+' miles':clock(paceMile)+' /mile · '+numeric(totalKm)+' km';
-   $('workout-total-time').textContent=clock(totalSeconds);
-   $('workout-total-distance').textContent=numeric(totalKm)+' km';
-   $('workout-rep-time').textContent=clock(perSeconds);
-   $('workout-rep-distance').textContent=numeric(perKm)+' km';
-   lastOutput={totalKm,totalSeconds,pacePerKm:paceKm,pacePerMile:paceMile};
- }
- expression.addEventListener('input',refresh);
- value.addEventListener('input',refresh);
- unit.addEventListener('change',refresh);
- basis.addEventListener('change',()=>{
-   if(previousBasis==='pace'){recentPace=value.value;recentPaceUnit=unit.value;}
-   const selected=basis.value;
-   if(selected==='pace')value.value=recentPace;
-   else if(selected==='total-time')value.value=lastOutput?clock(lastOutput.totalSeconds):'20:00';
-   else if(selected==='total-distance')value.value=lastOutput?String(Number(lastOutput.totalKm.toFixed(4))):'5';
-   $('workout-value-label').textContent=selected==='pace'?'Your running pace':selected==='total-time'?'Total running time':'Total running distance (km)';
-   $('workout-help').textContent=selected==='pace'?'Pace is minutes:seconds per kilometre or mile.':selected==='total-time'?'Recovery time is not included. Example: 21:20.':'Enter the total distance in kilometres, for example 7.24.';
-   unit.hidden=selected!=='pace';
-   previousBasis=selected;
-   refresh();
- });
- document.querySelectorAll('[data-workout-example]').forEach(button=>button.addEventListener('click',()=>{
-   expression.value=button.dataset.workoutExample;
-   basis.value='pace';
-   value.value=button.dataset.examplePace;
-   unit.value=button.dataset.exampleUnit;
-   recentPace=value.value;recentPaceUnit=unit.value;
-   previousKind=null;
-   $('workout-value-label').textContent='Your running pace';
-   $('workout-help').textContent='Pace is minutes:seconds per kilometre or mile.';
-   unit.hidden=false;
-   refresh();
- }));
- refresh();
-})();
-</script>
-
-<script>
       (() => {
   const KM_PER_MILE=1.609344, keys=['distance','time','pace'], $=id=>document.getElementById(id);
   const input={distance:$('distance'),time:$('time'),pace:$('pace')};
@@ -759,6 +502,40 @@ input { font-variant-numeric: tabular-nums; }
   // Keep sub-second precision internally while showing clean MM:SS inputs.
   let precisePaceSeconds=null,precisePaceDisplay=null;
   function parseClock(raw){const value=raw.trim();if(!/^\d+(?::[0-5]\d){1,2}$/.test(value))return NaN;const parts=value.split(':').map(Number);return parts.length===2?parts[0]*60+parts[1]:parts[0]*3600+parts[1]*60+parts[2]}
+
+  // Accept time-based repetitions in the original Time input.
+  // "4 x 5", "4*5", "4 * 5m", "4 x 5mins", "4×5" and "4 x 5:30".
+  // A bare repetition duration is measured in minutes.
+  function parseRepeatedTime(raw){
+    const rawText=String(raw).trim();
+    const source=rawText.replace(/\s*\(\s*\d+\s*mins?(?:\s+\d+\s*secs?)?\s*\)\s*$/i,'').trim();
+    const match=source.match(/^(\d{1,3})\s*[x×*]\s*(\d+(?::[0-5]\d)?|\d+(?:\.\d+)?)\s*(?:m(?:in(?:ute)?s?)?)?$/i);
+    if(!match)return null;
+    const repetitions=Number(match[1]);
+    const duration=match[2];
+    const perSeconds=duration.includes(':')?parseClock(duration):Number(duration)*60;
+    const totalSeconds=repetitions*perSeconds;
+    if(!Number.isSafeInteger(repetitions)||repetitions<1||repetitions>100||
+       !Number.isFinite(perSeconds)||perSeconds<=0||
+       !Number.isFinite(totalSeconds)||totalSeconds>8640000)return null;
+    return {source,repetitions,perSeconds,totalSeconds};
+  }
+  function parseTimeEntry(raw,distance){
+    const repeat=parseRepeatedTime(raw);
+    return repeat?{seconds:repeat.totalSeconds,ambiguous:false,repeat}:interpretRaceTime(raw,distance);
+  }
+  function repeatedVolumeLabel(totalSeconds){
+    const rounded=Math.round(totalSeconds);
+    const minutes=Math.floor(rounded/60),remaining=rounded%60;
+    return remaining?minutes+'mins '+remaining+'secs':minutes+'mins';
+  }
+  function formatRepeatedTimeInBox(){
+    const repeat=parseRepeatedTime(input.time.value);
+    if(!repeat)return;
+    const labelled=repeat.source+' ('+repeatedVolumeLabel(repeat.totalSeconds)+')';
+    if(input.time.value!==labelled){input.time.value=labelled;calculate();}
+  }
+
   function interpretRaceTime(raw, distance){
     const mmss=parseClock(raw),parts=raw.trim().split(':');
     // H:MM:SS is always explicit; e.g. 3:40:00 cannot be mistaken for 3m40s.
@@ -885,12 +662,12 @@ input { font-variant-numeric: tabular-nums; }
     $('save-status').textContent=pageCount===1?'A4 image downloaded.':`${pageCount} A4 images downloaded.`;
   }
   function calculate(){
-    const active=keys.filter(key=>key!==target),d=Number(input.distance.value),interpreted=interpretRaceTime(input.time.value,d),t=interpreted.seconds,p=precisePaceSeconds!==null&&input.pace.value===precisePaceDisplay?precisePaceSeconds:parseClock(input.pace.value);
+    const active=keys.filter(key=>key!==target),d=Number(input.distance.value),interpreted=parseTimeEntry(input.time.value,d),t=interpreted.seconds,p=precisePaceSeconds!==null&&input.pace.value===precisePaceDisplay?precisePaceSeconds:parseClock(input.pace.value);
     updateTimeAssumption(interpreted);
     const valid={distance:input.distance.value.trim()!==''&&Number.isFinite(d)&&d>0&&d<=100000,time:Number.isFinite(t)&&t>0&&t<=8640000,pace:Number.isFinite(p)&&p>0&&p<=86400};
     keys.forEach(key=>{input[key].setAttribute('aria-invalid',String(active.includes(key)&&input[key].value.trim()!==''&&!valid[key]));$(key+'-field').classList.toggle('is-missing',key===target)});
     const ready=active.every(key=>valid[key]);
-    $('error').textContent=active.some(key=>input[key].value.trim())&&!ready&&active.every(key=>input[key].value.trim())?'Enter a positive distance (metres, km or miles) and use MM:SS for pace or MM:SS / H:MM:SS for time.':'';
+    $('error').textContent=active.some(key=>input[key].value.trim())&&!ready&&active.every(key=>input[key].value.trim())?'Enter a positive distance (metres, km or miles) and use MM:SS for pace, and MM:SS, H:MM:SS or 4 x 5 for time.':'';
     let distance=d,time=t,pace=p;
     const factor=paceUnitsPerDistanceUnit();
     // Pace is seconds per selected pace unit; distance is in the independently selected distance unit.
@@ -959,9 +736,21 @@ input { font-variant-numeric: tabular-nums; }
   // the result to another field, rather than disabling the field the user wants.
   keys.forEach(key=>input[key].addEventListener('focus',()=>{
     if(key!==target)return;
-    const nextTarget=key==='pace'?'time':key==='time'?'pace':'time';
+    // When time is known, focusing pace should calculate Distance, not erase Time.
+    const timeKnown=Number.isFinite(parseTimeEntry(input.time.value,Number(input.distance.value)).seconds);
+    const paceKnown=Number.isFinite(parseClock(input.pace.value));
+    const distanceKnown=Number(input.distance.value)>0;
+    const nextTarget=key==='pace'?(timeKnown&&!distanceKnown?'distance':'time'):
+      key==='time'?(paceKnown&&!distanceKnown?'distance':'pace'):'time';
     find(nextTarget,false);
   }));
+  // Show the original shorthand with the summed running time after editing.
+  // When refocusing the Time field, remove the annotation for easy editing.
+  input.time.addEventListener('focus',()=>{
+    const repeat=parseRepeatedTime(input.time.value);
+    if(repeat)input.time.value=repeat.source;
+  });
+  input.time.addEventListener('blur',formatRepeatedTimeInBox);
   // Accept inputs like 800, 1500m, 5km and 3 miles without treating 800 as 800 km/miles.
   let suppressDistanceDetection=false;
   function selectDistanceUnit(next){
@@ -992,7 +781,7 @@ input { font-variant-numeric: tabular-nums; }
     calculate();
   }));
   $('time-assumption-switch').addEventListener('click',()=>{
-    const interpretation=interpretRaceTime(input.time.value,Number(input.distance.value));
+    const interpretation=parseTimeEntry(input.time.value,Number(input.distance.value));
     if(!interpretation.ambiguous)return;
     explicitTimeMode=interpretation.useHours?'minutes':'hours';
     calculate();
@@ -1042,7 +831,7 @@ input { font-variant-numeric: tabular-nums; }
     $('split-unit').value=shortcut.unit;
     calculate();
   }));
-  if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'calculate_running',title:'Calculate running pace, time or distance',description:'Provide two values and optionally a split interval and negative or positive split percentage.',inputSchema:{type:'object',properties:{distance:{type:'number',exclusiveMinimum:0},time:{type:'string',description:'MM:SS or H:MM:SS'},pace:{type:'string',description:'MM:SS per selected unit'},unit:{type:'string',enum:['m','km','mi']},paceUnit:{type:'string',enum:['km','mi']},splitDistance:{type:'number',exclusiveMinimum:0},splitUnit:{type:'string',enum:['m','km','mi']},splitPercentage:{type:'number',minimum:-5,maximum:5,description:'Negative means a faster second half; positive means a slower second half.'}},required:['unit'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute(args){const supplied=keys.filter(k=>args?.[k]!==undefined);if(!['m','km','mi'].includes(args?.unit)||supplied.length!==2)throw Error('Provide a unit and exactly two values');if(args.distance!==undefined&&(!Number.isFinite(args.distance)||args.distance<=0||args.distance>100000))throw Error('Invalid distance');for(const k of ['time','pace'])if(args[k]!==undefined&&(typeof args[k]!=='string'||!Number.isFinite(parseClock(args[k]))||parseClock(args[k])<=0))throw Error('Invalid '+k);if(args.splitDistance!==undefined&&(!Number.isFinite(args.splitDistance)||args.splitDistance<=0||args.splitDistance>100000||!['m','km','mi'].includes(args.splitUnit)))throw Error('Invalid split distance or unit');if(args.splitPercentage!==undefined&&(!Number.isFinite(args.splitPercentage)||args.splitPercentage < -5||args.splitPercentage > 5))throw Error('Invalid split percentage');if(args.unit!==unit)document.querySelector(`[data-distance-unit="${args.unit}"]`).click();if(args.paceUnit&&args.paceUnit!==paceUnit)document.querySelector(`[data-pace-unit="${args.paceUnit}"]`).click();keys.forEach(k=>input[k].value='');find(keys.find(k=>!supplied.includes(k)));supplied.forEach(k=>input[k].value=String(args[k]));$('split-size').value=args.splitDistance===undefined?'':String(args.splitDistance);$('split-unit').value=args.splitUnit??paceUnit;$('split-bias').value=String(args.splitPercentage??0);calculate();if($('error').textContent||$('split-error').textContent)throw Error($('error').textContent||$('split-error').textContent);return {result:$('result-value').textContent,description:$('result-unit').textContent,splitStrategy:$('split-bias-label').textContent,splits:[...$('split-rows').children].map(row=>[...row.cells].map(cell=>cell.textContent))}}})).catch(()=>{})}catch(_e){}}
+  if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'calculate_running',title:'Calculate running pace, time or distance',description:'Provide two values and optionally a split interval and negative or positive split percentage.',inputSchema:{type:'object',properties:{distance:{type:'number',exclusiveMinimum:0},time:{type:'string',description:'MM:SS, H:MM:SS or repeats such as 4 x 5'},pace:{type:'string',description:'MM:SS per selected unit'},unit:{type:'string',enum:['m','km','mi']},paceUnit:{type:'string',enum:['km','mi']},splitDistance:{type:'number',exclusiveMinimum:0},splitUnit:{type:'string',enum:['m','km','mi']},splitPercentage:{type:'number',minimum:-5,maximum:5,description:'Negative means a faster second half; positive means a slower second half.'}},required:['unit'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute(args){const supplied=keys.filter(k=>args?.[k]!==undefined);if(!['m','km','mi'].includes(args?.unit)||supplied.length!==2)throw Error('Provide a unit and exactly two values');if(args.distance!==undefined&&(!Number.isFinite(args.distance)||args.distance<=0||args.distance>100000))throw Error('Invalid distance');for(const k of ['time','pace'])if(args[k]!==undefined&&(typeof args[k]!=='string'||!Number.isFinite(k==='time'?parseTimeEntry(args[k],Number(args.distance)).seconds:parseClock(args[k]))||(k==='time'?parseTimeEntry(args[k],Number(args.distance)).seconds:parseClock(args[k]))<=0))throw Error('Invalid '+k);if(args.splitDistance!==undefined&&(!Number.isFinite(args.splitDistance)||args.splitDistance<=0||args.splitDistance>100000||!['m','km','mi'].includes(args.splitUnit)))throw Error('Invalid split distance or unit');if(args.splitPercentage!==undefined&&(!Number.isFinite(args.splitPercentage)||args.splitPercentage < -5||args.splitPercentage > 5))throw Error('Invalid split percentage');if(args.unit!==unit)document.querySelector(`[data-distance-unit="${args.unit}"]`).click();if(args.paceUnit&&args.paceUnit!==paceUnit)document.querySelector(`[data-pace-unit="${args.paceUnit}"]`).click();keys.forEach(k=>input[k].value='');find(keys.find(k=>!supplied.includes(k)));supplied.forEach(k=>input[k].value=String(args[k]));$('split-size').value=args.splitDistance===undefined?'':String(args.splitDistance);$('split-unit').value=args.splitUnit??paceUnit;$('split-bias').value=String(args.splitPercentage??0);calculate();if($('error').textContent||$('split-error').textContent)throw Error($('error').textContent||$('split-error').textContent);return {result:$('result-value').textContent,description:$('result-unit').textContent,splitStrategy:$('split-bias-label').textContent,splits:[...$('split-rows').children].map(row=>[...row.cells].map(cell=>cell.textContent))}}})).catch(()=>{})}catch(_e){}}
   // Validated deep links from the seven Pacing Guides: unit + race distance + goal time.
   // Example: calculator.html?distance=800&unit=m&time=1%3A52
   const guideParams=new URLSearchParams(window.location.search);
