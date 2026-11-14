@@ -8,7 +8,7 @@
 <meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="#004225" name="theme-color"/>
 <title>About &amp; FAQ | Stride Calculator</title>
 <link href="https://stridecalculator.com/about-faq.html" rel="canonical"/>
-<meta content="Learn about the Stride Calculator tools and get answers to frequently asked questions about running pace, race time, splits and units." name="description"/>
+<meta content="Learn how to use Stride Calculator's pace converter, split calculator and track lane calculator, with answers about pace, 400m tracks, lane distances and lap times." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
@@ -102,6 +102,7 @@ body.about-faq-view>#aboutFaqPage{display:grid}
 .about-faq-content .about-panel{max-width:960px}
 .about-faq-content .feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .about-faq-content .feature-tile{border:1px solid #d9e8de;background:#f7faf7;border-radius:17px;padding:20px}
+.about-faq-content .feature-tile.track-feature{grid-column:1 / -1}
 .about-faq-content .feature-tile strong{display:block;color:#004225;font-weight:850;margin-bottom:7px}
 .about-faq-content .feature-tile p{margin:0;color:#426454;line-height:1.55}
 .about-faq-content .faq-item{border-top:1px solid #dce7dd}
@@ -236,19 +237,21 @@ body { font-weight: 400; }
 <aside aria-label="Reserved left advertising space" class="ad-wing left"></aside>
 <main class="wrap about-faq-content">
 <h1 class="about-heading" id="aboutFaqTitle">About &amp; FAQ</h1>
-<p class="about-intro">Everything you need to know about Stride Calculator, from converting running pace to planning your race splits.</p>
+<p class="about-intro">Everything you need to know about Stride Calculator, from converting running pace and planning race splits to calculating lap times for different track lanes.</p>
 <section aria-labelledby="aboutSectionTitle" class="panel about-panel">
 <h2 class="section-title" id="aboutSectionTitle">Built for runners, made to be simple.</h2>
-<p class="about-intro">Stride Calculator helps you turn a race goal into a pace you can train for. Whether you run in kilometres or miles, you can quickly convert speeds, calculate finish times and plan splits without doing the maths yourself.</p>
+<p class="about-intro">Stride Calculator helps you turn a race goal into a pace you can train for. Whether you run in kilometres or miles, you can convert speeds, plan splits and work out full-lap times on different track lanes without doing the maths yourself.</p>
 <div class="feature-grid">
 <div class="feature-tile"><strong>Pace Conversion Tool</strong><p>Convert between min/km, min/mile, km/h and mph, with an interactive pace table.</p></div>
 <div class="feature-tile"><strong>Pace Calculator</strong><p>Work out your finish time, distance or pace, with separate kilometre and mile settings.</p></div>
 <div class="feature-tile"><strong>Your Splits</strong><p>View 200m, 400m, 1km, 1 mile or 5km splits for your chosen distance and goal.</p></div>
 <div class="feature-tile"><strong>Smart Time Entry</strong><p>The calculator interprets entries such as 3:40 based on race distance and lets you change the interpretation.</p></div>
+<div class="feature-tile track-feature"><strong>Track Lane Calculator</strong><p>Compare lanes 1–8 of a standard outdoor 400m track. Enter mile pace, kilometre pace, speed or a 400m time, then select a lane to see its full-circuit distance and target lap time. Watch the animated track update as you switch lanes.</p></div>
 </div>
 <div class="about-actions">
 <a class="about-action" href="./"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16m0 0-4-4m4 4-4 4"></path><path d="M20 17H4m0 0 4-4m-4 4 4 4"></path></svg><span>Open Pace Conversion Tool</span></a>
 <a class="about-action secondary" href="calculator.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18.5" rx="3" width="16" x="4" y="2.75"></rect><path d="M8 7.5h8"></path><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01M8 15.5h.01M12 15.5h.01M16 15.5h.01" stroke-width="2.9"></path></svg><span>Open Pace Calculator</span></a>
+<a class="about-action secondary" href="track-lanes.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="7"></rect><rect x="6.5" y="8.5" width="11" height="7" rx="3.5"></rect></svg><span>Open Track Lane Calculator</span></a>
 </div>
 </section>
 <section aria-labelledby="faqSectionTitle" class="panel about-panel" id="split-guide">
@@ -258,8 +261,11 @@ body { font-weight: 400; }
 <details class="faq-item"><summary>What does 3:40 mean in the Time box?</summary><div class="faq-answer"><p>The calculator uses race distance to make a sensible interpretation: for a 1500m, 3:40 normally means 3 minutes 40 seconds; for a marathon it can mean 3 hours 40 minutes. You can switch the interpretation if needed. Enter 3:40:00 to specify hours, minutes and seconds explicitly.</p></div></details>
 <details class="faq-item"><summary>Can I change which splits are displayed?</summary><div class="faq-answer"><p>Yes. Under Your Splits, select 200m, 400m, 1km, 1 mile or 5km. By default, the calculator shows 1km splits when your pace is set to kilometres and 1 mile splits when your pace is set to miles.</p></div></details>
 <details class="faq-item"><summary>How are split times calculated?</summary><div class="faq-answer"><p>Each split is based on your target average pace and the distance of that segment. If the final segment is shorter than the selected split distance, it is calculated proportionally. Displayed times are rounded to the nearest second.</p></div></details>
-<details class="faq-item"><summary>What's the difference between the two tools?</summary><div class="faq-answer"><p>The Pace Conversion Tool shows equivalent pace and speed values across different units. The Pace Calculator works from race distance, finish time and target pace to help plan a run or race.</p></div></details>
-<details class="faq-item"><summary>Does it work on a phone?</summary><div class="faq-answer"><p>Yes. The calculator and converter are designed to work on mobile as well as desktop. The advertising wings are hidden on smaller screens to leave more room for the tools.</p></div></details>
+<details class="faq-item"><summary>What's the difference between the calculators?</summary><div class="faq-answer"><p>The Pace Conversion Tool shows equivalent pace and speed values across different units. The Pace Calculator works from distance, finish time and target pace to plan a run or race. The Track Lane Calculator estimates the distance and time for a complete circuit of a selected track lane.</p></div></details>
+<details class="faq-item"><summary>How does the Track Lane Calculator work?</summary><div class="faq-answer"><p>Open the <a href="track-lanes.html">Track Lane Calculator</a>, enter your pace per mile, pace per kilometre, speed in km/h or 400m time, and select a lane from 1 to 8. It calculates the distance and estimated time for one complete circuit of that lane at a constant pace. You can also compare all eight lanes in the table below the track.</p></div></details>
+<details class="faq-item"><summary>Why are outer track lanes longer than 400m?</summary><div class="faq-answer"><p>On a standard outdoor track, lane 1 measures 400m for a full circuit along its measurement line. Each lane further out has a wider bend, so a full circuit is longer. In a 400m race, staggered starts compensate for these differences so every runner covers the same race distance. The Track Lane Calculator shows full-circuit distances and times, not staggered 400m race times.</p></div></details>
+<details class="faq-item"><summary>Can I enter my 400m pace in seconds?</summary><div class="faq-answer"><p>Yes. Enter <strong>73</strong> or <strong>1:13</strong> for a 73-second 400m pace. The pace fields stay linked, and the track updates once a complete time has been entered.</p></div></details>
+<details class="faq-item"><summary>Does it work on a phone?</summary><div class="faq-answer"><p>Yes. The pace tools and Track Lane Calculator are designed to work on mobile as well as desktop.</p></div></details>
 </section>
 </main>
 <aside aria-label="Reserved right advertising space" class="ad-wing right"></aside>
