@@ -19,8 +19,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--forest:#004225;--forest2:#073c2a;--lime:#92ff5f;--ink:#0c2920;--muted:#5d7367;--line:#dce8df;--bg:#f6f9f6;--white:#fff;--shadow:0 18px 50px rgba(0,54,28,.055)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #57c52c;outline-offset:3px}
-.site-header{background:var(--forest);color:#fff;box-shadow:0 3px 12px rgba(0,0,0,.09)}.nav{max-width:1190px;margin:auto;padding:14px 26px;display:flex;align-items:center;gap:26px;min-height:78px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.7px;white-space:nowrap}.brand-logo{height:38px;width:38px;display:grid;place-items:center;background:#0b5635;border-radius:12px}.brand-logo svg{width:33px;height:33px}.navlinks{display:flex;align-items:center;gap:22px;margin-left:auto;font-size:13px;font-weight:650;color:#d3e7db}.navlinks a{padding:7px 0}.navlinks a:hover,.navlinks a.active{color:var(--lime)}.preview-tag{font-size:10px;letter-spacing:.5px;font-weight:800;color:var(--forest);background:var(--lime);padding:6px 11px;border-radius:100px;white-space:nowrap}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:#cce9e9}body{margin:0;min-width:320px;background:radial-gradient(ellipse at 52% 44%,#d8e8c7 0%,#b4dcc7 42%,#cce9ee 100%);color:var(--ink);font-family:Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #57c52c;outline-offset:3px}
+.site-header{background:#f7f9f7;color:#004225;border-bottom:3px solid #004225;position:relative;z-index:100}
+.site-header .topbar-inner{max-width:1480px;margin:0 auto;min-height:86px;padding:14px clamp(20px,4vw,58px);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.site-header .brand{display:flex;align-items:center;gap:12px;min-width:0;text-decoration:none;color:#004225;font-family:Manrope,Arial,sans-serif;font-size:clamp(1.12rem,2.2vw,1.8rem);font-weight:700;letter-spacing:-.055em;white-space:nowrap}
+.site-header .brand-mark{width:48px;height:48px;flex:none;display:block}
+.site-header .brand-name{font-size:inherit;font-weight:inherit;letter-spacing:inherit;text-transform:uppercase;line-height:1.15}
+.site-header .brand:hover,.site-header .brand:focus-visible{color:#004225}
+.site-header .brand:focus-visible{outline:3px solid #004225;outline-offset:5px;border-radius:6px}
+.site-header .menu-wrap{position:relative;flex:none;margin-left:auto}
+.site-header .menu-toggle{width:48px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:2px solid #004225;border-radius:10px;background:#f7f9f7;color:#004225;padding:0;cursor:pointer;transition:background .18s}
+.site-header .menu-toggle span{display:block;width:20px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s,opacity .2s}
+.site-header .menu-toggle:hover,.site-header .menu-toggle[aria-expanded="true"]{background:#92ff5f}
+.site-header .menu-toggle:focus-visible,.site-header .menu-panel a:focus-visible{outline:3px solid #004225;outline-offset:3px}
+.site-header .menu-toggle[aria-expanded="true"] span:first-child{transform:translateY(7px) rotate(45deg)}
+.site-header .menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.site-header .menu-toggle[aria-expanded="true"] span:last-child{transform:translateY(-7px) rotate(-45deg)}
+.site-header .menu-panel{position:absolute;right:0;top:calc(100% + 10px);width:min(260px,calc(100vw - 32px));display:flex;flex-direction:column;gap:3px;padding:7px;border:2px solid #004225;border-radius:12px;background:#f7f9f7;box-shadow:0 10px 22px #001b1430;z-index:101}
+.site-header .menu-panel[hidden]{display:none!important}
+.site-header .menu-panel a{display:flex;align-items:center;gap:10px;min-height:48px;padding:10px 13px;border-radius:7px;color:#004225;text-decoration:none;font-size:1rem;line-height:1.35;font-weight:700;transition:background .18s}
+.site-header .menu-panel a:hover,.site-header .menu-panel a:focus-visible{background:#92ff5f}
+.site-header .overlay-menu-logo{display:block;width:30px;height:30px;flex:none}
+.site-header .menu-icon{display:inline-grid;place-items:center;width:20px;font-size:20px;font-weight:700;color:#004225}
+@media(max-width:720px){.site-header .topbar-inner{padding:12px 16px;min-height:70px;gap:10px}.site-header .brand{font-size:clamp(.94rem,3.6vw,1.1rem);gap:8px}.site-header .brand-mark{width:34px;height:34px}.site-header .menu-toggle{width:42px;height:42px}.site-header .menu-toggle span{width:18px}}
+/* Identical navigation hierarchy across conversion tool and pace calculator. */
+.site-header .menu-panel{width:min(276px,calc(100vw - 32px));gap:2px;padding:9px}
+.site-header .menu-panel a{min-height:46px;gap:12px;padding:9px 12px;font-weight:700}
+.site-header .menu-panel .menu-nav-icon{width:24px;height:24px;display:block;flex:none;color:#004225}
+.site-header .menu-panel .menu-section-divider{height:1px;background:#d4dfd7;margin:6px 9px}
+.site-header .menu-panel .overlay-menu-link{margin-top:0;border-top:0;padding-top:9px}
+.site-header .menu-panel .overlay-menu-logo{width:26px;height:26px;margin-left:-1px;flex:none}
+
+
 .wrap{max-width:1190px;padding:0 26px 64px;margin:auto}.hero{text-align:center;max-width:880px;margin:54px auto 32px}.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1.5px;font-weight:800;color:#287849;text-transform:uppercase}.eyebrow:before{content:'';height:7px;width:7px;background:#4fe534;border-radius:50%}.hero h1{font-size:clamp(30px,4.9vw,51px);letter-spacing:-2.2px;line-height:1.15;margin:16px 0 13px;font-weight:800}.hero h1 span{color:#269449}.hero p{margin:0 auto;color:var(--muted);font-size:15px;max-width:650px;line-height:1.8}.section-title{font-size:18px;letter-spacing:-.5px;margin:0;font-weight:800}.section-sub{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.6}.section-head{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:0 0 20px}.panel{background:#fff;border:1px solid #e2ebe4;border-radius:20px;padding:24px;box-shadow:var(--shadow)}.input-panel{margin-bottom:20px}.fields{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field{background:#f6faf6;border:1px solid #dce9dc;border-radius:13px;padding:14px 16px 12px;transition:border .2s,box-shadow .2s}.field:focus-within{border-color:#239a4b;box-shadow:0 0 0 3px rgba(146,255,95,.2)}.field label{font-size:11px;font-weight:800;color:#456653;display:block;margin-bottom:6px}.field input{width:100%;border:0;outline:0!important;padding:0;background:transparent;color:#004225;font-size:29px;font-weight:800;letter-spacing:-.8px;min-width:0}.field .unit{font-size:10px;color:#7d9081;font-weight:700;margin-top:4px}.field input::-webkit-outer-spin-button,.field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.small-note{font-size:11px;color:#61756b;margin:14px 2px 0}
 .track-panel{padding:0;overflow:hidden;margin-bottom:20px}.track-bar{background:#fff;padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap}.lane-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.lane-controls span{font-size:11px;font-weight:700;color:#64796d;margin-right:4px}.lane-btn{height:32px;min-width:34px;border-radius:8px;border:1px solid #d4e2d8;background:#fff;color:#1f5b36;font-size:12px;font-weight:800;transition:.15s}.lane-btn:hover{border-color:#4ab65d;background:#eefbea}.lane-btn.active{background:#004225;color:#92ff5f;border-color:#004225}
 .track-stage{background:linear-gradient(135deg,#082c20 0%,#0b392b 65%,#0b3224 100%);position:relative;overflow:hidden;min-height:280px}.track-stage svg{width:100%;height:auto;display:block;touch-action:manipulation}.track-stage .svg-lane{cursor:pointer}.track-stage .svg-lane:hover{cursor:pointer}.track-stage .svg-lane:focus-visible{outline:none}.track-stage .lane-band{transition:stroke .16s,stroke-width .16s,filter .16s}.track-stage .infield-top{font-size:14px;font-weight:800;letter-spacing:3px;fill:#a1ebba}.track-stage .infield-lane{font-size:39px;font-weight:800;letter-spacing:-1.3px;fill:#fff}.track-stage .infield-distance{font-size:32px;font-weight:800;letter-spacing:-.5px;fill:#92ff5f}.track-stage .infield-time{font-size:58px;font-weight:800;letter-spacing:-1.5px;fill:#fff;font-variant-numeric:tabular-nums}.track-stage .infield-rule{stroke:#41735a;stroke-width:1.3;opacity:.8}.track-stage .infield-foot{font-size:13px;fill:#99bdaa;font-weight:700}.track-stage .marker-label{font-size:9px;font-weight:800;dominant-baseline:middle;text-anchor:middle}.track-stage .finish-label{font-size:11px;fill:#eafbef;font-weight:800;letter-spacing:1.3px}
@@ -35,7 +65,7 @@
 
 
 .track-stage .svg-lane:hover{cursor:pointer}
-@media(max-width:850px){.navlinks{display:none}.nav{min-height:65px}.preview-tag{margin-left:auto}.wrap{padding:0 15px 48px}.hero{margin:36px auto 28px}.fields{grid-template-columns:repeat(2,1fr)}.results{grid-template-columns:repeat(3,1fr)}.track-stage{min-height:0}.track-stage svg{min-width:0}.result-card{padding:16px}}
+@media(max-width:850px){.wrap{padding:0 15px 48px}.hero{margin:36px auto 28px}.fields{grid-template-columns:repeat(2,1fr)}.results{grid-template-columns:repeat(3,1fr)}.track-stage{min-height:0}.track-stage svg{min-width:0}.result-card{padding:16px}}
 @media(max-width:560px){
 .hero{margin:20px auto 16px}.hero h1{margin:9px 0 7px}.hero p{font-size:12px;line-height:1.45}
 .input-panel{padding:14px}.input-panel .section-head{display:flex;align-items:center;gap:8px}.input-panel .section-head>div:first-child{flex:1;min-width:0}.input-panel .section-title{font-size:15px}.input-panel .section-sub{font-size:10px}
@@ -83,22 +113,90 @@
 @keyframes calc-pop{0%{opacity:.3;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.track-stage .infield-time{animation:none!important;transition:none!important}#hoverHalo,#hoverBand{transition:none}}
 
-/* Mobile navigation */
-.track-mobile-menu{display:none;position:relative;margin-left:auto;z-index:20}
-.track-mobile-menu summary{cursor:pointer;list-style:none;border:1px solid rgba(146,255,95,.4);border-radius:10px;padding:10px 16px;color:var(--lime);font-size:13px;font-weight:800}
-.track-mobile-menu summary::-webkit-details-marker{display:none}
-.track-mobile-links{position:absolute;right:0;top:calc(100% + 8px);min-width:220px;display:grid;border-radius:12px;overflow:hidden;background:var(--forest);border:1px solid #2b6445;box-shadow:0 10px 24px rgba(0,0,0,.16)}
-.track-mobile-links a{padding:12px 15px;color:#e9f6eb;font-size:13px;font-weight:700}
-.track-mobile-links a:hover,.track-mobile-links a[aria-current="page"]{background:#125939;color:var(--lime)}
-@media(max-width:850px){.track-mobile-menu{display:block}}
 </style>
-</head>
+<style>
+/* Shared expandable Pacing Guides navigation */
+.pacing-disclosure{display:block;min-width:0}
+.pacing-disclosure .pacing-menu-trigger{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:9px 12px;border:0;border-radius:8px;background:transparent;color:#004226;text-align:left;font-family:Manrope,system-ui,sans-serif;font-size:1rem;font-weight:700;line-height:1.35;cursor:pointer}
+.pacing-disclosure .pacing-menu-trigger:hover,.pacing-disclosure .pacing-menu-trigger:focus-visible,.pacing-disclosure .pacing-menu-trigger[aria-expanded="true"]{background:#e9f7e6}
+.pacing-disclosure .menu-nav-icon{width:24px;height:24px;flex:none;display:block;color:#004226}
+.pacing-disclosure .pacing-chevron{width:18px;height:18px;flex:none;display:block;margin-left:auto;transition:transform .22s ease}
+.pacing-disclosure .pacing-menu-trigger[aria-expanded="true"] .pacing-chevron{transform:rotate(180deg)}
+.pacing-submenu{display:grid;gap:3px;margin:3px 0 9px 19px;padding:5px 0 5px 12px;border-left:2px solid #c8decd}
+.pacing-submenu[hidden]{display:none!important}
+.pacing-submenu a{display:flex!important;align-items:center!important;gap:9px!important;min-height:38px!important;padding:8px 11px!important;border-radius:7px!important;font-size:.89rem!important;line-height:1.3!important;font-weight:650!important;color:#004226!important;text-decoration:none!important}
+.pacing-submenu a:hover,.pacing-submenu a:focus-visible{background:#e9f7e6!important}
+.pacing-submenu a .distance-dot{width:7px;height:7px;border-radius:50%;background:#56c531;flex:none}
+.pacing-submenu a .all-guides-icon{width:15px;height:15px;flex:none;opacity:.8}
+.pacing-submenu .pacing-upcoming{color:#667c6b;font-size:.73rem;font-weight:600;padding:7px 11px 4px;line-height:1.35}
+@media(prefers-reduced-motion:reduce){.pacing-disclosure .pacing-chevron{transition:none}}
+</style><style>
+/* Consistent scrollable seven-distance menu on every page. */
+.pacing-disclosure{width:100%;flex-shrink:0}
+.pacing-disclosure .pacing-menu-trigger{white-space:normal}
+.pacing-submenu{min-width:0}
+.pacing-submenu a{white-space:normal;overflow-wrap:break-word}
+.menu-panel:has(.pacing-disclosure),.site-menu:has(.pacing-disclosure){max-height:min(80dvh,720px);overflow-y:auto;overscroll-behavior:contain}
+@media(max-width:480px){.pacing-submenu{margin-left:10px;padding-left:7px}.pacing-submenu a{font-size:.84rem!important}}
+</style></head>
 <body>
-<header class="site-header"><nav class="nav" aria-label="Main navigation">
-<a class="brand" href="./"><span class="brand-logo" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 64 64"><rect fill="#004225" height="64" rx="12" width="64"/><rect fill="#92ff5f" height="46" rx="5" width="30" x="17" y="9"/><rect fill="#004225" height="11" rx="1.5" width="20" x="22" y="15"/><g fill="#004225"><rect height="6" rx="1.3" width="6" x="21" y="30"/><rect height="6" rx="1.3" width="6" x="29" y="30"/><rect height="6" rx="1.3" width="6" x="37" y="30"/><rect height="6" rx="1.3" width="6" x="21" y="38"/><rect height="6" rx="1.3" width="6" x="29" y="38"/><rect height="6" rx="1.3" width="6" x="37" y="38"/><rect height="6" rx="1.3" width="6" x="21" y="46"/><rect height="6" rx="1.3" width="6" x="29" y="46"/><rect height="6" rx="1.3" width="6" x="37" y="46"/></g></svg></span><span>Stride Calculator</span></a>
-<div class="navlinks"><a href="./">Pace Conversion</a><a href="calculator.html">Split Calculator</a><a class="active" href="track-lanes.html" aria-current="page">Track Lanes</a><a href="pacing-guides.html">Pacing Guides</a></div>
-<details class="track-mobile-menu"><summary aria-label="Open navigation menu">Menu</summary><div class="track-mobile-links"><a href="./">Pace Conversion</a><a href="calculator.html">Split Calculator</a><a href="track-lanes.html" aria-current="page">Track Lanes</a><a href="pacing-guides.html">Pacing Guides</a><a href="about-faq.html">About &amp; FAQ</a></div></details>
-</nav></header>
+<header class="site-header">
+<div class="topbar-inner">
+<a aria-label="Stride Calculator home" class="brand" href="./">
+<svg aria-hidden="true" class="brand-mark" viewbox="0 0 64 64">
+<rect fill="#004225" height="64" rx="12" width="64">
+</rect>
+<rect fill="#92ff5f" height="46" rx="5" width="30" x="17" y="9">
+</rect>
+<rect fill="#004225" height="11" rx="1.5" width="20" x="22" y="15">
+</rect>
+<g fill="#004225">
+<rect height="6" rx="1.3" width="6" x="21" y="30">
+</rect>
+<rect height="6" rx="1.3" width="6" x="29" y="30">
+</rect>
+<rect height="6" rx="1.3" width="6" x="37" y="30">
+</rect>
+<rect height="6" rx="1.3" width="6" x="21" y="38">
+</rect>
+<rect height="6" rx="1.3" width="6" x="29" y="38">
+</rect>
+<rect height="6" rx="1.3" width="6" x="37" y="38">
+</rect>
+<rect height="6" rx="1.3" width="6" x="21" y="46">
+</rect>
+<rect height="6" rx="1.3" width="6" x="29" y="46">
+</rect>
+<rect height="6" rx="1.3" width="6" x="37" y="46">
+</rect>
+</g>
+</svg>
+<span class="brand-name">STRIDE CALCULATOR</span>
+</a>
+<div class="menu-wrap">
+<button aria-controls="siteMenu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menuToggle" type="button">
+<span></span><span></span><span></span>
+</button>
+<nav aria-label="Main navigation" class="menu-panel" hidden="" id="siteMenu"><a class="menu-tool-link" href="./"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16m0 0-4-4m4 4-4 4M20 17H4m0 0 4-4m-4 4 4 4"></path></svg><span>Pace Conversion Tool</span></a>
+<a class="menu-tool-link" href="calculator.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18.5" rx="3" width="16" x="4" y="2.75"></rect><path d="M8 7.5h8"></path><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01M8 15.5h.01M12 15.5h.01M16 15.5h.01" stroke-width="2.9"></path></svg><span>Split Calculator</span></a> <a aria-current="page" class="menu-tool-link" href="track-lanes.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24" width="20" height="20"><rect x="2.5" y="5" width="19" height="14" rx="7"></rect><rect x="6.5" y="8.5" width="11" height="7" rx="3.5"></rect></svg><span>Track Lane Calculator</span></a>
+<div class="pacing-disclosure">
+<button aria-controls="pacing-choices-track-lanes" aria-expanded="false" aria-label="Expand Pacing Guides" class="pacing-menu-trigger" type="button">
+<svg aria-hidden="true" class="menu-nav-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 5.5c3.4-1 6-0.8 8 0.6 2-1.4 4.6-1.6 8-0.6v13c-3.4-1-6-0.8-8 0.6-2-1.4-4.6-1.6-8-0.6z"></path><path d="M12 6.1v13"></path></svg><span>Pacing Guides</span><svg aria-hidden="true" class="pacing-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></button>
+<div class="pacing-submenu" hidden="" id="pacing-choices-track-lanes">
+<a href="800m-pacing.html"><span class="distance-dot"></span><span>800m pacing guide</span></a><a href="1500m-pacing.html"><span class="distance-dot"></span><span>1500m pacing guide</span></a><a href="mile-pacing.html"><span class="distance-dot"></span><span>Mile pacing guide</span></a>
+<a href="5k-pacing.html"><span class="distance-dot"></span><span>5K pacing guide</span></a>
+<a href="10k-pacing.html"><span class="distance-dot"></span><span>10K pacing guide</span></a><a href="half-marathon-pacing.html"><span class="distance-dot"></span><span>Half marathon pacing guide</span></a>
+<a href="marathon-pacing.html"><span class="distance-dot"></span><span>Marathon pacing guide</span></a>
+</div>
+</div>
+<div aria-hidden="true" class="menu-section-divider" role="separator"></div>
+<a href="about-faq.html"><svg aria-hidden="true" class="menu-nav-icon" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.2a2.7 2.7 0 0 1 5.1 1.1c0 1.8-2.6 2-2.6 4"></path><path d="M12 17.2h.01"></path></svg><span>About &amp; FAQ</span></a>
+<div aria-hidden="true" class="menu-section-divider" role="separator"></div>
+<a class="overlay-menu-link" href="https://strideoverlay.com/" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" class="overlay-menu-logo" focusable="false" height="30" viewbox="0 0 64 64" width="30" xmlns="http://www.w3.org/2000/svg"><rect fill="#004225" height="64" rx="12" width="64"></rect><path d="M8 43h12l8-22 9 29 8-18h11" fill="none" stroke="#92ff5f" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"></path></svg><span>Stride Overlay</span></a>
+</nav>
+</div>
+</div>
+</header>
 <main class="wrap" id="top">
 <section class="hero"><div class="eyebrow">TRAINING TOOLS / TRACK LANES</div><h1>Every lane. <span>The right pace.</span></h1></section>
 <section class="panel input-panel" aria-labelledby="pace-heading"><div class="section-head"><h2 class="section-title" id="pace-heading">Set your target pace</h2></div><div class="fields">
@@ -390,4 +488,19 @@ function animate(now){
 initialTrack();updateLaneLabels();renderSlider();syncInputs();renderOutputs();finishCalculation(resultKey());requestAnimationFrame(animate);
 })();
 </script>
-</body></html>
+<script>(()=>{const button=document.getElementById('menuToggle'), menu=document.getElementById('siteMenu');if(!button||!menu)return;const close=(focus=false)=>{menu.hidden=true;button.setAttribute('aria-expanded','false');button.setAttribute('aria-label','Open navigation menu');if(focus)button.focus()};button.addEventListener('click',()=>{const show=menu.hidden;menu.hidden=!show;button.setAttribute('aria-expanded',String(show));button.setAttribute('aria-label',show?'Close navigation menu':'Open navigation menu')});document.addEventListener('pointerdown',e=>{if(!e.target.closest('.menu-wrap'))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden)close(true)});menu.addEventListener('click',e=>{if(e.target.closest('a'))close()});})();</script><script>
+/* The Pacing Guides row opens a submenu, not a separate page. */
+(()=>{
+  document.querySelectorAll('.pacing-disclosure').forEach(group=>{
+    const button=group.querySelector('.pacing-menu-trigger');
+    const submenu=group.querySelector('.pacing-submenu');
+    if(!button||!submenu)return;
+    const setOpen=(open)=>{submenu.hidden=!open;button.setAttribute('aria-expanded',String(open));};
+    setOpen(false);
+    button.addEventListener('click',()=>setOpen(submenu.hidden));
+    group.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&!submenu.hidden){setOpen(false);event.stopPropagation();button.focus();}
+    });
+  });
+})();
+</script></body></html>
