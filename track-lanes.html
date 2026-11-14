@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#004225">
+<title>Track Lane Pace Calculator | Running Track Lanes 1–8 | Stride Calculator</title>
+<meta name="description" content="Calculate running pace for lanes 1 to 8 of a standard 400m athletics track. Enter mile pace, kilometre pace, speed or 400m time, then select a lane to see its lap distance and target time.">
+<link rel="canonical" href="https://stridecalculator.com/track-lanes.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Track Lane Pace Calculator | Stride Calculator">
+<meta property="og:description" content="Interactive 400m running track lane calculator with linked pace inputs, lane distances and lap times.">
+<meta property="og:url" content="https://stridecalculator.com/track-lanes.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#004225;--forest2:#073c2a;--lime:#92ff5f;--ink:#0c2920;--muted:#5d7367;--line:#dce8df;--bg:#f6f9f6;--white:#fff;--shadow:0 18px 50px rgba(0,54,28,.055)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #57c52c;outline-offset:3px}
+.site-header{background:var(--forest);color:#fff;box-shadow:0 3px 12px rgba(0,0,0,.09)}.nav{max-width:1190px;margin:auto;padding:14px 26px;display:flex;align-items:center;gap:26px;min-height:78px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.7px;white-space:nowrap}.brand-logo{height:38px;width:38px;display:grid;place-items:center;background:#0b5635;border-radius:12px}.brand-logo svg{width:33px;height:33px}.navlinks{display:flex;align-items:center;gap:22px;margin-left:auto;font-size:13px;font-weight:650;color:#d3e7db}.navlinks a{padding:7px 0}.navlinks a:hover,.navlinks a.active{color:var(--lime)}.preview-tag{font-size:10px;letter-spacing:.5px;font-weight:800;color:var(--forest);background:var(--lime);padding:6px 11px;border-radius:100px;white-space:nowrap}
+.wrap{max-width:1190px;padding:0 26px 64px;margin:auto}.hero{text-align:center;max-width:880px;margin:54px auto 32px}.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1.5px;font-weight:800;color:#287849;text-transform:uppercase}.eyebrow:before{content:'';height:7px;width:7px;background:#4fe534;border-radius:50%}.hero h1{font-size:clamp(30px,4.9vw,51px);letter-spacing:-2.2px;line-height:1.15;margin:16px 0 13px;font-weight:800}.hero h1 span{color:#269449}.hero p{margin:0 auto;color:var(--muted);font-size:15px;max-width:650px;line-height:1.8}.section-title{font-size:18px;letter-spacing:-.5px;margin:0;font-weight:800}.section-sub{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.6}.section-head{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:0 0 20px}.panel{background:#fff;border:1px solid #e2ebe4;border-radius:20px;padding:24px;box-shadow:var(--shadow)}.input-panel{margin-bottom:20px}.fields{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field{background:#f6faf6;border:1px solid #dce9dc;border-radius:13px;padding:14px 16px 12px;transition:border .2s,box-shadow .2s}.field:focus-within{border-color:#239a4b;box-shadow:0 0 0 3px rgba(146,255,95,.2)}.field label{font-size:11px;font-weight:800;color:#456653;display:block;margin-bottom:6px}.field input{width:100%;border:0;outline:0!important;padding:0;background:transparent;color:#004225;font-size:29px;font-weight:800;letter-spacing:-.8px;min-width:0}.field .unit{font-size:10px;color:#7d9081;font-weight:700;margin-top:4px}.field input::-webkit-outer-spin-button,.field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.small-note{font-size:11px;color:#61756b;margin:14px 2px 0}
+.track-panel{padding:0;overflow:hidden;margin-bottom:20px}.track-bar{background:#fff;padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap}.lane-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.lane-controls span{font-size:11px;font-weight:700;color:#64796d;margin-right:4px}.lane-btn{height:32px;min-width:34px;border-radius:8px;border:1px solid #d4e2d8;background:#fff;color:#1f5b36;font-size:12px;font-weight:800;transition:.15s}.lane-btn:hover{border-color:#4ab65d;background:#eefbea}.lane-btn.active{background:#004225;color:#92ff5f;border-color:#004225}
+.track-stage{background:linear-gradient(135deg,#082c20 0%,#0b392b 65%,#0b3224 100%);position:relative;overflow:hidden;min-height:280px}.track-stage svg{width:100%;height:auto;display:block;touch-action:manipulation}.track-stage .svg-lane{cursor:pointer}.track-stage .svg-lane:hover{cursor:pointer}.track-stage .svg-lane:focus-visible{outline:none}.track-stage .lane-band{transition:stroke .16s,stroke-width .16s,filter .16s}.track-stage .infield-top{font-size:14px;font-weight:800;letter-spacing:3px;fill:#a1ebba}.track-stage .infield-lane{font-size:39px;font-weight:800;letter-spacing:-1.3px;fill:#fff}.track-stage .infield-distance{font-size:32px;font-weight:800;letter-spacing:-.5px;fill:#92ff5f}.track-stage .infield-time{font-size:58px;font-weight:800;letter-spacing:-1.5px;fill:#fff;font-variant-numeric:tabular-nums}.track-stage .infield-rule{stroke:#41735a;stroke-width:1.3;opacity:.8}.track-stage .infield-foot{font-size:13px;fill:#99bdaa;font-weight:700}.track-stage .marker-label{font-size:9px;font-weight:800;dominant-baseline:middle;text-anchor:middle}.track-stage .finish-label{font-size:11px;fill:#eafbef;font-weight:800;letter-spacing:1.3px}
+
+.results{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:20px}.result-card{background:#fff;padding:22px;border-radius:17px;border:1px solid #e3eae4;box-shadow:var(--shadow);min-width:0}.result-card.primary{background:#004225;border-color:#004225;color:#fff}.result-label{font-size:11px;font-weight:800;color:#658175;letter-spacing:.3px}.primary .result-label{color:#d2e8d5}.result-value{font-size:clamp(25px,3.5vw,35px);font-weight:800;letter-spacing:-1.2px;margin:10px 0 3px;font-variant-numeric:tabular-nums}.primary .result-value{color:#92ff5f}.result-helper{color:#769286;font-size:11px;line-height:1.5}.primary .result-helper{color:#cae5d1}.comparison-panel{padding:22px 24px 15px}.table-container{width:100%;overflow-x:auto}.comparison-table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}.comparison-table th{text-align:right;color:#6d8577;font-size:10px;letter-spacing:.7px;text-transform:uppercase;font-weight:800;padding:13px 10px;border-bottom:1px solid #e0e9e1}.comparison-table th:first-child,.comparison-table td:first-child{text-align:left}.comparison-table td{text-align:right;border-bottom:1px solid #eef2ee;padding:12px 10px;font-variant-numeric:tabular-nums;font-weight:700}.comparison-table tbody tr{cursor:pointer}.comparison-table tbody tr:hover{background:#f1fbee}.comparison-table tbody tr.selected{background:#e9f9e6;color:#0b6130}.badge-small{display:inline-block;border-radius:7px;padding:3px 7px;background:#eaf2e8;color:#1d6437;font-size:11px;font-weight:800}.comparison-table tbody tr.selected .badge-small{background:#004225;color:#92ff5f}.fine-print{font-size:11px;line-height:1.7;color:#6d8175;margin:16px 0 0}
+/* Faster to scan: live selected-lane target is always beside the input heading. */
+.hero{margin:28px auto 20px}.hero h1{font-size:clamp(30px,4.6vw,44px);margin:10px 0 8px}.hero p{font-size:13px;line-height:1.55}
+.input-panel{padding:18px 22px;margin-bottom:14px}.input-panel .section-head{margin-bottom:13px}
+.field{padding:11px 13px 10px}.field input{font-size:27px}.small-note{margin:9px 2px 0}
+.track-panel{margin-bottom:14px}.track-bar{padding:14px 20px}
+
+
+
+.track-stage .svg-lane:hover{cursor:pointer}
+@media(max-width:850px){.navlinks{display:none}.nav{min-height:65px}.preview-tag{margin-left:auto}.wrap{padding:0 15px 48px}.hero{margin:36px auto 28px}.fields{grid-template-columns:repeat(2,1fr)}.results{grid-template-columns:repeat(3,1fr)}.track-stage{min-height:0}.track-stage svg{min-width:0}.result-card{padding:16px}}
+@media(max-width:560px){
+.hero{margin:20px auto 16px}.hero h1{margin:9px 0 7px}.hero p{font-size:12px;line-height:1.45}
+.input-panel{padding:14px}.input-panel .section-head{display:flex;align-items:center;gap:8px}.input-panel .section-head>div:first-child{flex:1;min-width:0}.input-panel .section-title{font-size:15px}.input-panel .section-sub{font-size:10px}
+
+.field input{font-size:23px}
+.brand{font-size:16px}.brand-logo{height:32px;width:32px;font-size:18px}.nav{padding:12px 15px;gap:8px}.preview-tag{font-size:8px;padding:6px 8px}.hero h1{letter-spacing:-1.3px}.hero p{font-size:13px}.section-head{display:block}.panel{padding:17px;border-radius:16px}.fields{gap:9px}.field{padding:12px}.field input{font-size:24px}.track-panel{padding:0}.track-bar{padding:16px 13px}.lane-controls{width:100%;justify-content:space-between;gap:4px}.lane-controls span{display:none}.lane-btn{flex:1;min-width:0;height:36px}.track-stage svg{width:calc(100% + 28px);margin-left:-14px}.track-stage .infield-lane{font-size:39px}.results{grid-template-columns:1fr 1fr;gap:10px}.result-card{padding:15px}.result-card.primary{grid-column:1/-1}.result-value{font-size:26px}.result-card.primary .result-value{font-size:36px}.comparison-panel{padding:18px 12px}.comparison-table td,.comparison-table th{padding:11px 8px}.comparison-table th:nth-child(3),.comparison-table td:nth-child(3){display:none}.fine-print{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* V4: single, thicker, numbered slider with the chosen lane highlighted inside the bar. */
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.lane-controls{display:flex;align-items:center;gap:13px;flex-wrap:nowrap;min-width:0}
+.lane-slider-label{font-size:11px;letter-spacing:1px;font-weight:800;color:#40644c;white-space:nowrap}
+.lane-slider-box{width: min(100%,400px);min-width:295px}
+.lane-slider-rail{position:relative;width:100%;height:50px;border-radius:14px;background:#004225;box-shadow:inset 0 0 0 1px rgba(0,66,37,.15);padding:4px;isolation:isolate;user-select:none;-webkit-user-select:none}
+.lane-slider-selection{position:absolute;top:4px;left:4px;width:calc((100% - 8px) / 8);height:calc(100% - 8px);background:#92ff5f;border-radius:10px;transform:translateX(calc(var(--lane-index,7) * 100%));transition:transform .18s ease;box-shadow:0 3px 9px rgba(0,30,14,.27);pointer-events:none;z-index:1}
+.lane-ticks{height:100%;width:100%;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));position:relative;z-index:2;pointer-events:none}
+.lane-tick{display:flex;justify-content:center;align-items:center;border:0;background:transparent;font-weight:800;font-size:16px;color:#d8f3df;padding:0;pointer-events:none;transition:color .13s ease}
+.lane-tick.active{color:#004225}.lane-range{position:absolute;top:0;left:calc((100% / 8 - 34px) / 2);width:calc(100% * 7 / 8 + 34px);height:100%;margin:0;opacity:0;z-index:4;cursor:grab;appearance:none;-webkit-appearance:none;touch-action:pan-y}
+.lane-range:active{cursor:grabbing}.lane-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:34px;height:48px;background:transparent;border:0}.lane-range::-moz-range-thumb{appearance:none;width:34px;height:48px;background:transparent;border:0}
+.lane-slider-rail:focus-within{outline:3px solid #54be4e;outline-offset:3px}
+.hero{margin-bottom:15px}.hero h1{margin-bottom:0}.input-panel .section-head{margin-bottom:14px}
+@media(max-width:700px){.track-bar{align-items:stretch;flex-direction:column;gap:10px}.lane-controls{width:100%;min-width:0}.lane-slider-box{flex:1;width:100%;min-width:0}}
+@media(max-width:560px){.track-bar{padding:12px 16px}.lane-slider-rail{height:52px}.lane-tick{font-size:15px}.hero{margin-bottom:15px}}
+/* V6: smooth persistent lane morph, flowing hover, and one-lap calculation reveal. */
+.lane-controls .lane-tick{font-size:16px;color:#b9d6c4;margin:0;border-radius:10px;transition:color .18s ease,background-color .18s ease,text-shadow .18s ease}
+.lane-controls .lane-tick.hovered:not(.active){color:#b8e6a7;background:rgba(146,255,95,.10);text-shadow:0 0 7px rgba(146,255,95,.28)}
+.lane-controls .lane-tick.active{color:#004225}
+.track-stage .svg-lane{cursor:pointer;outline:none}
+.track-stage .svg-lane:focus-visible{stroke:rgba(146,255,95,.22)!important}
+#selectedHalo,#selectedBand,#selectedEdge,#hoverHalo,#hoverBand,#calcProgress,#calcProgressBlur,#calcPulseHead,#calcPulseHalo{pointer-events:none}
+#selectedHalo{opacity:.55;transition:opacity .26s ease}
+#selectedBand{opacity:.96;transition:stroke .22s ease,opacity .22s ease}
+#selectedEdge{opacity:.96;transition:opacity .22s ease}
+#hoverHalo,#hoverBand{opacity:0;transition:opacity .23s cubic-bezier(.22,.8,.28,1)}
+#hoverHalo.visible{opacity:.46}#hoverBand.visible{opacity:.92}
+.track-stage .infield-time{transition:opacity .19s ease,transform .19s cubic-bezier(.16,.9,.3,1);font-variant-numeric:tabular-nums}
+.track-stage .infield-time.calculating{opacity:.66;fill:#d4ffe0;letter-spacing:3px;animation:calc-breathe .72s ease-in-out infinite}
+.track-stage .infield-time.just-revealed{animation:calc-pop .25s cubic-bezier(.16,1,.3,1) both}
+.track-stage #calcPhase{transition:fill .13s ease;letter-spacing:2.2px;font-size:13px}
+.track-stage #calcPhase.busy{fill:#a7ff90}
+.track-stage #calcDetails{fill:#a0cbb0;font-size:12px;letter-spacing:.35px;font-weight:700;opacity:.88}
+#calcProgress,#calcProgressBlur,#calcPulseHead,#calcPulseHalo{opacity:0;transition:opacity .18s ease}
+#calcProgress.running{opacity:1}#calcProgressBlur.running{opacity:.72}#calcPulseHead.running{opacity:1}#calcPulseHalo.running{opacity:.75}
+@keyframes calc-breathe{0%,100%{opacity:.38}50%{opacity:.85}}
+@keyframes calc-pop{0%{opacity:.3;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.track-stage .infield-time{animation:none!important;transition:none!important}#hoverHalo,#hoverBand{transition:none}}
+
+/* Mobile navigation */
+.track-mobile-menu{display:none;position:relative;margin-left:auto;z-index:20}
+.track-mobile-menu summary{cursor:pointer;list-style:none;border:1px solid rgba(146,255,95,.4);border-radius:10px;padding:10px 16px;color:var(--lime);font-size:13px;font-weight:800}
+.track-mobile-menu summary::-webkit-details-marker{display:none}
+.track-mobile-links{position:absolute;right:0;top:calc(100% + 8px);min-width:220px;display:grid;border-radius:12px;overflow:hidden;background:var(--forest);border:1px solid #2b6445;box-shadow:0 10px 24px rgba(0,0,0,.16)}
+.track-mobile-links a{padding:12px 15px;color:#e9f6eb;font-size:13px;font-weight:700}
+.track-mobile-links a:hover,.track-mobile-links a[aria-current="page"]{background:#125939;color:var(--lime)}
+@media(max-width:850px){.track-mobile-menu{display:block}}
+</style>
+</head>
+<body>
+<header class="site-header"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="./"><span class="brand-logo" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 64 64"><rect fill="#004225" height="64" rx="12" width="64"/><rect fill="#92ff5f" height="46" rx="5" width="30" x="17" y="9"/><rect fill="#004225" height="11" rx="1.5" width="20" x="22" y="15"/><g fill="#004225"><rect height="6" rx="1.3" width="6" x="21" y="30"/><rect height="6" rx="1.3" width="6" x="29" y="30"/><rect height="6" rx="1.3" width="6" x="37" y="30"/><rect height="6" rx="1.3" width="6" x="21" y="38"/><rect height="6" rx="1.3" width="6" x="29" y="38"/><rect height="6" rx="1.3" width="6" x="37" y="38"/><rect height="6" rx="1.3" width="6" x="21" y="46"/><rect height="6" rx="1.3" width="6" x="29" y="46"/><rect height="6" rx="1.3" width="6" x="37" y="46"/></g></svg></span><span>Stride Calculator</span></a>
+<div class="navlinks"><a href="./">Pace Conversion</a><a href="calculator.html">Split Calculator</a><a class="active" href="track-lanes.html" aria-current="page">Track Lanes</a><a href="pacing-guides.html">Pacing Guides</a></div>
+<details class="track-mobile-menu"><summary aria-label="Open navigation menu">Menu</summary><div class="track-mobile-links"><a href="./">Pace Conversion</a><a href="calculator.html">Split Calculator</a><a href="track-lanes.html" aria-current="page">Track Lanes</a><a href="pacing-guides.html">Pacing Guides</a><a href="about-faq.html">About &amp; FAQ</a></div></details>
+</nav></header>
+<main class="wrap" id="top">
+<section class="hero"><div class="eyebrow">TRAINING TOOLS / TRACK LANES</div><h1>Every lane. <span>The right pace.</span></h1></section>
+<section class="panel input-panel" aria-labelledby="pace-heading"><div class="section-head"><h2 class="section-title" id="pace-heading">Set your target pace</h2></div><div class="fields">
+<div class="field"><label for="mile">PACE / MILE</label><input id="mile" type="text" inputmode="decimal" value="5:20" autocomplete="off" spellcheck="false" aria-label="Pace per mile"><div class="unit">min : sec / mile</div></div>
+<div class="field"><label for="km">PACE / KM</label><input id="km" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Pace per kilometre"><div class="unit">min : sec / km</div></div>
+<div class="field"><label for="speed">SPEED</label><input id="speed" type="number" min="0.1" max="80" step="0.01" inputmode="decimal" autocomplete="off" aria-label="Speed in kilometres per hour"><div class="unit">km/h · <span id="mph">11.25</span> mph</div></div>
+<div class="field"><label for="four">400M PACE</label><input id="four" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Time for exactly 400 metres"><div class="unit">seconds or min:sec / 400m</div></div>
+</div><p class="sr-only" id="inputStatus" aria-live="polite"></p></section>
+<section class="panel track-panel" aria-label="Track lane calculator"><div class="track-bar"><div class="lane-controls" id="laneControls">
+<label class="lane-slider-label" for="laneRange">LANE</label>
+<div class="lane-slider-box" id="laneSliderBox">
+<div class="lane-slider-rail" id="laneSliderRail" style="--lane-index:7">
+<div class="lane-slider-selection" aria-hidden="true"></div>
+<div class="lane-ticks" id="laneTicks" aria-hidden="true"></div>
+<input id="laneRange" class="lane-range" type="range" min="1" max="8" step="1" value="8" aria-label="Selected lane. Drag to change between lanes 1 and 8">
+</div>
+</div></div></div>
+<div class="track-stage"><svg id="trackSvg" viewBox="0 0 1000 540" role="img" aria-labelledby="svgTitle svgDesc"><title id="svgTitle">Interactive eight-lane standard outdoor running track</title><desc id="svgDesc">Click a lane or use the lane slider to select it. Staggered 400 metre start marks are shown in each lane; the moving marker travels a complete lap at your target speed.</desc><defs>
+<filter id="pulseGlow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<linearGradient id="infield" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#124733"/><stop offset="1" stop-color="#0b3023"/></linearGradient>
+</defs><rect x="0" y="0" width="1000" height="540" fill="transparent"/>
+<g id="laneShapes"></g>
+<g id="selectedOverlay" pointer-events="none">
+<path id="selectedHalo" fill="none" stroke="#42c56d" stroke-width="27" filter="url(#pulseGlow)" />
+<path id="selectedBand" fill="none" stroke="#398a59" stroke-width="11.4" />
+<path id="selectedEdge" fill="none" stroke="#92ff5f" stroke-width="2.2" />
+</g>
+<g id="hoverOverlay" pointer-events="none"><path id="hoverHalo" fill="none" stroke="#7bf5a0" stroke-width="20" filter="url(#pulseGlow)" /><path id="hoverBand" fill="none" stroke="#b8ffa0" stroke-width="2.5" /></g>
+<g id="finishMarks"></g><g id="staggerMarks"></g>
+<g id="infieldGroup" pointer-events="none"><rect x="339" y="151" width="322" height="231" rx="105" fill="url(#infield)" opacity=".58"/>
+<text x="500" y="207" text-anchor="middle" class="infield-lane" id="infieldLane">LANE 8</text>
+<text x="500" y="250" text-anchor="middle" class="infield-distance" id="infieldDistance">453.03m</text>
+<line x1="414" y1="266" x2="586" y2="266" class="infield-rule"/>
+<text x="500" y="292" text-anchor="middle" class="infield-foot" id="calcPhase">FULL-LAP TARGET TIME</text>
+<text x="500" y="350" text-anchor="middle" class="infield-time" id="infieldLapTime">1:30.1</text>
+<text x="500" y="374" text-anchor="middle" id="calcDetails">400m pace × lane distance ÷ 400</text></g>
+<path id="motionTrailBlur" fill="none" stroke="#0a913c" stroke-linecap="round" stroke-width="14" opacity=".45" filter="url(#pulseGlow)" pointer-events="none"/>
+<path id="motionTrail" fill="none" stroke="#92ff5f" stroke-width="5" stroke-linecap="round" pointer-events="none"/>
+<circle id="motionHalo" r="14" fill="#92ff5f" opacity=".3" filter="url(#pulseGlow)" pointer-events="none"/><circle id="motionDot" r="6.5" fill="#e1ffd1" stroke="#72e743" stroke-width="3" pointer-events="none"/>
+<path id="calcProgressBlur" fill="none" stroke="#42e077" stroke-width="21" stroke-linecap="round" filter="url(#pulseGlow)"/>
+<path id="calcProgress" fill="none" stroke="#b8ff83" stroke-width="6.5" stroke-linecap="round"/>
+<circle id="calcPulseHalo" r="20" fill="#92ff5f" filter="url(#pulseGlow)"/>
+<circle id="calcPulseHead" r="8.5" fill="#f2ffe3" stroke="#92ff5f" stroke-width="3"/>
+<g id="hitAreas"></g>
+</svg></div>
+
+</section>
+
+<section class="panel comparison-panel" aria-labelledby="comparison-heading"><div class="section-head"><div><h2 class="section-title" id="comparison-heading">Compare all eight lanes</h2></div></div><div class="table-container"><table class="comparison-table"><thead><tr><th scope="col">Lane</th><th scope="col">Full lap</th><th scope="col">Extra distance</th><th scope="col">Target full-lap time</th></tr></thead><tbody id="comparisonRows"></tbody></table></div><p class="fine-print">Based on a standard outdoor 400m track with 1.22m lanes, following World Athletics measurement conventions (lane 1 measured 0.30m from the kerb; other lanes 0.20m from their inner lane line). Results assume a constant pace along the measurement line. Actual paths and non-standard tracks may differ.</p></section>
+</main>
+<script>
+(()=>{
+'use strict';
+const MI=1609.344, PI=Math.PI, ids=['mile','km','speed','four'];
+const els=Object.fromEntries(ids.map(id=>[id,document.getElementById(id)]));
+const byId=id=>document.getElementById(id);
+const laneRange=byId('laneRange'), laneTicks=byId('laneTicks');
+const laneShapes=byId('laneShapes'),hitAreas=byId('hitAreas'),finishMarks=byId('finishMarks'),staggerMarks=byId('staggerMarks');
+const selectedHalo=byId('selectedHalo'),selectedBand=byId('selectedBand'),selectedEdge=byId('selectedEdge');
+const hoverHalo=byId('hoverHalo'),hoverBand=byId('hoverBand');
+const calcLine=byId('calcProgress'),calcBlur=byId('calcProgressBlur'),calcHead=byId('calcPulseHead'),calcHalo=byId('calcPulseHalo');
+const lapText=byId('infieldLapTime'),phaseText=byId('calcPhase'),detailText=byId('calcDetails');
+const normalIds=['motionTrail','motionTrailBlur','motionDot','motionHalo'];
+const normal=normalIds.map(byId);
+const tableBody=byId('comparisonRows'),svgns='http://www.w3.org/2000/svg';
+const L=340,R=660,CY=260,inner=140,gap=12,FINISHX=400;
+const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const CALC_MS=820, MORPH_MS=520, HOVER_MS=230;
+let lane=8,hoveredLane=null,metersPerSecond=MI/320,playing=true,progress=0,lastFrame=null;
+let morphRadius=radius(8),morphStart=0,morphFrom=morphRadius,morphTo=morphRadius;
+let hoverRadius=morphRadius,hoverFrom=hoverRadius,hoverTo=hoverRadius,hoverStart=0;
+let calculation=null,commitTimer=null,committedKey=null,validPace=true;
+const lanePaths=new Map();
+function radius(n){return inner+(n-1)*gap}
+function distance(n){return n===1?400:400+2*PI*(1.22*(n-1)-0.1)}
+function lapSeconds(n){return distance(n)/metersPerSecond}
+function resultKey(){return `${lane}:${metersPerSecond.toFixed(9)}`}
+function strTime(secs,decimals=1){if(!Number.isFinite(secs)||secs<=0)return '—';const precision=10**decimals,total=Math.round(secs*precision)/precision;let m=Math.floor(total/60),s=total-m*60;if(s>=60){m++;s=0}return String(m)+':'+s.toFixed(decimals).padStart(decimals?3+decimals:2,'0')}
+function parseTime(v){v=String(v).trim();if(!v)return NaN;const parts=v.split(':');let s;if(parts.length===2){const m=Number(parts[0]),sec=Number(parts[1]);if(!Number.isFinite(m)||!Number.isFinite(sec)||sec>=60||sec<0||m<0)return NaN;s=m*60+sec}else if(parts.length===1){s=Number(v)}else return NaN;return Number.isFinite(s)&&s>0?s:NaN}
+function svg(tag,attrs,parent){const e=document.createElementNS(svgns,tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,String(v)));if(parent)parent.appendChild(e);return e}
+// Begin all SVG lane paths at the upper-left finish line. Going left along the
+// top straight, down the left bend, right along the bottom and back up the
+// right bend produces the track's correct anticlockwise running direction.
+// One canonical path is shared by lane outlines, hover, running and loading.
+function pathD(rad){return `M ${FINISHX} ${CY-rad} H ${L} A ${rad} ${rad} 0 0 0 ${L} ${CY+rad} H ${R} A ${rad} ${rad} 0 0 0 ${R} ${CY-rad} H ${FINISHX} Z`}
+function pulseD(rad){return pathD(rad)}
+function easeOutQuint(t){return 1-Math.pow(1-t,5)}
+function drawGeometry(){
+ const d=pathD(morphRadius);
+ selectedHalo.setAttribute('d',d);selectedBand.setAttribute('d',d);selectedEdge.setAttribute('d',d);
+ for(const id of ['motionTrail','motionTrailBlur'])byId(id).setAttribute('d',d);
+ const pd=pulseD(morphRadius);
+ calcLine.setAttribute('d',pd);calcBlur.setAttribute('d',pd);
+ const hd=pathD(hoverRadius);
+ hoverHalo.setAttribute('d',hd);hoverBand.setAttribute('d',hd);
+}
+function initialTrack(){
+ laneShapes.replaceChildren();hitAreas.replaceChildren();finishMarks.replaceChildren();
+ for(let n=8;n>=1;n--){const d=pathD(radius(n));
+  const p=svg('path',{d,fill:'none',stroke:n%2?'#275442':'#214d3b','stroke-width':11.5,class:'lane-band'},laneShapes);lanePaths.set(n,p);
+ }
+ svg('line',{x1:FINISHX,y1:CY-inner+5.5,x2:FINISHX,y2:CY-inner-(7*gap)-5.5,stroke:'#ebfff2','stroke-width':4,'stroke-linecap':'round'},finishMarks);
+ svg('text',{x:FINISHX,y:21,'text-anchor':'middle',class:'finish-label'},finishMarks).textContent='FINISH / FULL LAP';
+ // Invisible strokes have a generous, continuous hover target. No lane DOM is recreated on selection.
+ for(let n=8;n>=1;n--){const hit=svg('path',{d:pathD(radius(n)),fill:'none',stroke:'transparent','stroke-width':15,'pointer-events':'stroke',class:'svg-lane',tabindex:'0',role:'button','aria-label':`Select lane ${n}`},hitAreas);
+  hit.addEventListener('pointerenter',()=>setHoverLane(n));
+  hit.addEventListener('pointerleave',e=>{if(e.relatedTarget?.classList?.contains('svg-lane'))return;setHoverLane(null)});
+  hit.addEventListener('focus',()=>setHoverLane(n));
+  hit.addEventListener('blur',()=>setHoverLane(null));
+  hit.addEventListener('click',()=>setLane(n));
+  hit.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setLane(n)}});
+ }
+ drawStaggers();drawGeometry();
+}
+function drawStaggers(){
+ staggerMarks.replaceChildren();
+ for(let n=1;n<=8;n++){
+  const p=lanePaths.get(n),len=p.getTotalLength(),stagger=(distance(n)-400)/distance(n)*len;
+  // Each stagger is measured anticlockwise from the common finish line.
+  const at=stagger%len,pt=p.getPointAtLength(at);
+  const before=p.getPointAtLength((at-1+len)%len),after=p.getPointAtLength((at+1)%len);
+  const dx=after.x-before.x,dy=after.y-before.y,unit=Math.hypot(dx,dy)||1,nx=-dy/unit,ny=dx/unit;
+  const active=n===lane;
+  svg('line',{x1:pt.x-nx*6.6,y1:pt.y-ny*6.6,x2:pt.x+nx*6.6,y2:pt.y+ny*6.6,stroke:active?'#92ff5f':'#ffffff','stroke-width':active?3.6:2.3,'stroke-linecap':'round'},staggerMarks);
+  const tx=pt.x+nx*(active?20:16),ty=pt.y+ny*(active?20:16);
+  if(active)svg('circle',{cx:tx,cy:ty,r:11,fill:'#92ff5f'},staggerMarks);
+  const label=svg('text',{x:tx,y:ty,fill:active?'#003c26':'#d9f0e0',class:'marker-label','font-size':active?12:10},staggerMarks);label.textContent=n;
+ }
+}
+function setHoverLane(n){
+ if(hoveredLane===n)return;
+ hoveredLane=n;
+ if(n!==null){hoverFrom=hoverRadius;hoverTo=radius(n);hoverStart=performance.now()}
+ const show=n!==null&&n!==lane;
+ hoverHalo.classList.toggle('visible',show);hoverBand.classList.toggle('visible',show);
+ selectedHalo.style.opacity=n===lane?'.9':'';selectedBand.setAttribute('stroke',n===lane?'#47ae72':'#398a59');
+ lanePaths.forEach((path,i)=>{path.style.transition='stroke .24s ease';path.setAttribute('stroke',i===n?'#37775a':i%2?'#275442':'#214d3b')});
+}
+function renderSlider(){
+ laneRange.value=String(lane);byId('laneSliderRail').style.setProperty('--lane-index',String(lane-1));
+ laneRange.setAttribute('aria-valuetext',`Lane ${lane}`);
+ laneTicks.querySelectorAll('.lane-tick').forEach(el=>el.classList.toggle('active',Number(el.dataset.lane)===lane));
+}
+function updateLaneLabels(){byId('infieldLane').textContent='LANE '+lane;byId('infieldDistance').textContent=distance(lane).toFixed(2)+'m'}
+function clearCalculation(){
+ if(commitTimer!==null){clearTimeout(commitTimer);commitTimer=null}
+ calculation=null;
+ [calcLine,calcBlur,calcHead,calcHalo].forEach(e=>e.classList.remove('running'));
+ normal.forEach(e=>{e.style.opacity=''});
+ phaseText.classList.remove('busy');lapText.classList.remove('calculating');
+}
+function showPending(){
+ clearCalculation();committedKey=null;
+ lapText.classList.remove('just-revealed');lapText.textContent='--:--';
+ phaseText.textContent='READY TO CONVERT';detailText.textContent='Waiting for your pace';
+}
+function startCalculation(){
+ if(!validPace)return;
+ if(committedKey===resultKey()&&!calculation)return;
+ clearCalculation();
+ const key=resultKey();
+ if(prefersReducedMotion){finishCalculation(key);return}
+ calculation={start:performance.now(),target:strTime(lapSeconds(lane)),key,phase:-1};
+ lapText.classList.remove('just-revealed');lapText.classList.add('calculating');lapText.textContent='--:--';
+ phaseText.classList.add('busy');
+ normal.forEach(e=>{e.style.opacity='0'});
+ [calcLine,calcBlur,calcHead,calcHalo].forEach(e=>e.classList.add('running'));
+ setCalcPhase(0);
+}
+function setCalcPhase(step){
+ if(!calculation||step===calculation.phase)return;
+ calculation.phase=step;
+ const base=strTime(400/metersPerSecond);
+ if(step===0){phaseText.textContent='01 / 03   MEASURING LANE';detailText.textContent=`Lane ${lane}  ·  ${distance(lane).toFixed(2)} metres`}
+ else if(step===1){phaseText.textContent='02 / 03   MATCHING PACE';detailText.textContent=`${base} / 400m  ·  ${metersPerSecond.toFixed(2)} m/s`}
+ else{phaseText.textContent='03 / 03   CALCULATING SPLIT';detailText.textContent=`${base} × ${distance(lane).toFixed(2)} ÷ 400`}
+}
+function finishCalculation(key){
+ if(key!==resultKey())return;
+ calculation=null;committedKey=key;
+ [calcLine,calcBlur,calcHead,calcHalo].forEach(e=>e.classList.remove('running'));
+ normal.forEach(e=>{e.style.opacity=''});
+ lapText.classList.remove('calculating');lapText.textContent=strTime(lapSeconds(lane));
+ lapText.classList.remove('just-revealed');void lapText.getBoundingClientRect();lapText.classList.add('just-revealed');
+ phaseText.textContent='FULL-LAP TARGET TIME';phaseText.classList.remove('busy');
+ detailText.textContent=`${strTime(400/metersPerSecond)} / 400m  ·  ${distance(lane).toFixed(2)}m lap`;
+ progress=0;
+}
+function updateCalculation(now){
+ if(!calculation)return;
+ const t=Math.max(0,Math.min(1,(now-calculation.start)/CALC_MS));
+ setCalcPhase(t<.33?0:t<.67?1:2);
+ const len=calcLine.getTotalLength();
+ for(const p of [calcLine,calcBlur]){p.setAttribute('stroke-dasharray',`${Math.max(0.02,t*len)} ${len+3}`);p.setAttribute('stroke-dashoffset','0')}
+ const pos=calcLine.getPointAtLength(Math.min(len,t*len));
+ for(const c of [calcHead,calcHalo]){c.setAttribute('cx',pos.x);c.setAttribute('cy',pos.y)}
+ if(t>=1)finishCalculation(calculation.key);
+}
+function setLane(n){
+ n=Math.max(1,Math.min(8,Math.round(Number(n))));if(n===lane)return;
+ lane=n;
+ morphFrom=morphRadius;morphTo=radius(n);morphStart=performance.now();
+ progress=0;hoveredLane=null;hoverHalo.classList.remove('visible');hoverBand.classList.remove('visible');
+ updateLaneLabels();drawStaggers();renderSlider();renderOutputs();
+ committedKey=null;startCalculation();
+}
+for(let n=1;n<=8;n++){const tick=document.createElement('button');tick.type='button';tick.className='lane-tick';tick.dataset.lane=String(n);tick.textContent=n;tick.setAttribute('tabindex','-1');tick.setAttribute('aria-hidden','true');laneTicks.appendChild(tick)}
+// Hover is tracked against the eight numbered regions because the native range
+// input sits above the visible digits to support smooth drag interaction.
+const sliderRail=byId('laneSliderRail');
+function clearSliderHover(){laneTicks.querySelectorAll('.lane-tick.hovered').forEach(el=>el.classList.remove('hovered'))}
+sliderRail.addEventListener('pointermove', e=>{
+ if(e.pointerType!=='mouse'&&e.pointerType!=='pen')return;
+ const bounds=sliderRail.getBoundingClientRect();
+ const usableWidth=Math.max(1,bounds.width-8);
+ const relativeX=Math.max(0,Math.min(usableWidth-.01,e.clientX-bounds.left-4));
+ const hovered=Math.floor(relativeX/(usableWidth/8))+1;
+ laneTicks.querySelectorAll('.lane-tick').forEach(el=>el.classList.toggle('hovered',Number(el.dataset.lane)===hovered));
+});
+sliderRail.addEventListener('pointerleave',clearSliderHover);
+laneRange.addEventListener('input',e=>setLane(e.target.value));
+function syncInputs(except){const values={mile:strTime(MI/metersPerSecond,1),km:strTime(1000/metersPerSecond,1),speed:(metersPerSecond*3.6).toFixed(2),four:strTime(400/metersPerSecond,1)};ids.forEach(id=>{if(id!==except)els[id].value=values[id]});byId('mph').textContent=(metersPerSecond*3600/MI).toFixed(2)}
+function renderOutputs(){
+
+ tableBody.replaceChildren();for(let n=1;n<=8;n++){const tr=document.createElement('tr');if(n===lane)tr.className='selected';const cells=[`<span class="badge-small">${n}</span>`,distance(n).toFixed(2)+'m','+'+(distance(n)-400).toFixed(2)+'m',strTime(lapSeconds(n))];tr.innerHTML=cells.map(t=>`<td>${t}</td>`).join('');tr.setAttribute('tabindex','0');tr.setAttribute('aria-label',`Select lane ${n}`);tr.addEventListener('click',()=>setLane(n));tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setLane(n)}});tableBody.appendChild(tr)}
+}
+// Mile and km pace require complete m:ss (optionally m:ss.d).
+// 400m pace also accepts seconds (e.g. 60 or 73) without needing a colon.
+// A single digit or partial time such as 1:0 never triggers the loading lap.
+function isCompleteEntry(id, raw){
+ const text=String(raw).trim();
+ if(id==='speed')return /^(?:\d+(?:\.\d+)?|\.\d+)$/.test(text);
+ if(id==='four')return /^(?:\d{2,}(?:\.\d+)?|\d{1,3}:[0-5]\d(?:\.\d+)?)$/.test(text);
+ return /^\d{1,3}:[0-5]\d(?:\.\d+)?$/.test(text);
+}
+function showIncompletePace(){
+ // Interrupt any pending/ongoing calculation, but never start a new one.
+ clearCalculation();committedKey=null;validPace=false;
+ lapText.classList.remove('just-revealed');lapText.textContent='--:--';
+ phaseText.textContent='ENTER COMPLETE PACE';
+ detailText.textContent='';
+ byId('inputStatus').textContent='Finish entering your pace to calculate the lap.';
+}
+function inputChange(id){
+ const raw=els[id].value;
+ if(!isCompleteEntry(id,raw)){
+  showIncompletePace();
+  return;
+ }
+ let speed;
+ if(id==='mile'){speed=MI/parseTime(raw)}
+ else if(id==='km'){speed=1000/parseTime(raw)}
+ else if(id==='four'){speed=400/parseTime(raw)}
+ else{speed=Number(raw)/3.6}
+ if(!Number.isFinite(speed)||speed<=0||speed>50){
+  showIncompletePace();
+  phaseText.textContent='ENTER A VALID PACE';
+  byId('inputStatus').textContent='Enter a positive, valid pace or speed.';
+  return;
+ }
+ // Only fully formed values can change the speed or trigger a loading lap.
+ validPace=true;metersPerSecond=speed;syncInputs(id);renderOutputs();showPending();
+ byId('inputStatus').textContent='Pace entered. Calculating lap.';
+ // Brief debounce avoids a sweep on every extra fractional digit or rapid edit.
+ commitTimer=setTimeout(()=>{commitTimer=null;startCalculation()},280);
+}
+ids.forEach(id=>{
+ els[id].addEventListener('input',()=>inputChange(id));
+ // Blur/change can commit a full entry immediately, but never a partial one.
+ els[id].addEventListener('change',()=>{
+  if(!isCompleteEntry(id,els[id].value)||!validPace)return;
+  if(commitTimer!==null){committedKey=null;startCalculation()}
+ });
+ els[id].addEventListener('blur',()=>{if(validPace)syncInputs(id)});
+});
+function animate(now){
+ if(lastFrame===null)lastFrame=now;const dt=Math.min(.1,(now-lastFrame)/1000);lastFrame=now;
+ if(morphRadius!==morphTo){const t=Math.min(1,(now-morphStart)/MORPH_MS);morphRadius=morphFrom+(morphTo-morphFrom)*easeOutQuint(t);if(t>=1)morphRadius=morphTo;drawGeometry()}
+ if(hoverRadius!==hoverTo){const t=Math.min(1,(now-hoverStart)/HOVER_MS);hoverRadius=hoverFrom+(hoverTo-hoverFrom)*easeOutQuint(t);if(t>=1)hoverRadius=hoverTo;const d=pathD(hoverRadius);hoverHalo.setAttribute('d',d);hoverBand.setAttribute('d',d)}
+ if(playing&&!calculation)progress=(progress+dt/lapSeconds(lane))%1;
+ const trackPath=selectedBand;
+ if(trackPath){const len=trackPath.getTotalLength(),at=progress*len,pos=trackPath.getPointAtLength(at),tail=50;
+  for(const id of ['motionTrail','motionTrailBlur']){const el=byId(id);el.setAttribute('stroke-dasharray',`${tail} ${len}`);el.setAttribute('stroke-dashoffset',String(tail-at))}
+  for(const id of ['motionDot','motionHalo']){byId(id).setAttribute('cx',pos.x);byId(id).setAttribute('cy',pos.y)}
+ }
+ updateCalculation(now);
+ requestAnimationFrame(animate);
+}
+initialTrack();updateLaneLabels();renderSlider();syncInputs();renderOutputs();finishCalculation(resultKey());requestAnimationFrame(animate);
+})();
+</script>
+</body></html>
