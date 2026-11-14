@@ -142,6 +142,10 @@
 @media (max-width:850px){
   .hero h1{font-size:clamp(29px,7vw,42px)}
 }
+/* Identical Jade Sky background to the Split Calculator: fixed viewport layers preserve hue across differently sized pages. */
+html{background:#cfe9f0}
+body{isolation:isolate;background:transparent}
+body::before{content:"";position:fixed;inset:-.8vmin;z-index:-1;pointer-events:none;background-color:#cfe9f0;background-image:radial-gradient(circle at 65.34% 44.62%,rgba(238,246,227,1) 0%,rgba(238,246,227,0) 34.1%),radial-gradient(circle at 28.07% 74.48%,rgba(183,217,142,1) 0%,rgba(183,217,142,0) 45.65%),radial-gradient(circle at 52.42% 19.94%,rgba(127,191,154,1) 0%,rgba(127,191,154,0) 57.55%),radial-gradient(circle at 80.31% 84.47%,rgba(207,233,240,1) 0%,rgba(207,233,240,0) 69.1%);filter:blur(.4vmin)}
 </style>
 <style>
 /* Shared expandable Pacing Guides navigation */
