@@ -233,10 +233,10 @@ body::before{content:"";position:fixed;inset:-.8vmin;z-index:-1;pointer-events:n
 <main class="wrap" id="top">
 <section class="hero"><h1>Every lane. <span>The right pace.</span></h1></section>
 <section class="panel input-panel" aria-labelledby="pace-heading"><div class="section-head"><h2 class="section-title" id="pace-heading">Set your target pace</h2></div><div class="fields">
-<div class="field"><label for="mile">PACE / MILE</label><input id="mile" type="text" inputmode="decimal" value="5:20" autocomplete="off" spellcheck="false" aria-label="Pace per mile"><div class="unit">min : sec / mile</div></div>
-<div class="field"><label for="km">PACE / KM</label><input id="km" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Pace per kilometre"><div class="unit">min : sec / km</div></div>
+<div class="field"><label for="mile">PACE / MILE</label><input id="mile" type="text" inputmode="text" value="5:20" autocomplete="off" spellcheck="false" aria-label="Pace per mile"><div class="unit">min : sec / mile</div></div>
+<div class="field"><label for="km">PACE / KM</label><input id="km" type="text" inputmode="text" autocomplete="off" spellcheck="false" aria-label="Pace per kilometre"><div class="unit">min : sec / km</div></div>
 <div class="field"><label for="speed">SPEED</label><input id="speed" type="number" min="0.1" max="80" step="0.01" inputmode="decimal" autocomplete="off" aria-label="Speed in kilometres per hour"><div class="unit">km/h · <span id="mph">11.25</span> mph</div></div>
-<div class="field"><label for="four">400M PACE</label><input id="four" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Time for exactly 400 metres"><div class="unit">seconds or min:sec / 400m</div></div>
+<div class="field"><label for="four">400M PACE</label><input id="four" type="text" inputmode="text" autocomplete="off" spellcheck="false" aria-label="Time for exactly 400 metres"><div class="unit">seconds or min:sec / 400m</div></div>
 </div><p class="sr-only" id="inputStatus" aria-live="polite"></p></section>
 <section class="panel track-panel" aria-label="Track lane calculator"><div class="track-bar"><div class="lane-controls" id="laneControls">
 <label class="lane-slider-label" for="laneRange">LANE</label>
